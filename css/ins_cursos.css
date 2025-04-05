@@ -1,0 +1,716 @@
+/* ===== VARIÁVEIS GLOBAIS ===== */
+:root {
+  --azul-principal: #0000e6;
+  --laranja-botao: #fc9403;
+  --cinza-borda: #e0e0e0;
+  --cinza-texto: #333;
+  --vermelho-erro: #e74c3c;
+  --fonte-principal: sans-serif;
+  --cor-texto: #000; /* Nova variável para cor do texto */
+}
+
+/* ===== RESET E BASE ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--fonte-principal);
+  color: var(--cor-texto); /* Aplica preto para todos os elementos */
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: var(--fonte-principal);
+  line-height: 1.5;
+  color: var(--cor-texto);
+  background-color: #abdef8;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+  display: flex; /* Ativa flexbox */
+  flex-direction: column; /* Organiza os elementos em coluna */
+}
+
+/* Garante que todos os textos dentro do body sejam pretos, incluindo herança */
+body * {
+  color: inherit;
+}
+
+/* Exceção apenas para links (caso queira manter estilização diferente) */
+a {
+  color: var(--azul-principal);
+}
+
+/* ===== ESTRUTURA PRINCIPAL ===== */
+.container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 15px;
+  flex: 1;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.curso-intro {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.titulo-curso {
+  margin-top: 0;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 10px;
+  font-family: var(--fonte-principal);
+  color: var(--cor-texto);
+}
+
+.titulo-curso::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--laranja-botao), transparent);
+}
+
+.destaque-experiencia {
+  font-family: var(--fonte-principal);
+  font-style: italic;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 1.1em;
+  color: var(--cor-texto);
+}
+
+.destaque-experiencia span {
+  display: block;
+}
+
+/* ===== LAYOUT DE COLUNAS ===== */
+.content-wrapper {
+  display: flex;
+  justify-content: center; /* Centraliza as colunas horizontalmente */
+  margin: 30px auto; /* Centraliza verticalmente com margem automática */
+  align-items: flex-start;
+  gap: 20px 50px;
+  max-width: 1500px; /* Define uma largura máxima para o conteúdo */
+  padding: 0 20px; /* Adiciona padding para evitar colar nas bordas */
+}
+
+.text-info {
+  flex: 0 0 28%;
+  /* Remove margin-right pois o espaçamento é controlado pelo gap */
+}
+
+.temas-container {
+  flex: 0 0 32%;
+  margin-right: -50px
+}
+
+.form-container {
+  flex: 0 0 32%;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ===== TEXTOS E TÍTULOS ===== */
+.text-info h3,
+.temas-container h3 {
+  font-family: var(--fonte-principal);
+  font-size: 1.3em;
+  color: var(--cor-texto);
+  margin-bottom: 10px;
+}
+
+.text-info p {
+  font-family: var(--fonte-principal);
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: var(--cor-texto);
+}
+
+/* ===== LISTA DE TEMAS ===== */
+.temas-lista {
+  columns: 1;
+  padding: 0;
+  margin: 10px 0 0 0;
+  list-style: none;
+}
+
+.temas-lista li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-family: var(--fonte-principal);
+  font-size: small;
+  color: var(--cor-texto);
+}
+
+/* ===== FORMULÁRIO ===== */
+.form-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+  position: relative;
+  padding-bottom: 10px;
+  font-family: var(--fonte-principal);
+  color: var(--cor-texto);
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--laranja-botao), transparent);
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group label:not(.radio-option label) {
+  flex: 0 0 120px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--cor-texto);
+}
+
+/* CAMPOS DE ENTRADA */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select.ddi-select {
+  height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--cinza-borda);
+  border-radius: 4px;
+  font-size: 14px;
+  flex: 1;
+  max-width: 250px;
+  font-family: var(--fonte-principal);
+  color: var(--cor-texto);
+}
+
+/* Ajustes para os selects com bandeiras */
+.ddi-select {
+  padding-left: 50px !important; /* Aumente o espaço para a bandeira */
+  background-repeat: no-repeat;
+  background-position: left 10px center; /* Posição mais precisa */
+  background-size: 20px; /* Tamanho um pouco menor */
+  width: 150px; /* Largura fixa para melhor visualização */
+}
+
+.ddi-select option {
+  padding-left: 60px !important;
+  background-position: left 12px center;
+  min-width: 300px;
+  font-size: 14px;
+}
+
+/* Ajuste específico para os campos de DDI */
+.phone-inputs select.ddi-select {
+  width: 270px!important;
+  padding-left: 48px !important;
+  background-position: left 15px center;
+  background-size: 25px;
+  font-size: 14px;
+}
+
+.email-input {
+  margin-left: 200px;
+  /* outros estilos se necessário */
+}
+
+/* SELECT COM ÍCONE */
+select.ddi-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 35px;
+}
+
+/* RADIO BUTTONS */
+.radio-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.radio-container > label.required {
+  flex: 0 0 120px;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-right: 20px;
+  font-size: 15px;
+  color: var(--cor-texto);
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.radio-option label {
+  color: var(--cor-texto);
+}
+
+/* CAMPOS DE TELEFONE */
+.phone-inputs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 20px;
+  flex: 1;
+}
+
+#ddd-telefone,
+#ddd-whatsapp {
+  width: 65px;
+  height: 36px;
+  text-align: center;
+}
+
+#ddi-telefone,
+#ddi-whatsapp {
+  width: 130px;
+  height: 36px;
+  text-align: center;
+}
+
+#telefone,
+#whatsapp {
+  width: 120px;
+  height: 36px;
+}
+
+/* PLACEHOLDERS */
+::placeholder {
+  font-family: var(--fonte-principal);
+  font-size: 0.9em;
+  color: #777; /* Placeholder mais claro, mas texto digitado será preto */
+}
+
+/* BOTÃO DE ENVIO */
+/* Estilos para os botões do formulário */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Estilo do botão de instruções */
+.btn-instrucoes {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-instrucoes:hover {
+  background-color: #e0e0e0;
+}
+
+/* Estilos para a modal */
+.modal-instrucoes {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-conteudo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  max-height: 80%;
+  text-align: center;
+}
+
+.modal-conteudo img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+}
+
+.fechar-modal {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.fechar-modal:hover {
+  color: #fc9403;
+}
+
+/* VALIDAÇÃO */
+.error {
+  color: var(--vermelho-erro);
+  font-size: 0.8em;
+  margin-left: 140px;
+  height: 16px;
+  display: block;
+}
+
+.required:after {
+  content: " *";
+  color: var(--vermelho-erro);
+  font-weight: bold;
+}
+
+/* ===== AJUSTES ESPECÍFICOS PARA CAMPOS ===== */
+
+#nome {
+  height: 32px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 2px;
+  max-width: 70%;
+  margin-left: 20px; /* Margem à esquerda atual */
+  color: var(--cor-texto);
+}
+
+#email {
+  height: 32px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 2px;
+  max-width: 70%;
+  margin-left: 25px; /* Margem à esquerda atual */
+  color: var(--cor-texto);
+}
+
+#empresa {
+  height: 32px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 2px;
+  max-width: 70%;
+  margin-left: 25px; /* Margem à esquerda atual */
+  color: var(--cor-texto);
+}
+
+#funcao {
+  height: 32px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 2px;
+  max-width: 70%;
+  margin-left: 25px; /* Margem à esquerda atual */
+  color: var(--cor-texto);
+}
+
+#ddi-telefone,
+#ddi-whatsapp {
+  height: 32px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 100px;
+  max-width: 70%;
+  margin-left: 5px;
+  color: var(--cor-texto);
+}
+
+.phone-inputs .ddi_telefone {
+  width: 300px;
+}
+
+/* Estilo do botão quando desabilitado */
+button[type="submit"]:disabled {
+  background-color: #cccccc; /* Cinza claro */
+  color: #666666; /* Texto cinza mais escuro */
+  cursor: not-allowed; /* Cursor indicando que não é clicável */
+  opacity: 0.7; /* Leve transparência */
+}
+
+/* Estilo do botão quando habilitado */
+button[type="submit"]:not(:disabled) {
+  background-color: var(--azul-principal); /* Azul definido na variável */
+  color: white; /* Texto branco */
+  cursor: pointer; /* Cursor normal */
+  opacity: 1; /* Sem transparência */
+}
+
+/* Mantenha o hover apenas para o estado habilitado */
+button[type="submit"]:not(:disabled):hover {
+  background-color: #0000cc; /* Azul mais escuro no hover */
+  color: white;
+}
+
+.mensagem-sucesso {
+  background-color: #fc9403; /* Laranja */
+  color: #0000e6; /* Azul */
+  padding: 15px 30px;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: relative; /* Posicionamento relativo ao formulário */
+  z-index: 1;
+}
+
+.mensagem-sucesso.mostrar {
+  display: block;
+  opacity: 1;
+  animation: fadeOut 3s forwards 0.5s;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}
+
+/* Estilo da mensagem de sucesso */
+.mensagem-flutuante {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fc9403; /* Laranja igual ao botão */
+  color: #0000e6; /* Azul principal */
+  padding: 15px 30px;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  font-weight: bold;
+  text-align: center;
+  animation: fadeInOut 3s ease-in-out;
+  display: none;
+}
+
+/* Estilos para o botão e modal de instruções */
+.btn-instrucoes {
+  background-color:#0000e6;
+  color:white;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: all 0.3s;
+}
+
+.btn-instrucoes:hover {
+  background-color:#fc9403;
+  color:black;
+}
+
+.modal-instrucoes {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-conteudo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  max-height: 80%;
+  text-align: center;
+}
+
+.modal-conteudo img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+}
+
+.fechar-modal {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.fechar-modal:hover {
+  color: #fc9403;
+}
+
+/* Estilo para o subtítulo do curso */
+.subtitulo-curso {
+  text-align: center;
+  color: black;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.subtitulo-curso::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--laranja-botao), transparent);
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+  .content-wrapper {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+    .content-wrapper {
+      flex-direction: column;
+      align-items: center; /* Centraliza os itens quando em coluna */
+    }
+    
+    .text-info,
+    .temas-container,
+    .form-container {
+      width: 100%;
+      max-width: 500px; /* Define uma largura máxima para mobile */
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .phone-inputs {
+        flex-wrap: wrap;
+    }
+    
+    .phone-inputs select.ddi-select {
+        width: 100% !important;
+        margin-bottom: 8px;
+    }
+    
+    .phone-inputs input[type="tel"] {
+        width: calc(100% - 110px) !important;
+    }
+
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #nome,
+  .phone-inputs,
+  select.ddi-select,
+  #telefone,
+  #whatsapp {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .error {
+    margin-left: 0;
+  }
+  
+  .radio-container > label.required {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  
+  .phone-inputs {
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 0;
+    gap: 5px;
+  }
+  
+  select.ddi-select {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  
+  #ddd-telefone,
+  #ddd-whatsapp {
+    width: 50px;
+  }
+  
+  #telefone,
+  #whatsapp {
+    width: calc(100% - 55px);
+  }
+  
+  .temas-lista {
+    columns: 1;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select.ddi-select {
+    height: 46px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+  
+  .text-info,
+  .temas-container,
+  .form-container {
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0 0 30px 0;
+  }
+}

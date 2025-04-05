@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Cálculo de Engrenagens | ENENG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="css/header-nav.css">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<div id="header-nav-container"></div>
+<div id="imagemHelpModal" class="modal-help">
+    <div class="modal-help-content">
+      <span class="close-help">&times;</span>
+      <img id="imagemHelp" src="" alt="Ajuda">
+    </div>
+</div>
+
+<body class="calculo-page">
+    <div id="header-nav-container"></div>
+
+    <section class="formulario">
+        <div class="grid-container">
+            <div class="boxInput">
+                <form id="formCalculo">
+                    <div class="tituloCalc">
+                        <p>Dados de entrada</p>
+                    </div>
+                    <div class="boxInput2">
+                        <label>Cliente:</label>
+                        <input type="text" name="cliente">
+                    </div>
+                    
+                    <div class="boxInput2">
+                        <label>Projeto:</label>
+                        <input type="text" name="projeto">
+                    </div>
+                    <div class="boxInput2">
+                        <label>Observações:</label>
+                        <input type="text" name="observacoes">
+                    </div>                    
+                    <div class="boxInput1">
+                        <label for="mn">Módulo normal m<sub>n</sub>(mm):</label>
+                        <input type="number" id="mn" class="campo-limite" required>
+                        <span class="info-icon" data-image="/Help/Módulospadronizados.jpg">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="z1">Número de dentes Z<sub>1</sub>:</label>
+                        <input type="number" id="z1" class="campo-limite" required>
+                        <span class="info-icon" data-image="/Help/ajuda-numero-dentes.jpg">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="z2">Número de dentes Z<sub>2</sub>:</label>
+                        <input type="number" id="z2" class="campo-limite" required>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="aw">Entre centros de trabalho a<sub>w</sub> (mm):</label>
+                        <input type="number" id="aw" class="campo-limite" required>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="alfa">Ângulo de pressão α (°):</label>
+                        <input type="number" id="alfa" class="campo-limite" value="20" required>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="beta">Ângulo de inclinação β (°):</label>
+                        <input type="number" id="beta" class="campo-limite" required>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="sx">Correção total calculada (ΣX):</label>
+                        <input type="text" id="SX" class="resultado-calculado" readonly>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="x1">Informe o valor de X<sub>1</sub>:</label>
+                        <input type="number" id="x1" class="campo-limite" step="any">
+                    </div>
+                    <div class="boxInput1">
+                        <label for="valorX2">Valor de X<sub>2</sub>:</label>
+                        <input type="text" id="valorX2" class="resultado-calculado" readonly>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="adendo">Adendo (mm):</label>
+                        <input type="number" id="adendo" class="campo-limite" step="any">
+                    </div>
+                    <div class="boxInput1">
+                        <label for="dedendo">Dedendo (mm):</label>
+                        <input type="number" id="dedendo" class="campo-limite" step="any">
+                    </div>
+                    <div class="boxInput1">
+                        <label for="grauTolerancia">Grau de Tolerância (ex: 25):</label>
+                        <select id="grauTolerancia" class="campo-limite">
+                            <option value="">Selecione</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25" selected>25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="desvioPermitido">Desvio Permitido:</label>
+                        <select id="desvioPermitido" class="campo-limite">
+                            <option value="">Selecione</option>
+                            <option value="a">a</option>
+                            <option value="ab">ab</option>
+                            <option value="b" selected>b</option>
+                            <option value="bc">bc</option>
+                            <option value="c">c</option>
+                            <option value="cd">cd</option>
+                            <option value="d">d</option>
+                            <option value="e">e</option>
+                            <option value="f">f</option>
+                            <option value="g">g</option>
+                        </select>
+                    </div>
+
+                    <div class="btn-container">
+                        <button id="btnReset">Resetar</button>
+                        <button id="btnPDF">Gerar PDF</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="boxOutput">
+                <div class="tituloCalc">
+                    <p>Resultados</p>
+                </div>
+                <div class="dados_de_saída">
+                    <p>Passo normal p<sub>n</sub>: <span id="pn">-</span></p>
+                    <p>Passo transversal p<sub>t</sub>: <span id="pt">-</span></p>
+                    <p>Diâmetro primitivo transversal 1: <span id="d1t">-</span></p>
+                    <p>Diâmetro primitivo transversal 2: <span id="d2t">-</span></p>
+                    <p>Fator Y: <span id="Y">-</span></p>
+                </div>
+            </div>
+
+            <div class="boxOutput">
+                <div class="tituloCalc">
+                    <p>Resultados</p>
+                </div>
+                <div class="dados_de_saída">
+                    <p>Correção X<sub>1</sub>: <span id="X1">-</span></p>
+                    <p>Correção X<sub>2</sub>: <span id="X2">-</span></p>
+                    <p>Diâmetro primitivo 1: <span id="d1">-</span></p>
+                    <p>Diâmetro primitivo 2: <span id="d2">-</span></p>
+                </div>
+            </div>
+
+            <div class="boxOutput">
+                <div class="tituloCalc">
+                    <p>Resultados</p>
+                </div>
+                <div class="dados_de_saída">
+                    <p>Espessura do dente 1: <span id="espessura1">-</span></p>
+                    <p>Espessura do dente 2: <span id="espessura2">-</span></p>
+                    <p>Folga no fundo: <span id="folga">-</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmacaoReset" class="modal-reset">
+        <div class="modal-content">
+            <div class="modal-icon">⚠️</div>
+            <div class="modal-message">ATENÇÃO, TODOS OS VALORES SERÃO APAGADOS, DESEJA APAGAR MESMO?</div>
+            <div class="modal-buttons">
+                <button id="btnSim">SIM</button>
+                <button id="btnNao">NÃO</button>
+            </div>
+    </div>
+
+    <script src="js/js_calc1.js"></script>
+</body>
+
+<div id="footer-container"></div>
+
+<script>
+    // Carrega o header e nav
+    fetch('header-nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-nav-container').innerHTML = data;
+        });
+</script>
+
+<script>
+    // Carrega o footer
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        });
+</script>
+
+
+</html>

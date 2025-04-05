@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato - Perracini Engenharia</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/header-nav.css" />
+  <link rel="stylesheet" href="css/contatonew.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <header id="header"></header>
+
+  <main class="contato-container">
+    <section class="contato-info">
+      <h2>CONTATO</h2>
+      <p><i class="fas fa-user-tie"></i> Eng.º Roberto Perracini</p>
+      <p><i class="fas fa-phone-alt"></i> (+55) (11) 98540-0421</p>
+      <p class="whatsapp-item">
+        <a href="https://wa.me/5511985400421" target="_blank" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> <!-- Ícone do WhatsApp -->
+            <span>(+55) (11) 98540-0421</span>
+        </a>
+      </p>
+      <p class="email-contato"><i class="fas fa-envelope"></i> roberto@eneng.com.br</p>
+    </section>
+
+    <section class="contato-formulario">
+      <form action="https://formsubmit.co/contato@eneng.com.br" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://perracini.eng.br/obrigado.html">
+        <input type="hidden" name="_template" value="box">
+
+        <label for="nome"><i class="fas fa-user"></i> Nome</label>
+        <input type="text" id="nome" name="nome" required />
+
+        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="mensagem"><i class="fas fa-comment"></i> Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+        <div class="upload-container">
+          <label for="arquivos" class="btn-anexar">
+            <i class="fas fa-paperclip"></i> Anexar arquivos
+          </label>
+          <input type="file" id="arquivos" name="arquivos[]" multiple />
+          <span id="file-names">Nenhum arquivo selecionado</span>
+        </div>
+
+        <button type="submit" class="btn-enviar">
+          <i class="fas fa-paper-plane"></i> Enviar
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script src="js/contatonew.js"></script>
+</body>
+</html>

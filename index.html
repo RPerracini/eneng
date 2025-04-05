@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENENG</title>
+    <link rel="stylesheet" href="css/estilo.css" />
+    <link rel="stylesheet" href="css/header-nav.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+</head>
+<body>
+    <div id="header-nav-container"></div>
+
+    <main class="main-grid">
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-image">
+                    <img src="Imagens/Redutordapaginainicial.png" alt="Redutor de velocidade" />
+                </div>
+                <div class="hero-text">
+                    <h1>Projetos personalizados às suas necessidades</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="texto_representadas">
+            <div class="container">
+                <div class="texto1">
+                    <p>
+                        Também representamos empresas brasileiras de destaque, pioneiras
+                        em soluções tecnológicas avançadas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="representadas">
+            <div class="container">
+                <img src="Imagens/FresadoraSantana.png" alt="Redutores e engrenagens" />
+                <img src="Imagens/Metalflex.png" alt="Acoplamentos" />
+                <img src="Imagens/Lubrisystem.png" alt="Lubrificação" />
+                <img src="Imagens/PowerMaster.png" alt="Acoplamentos hidráulicos" />
+            </div>
+        </section>
+
+        <section class="mais_informações">
+            <div class="container">
+                <p>Para mais informações sobre as representadas clique na imagem da mesma</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Carrega o header -->
+    <script>
+        fetch('header-nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav-container').innerHTML = data;
+            });
+    </script>
+
+    <!-- Carrega o footer -->
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+
+    <script src="js/js_calc1.js"></script>
+    <script>
+        var url = 'https://cdn.waplus.io/waplus-crm/settings/ossembed.js';
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        var options = {
+            "enabled": true,
+            "chatButtonSetting": {
+                "backgroundColor": "#16BE45",
+                "ctaText": "Envie uma mensagem",
+                "borderRadius": "8",
+                "marginLeft": "20",
+                "marginBottom": "30",
+                "marginRight": "20",
+                "position": "right",
+                "textColor": "#ffffff",
+                "phoneNumber": "+5511985400421",
+                "messageText": "👋🏻 Recebemos sua mensagem com sucesso! Em breve, um dos nossos representantes entrará em contato.",
+                "trackClick": true
+            }
+        };
+        s.onload = function () {
+            CreateWhatsappBtn(options);
+        };
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    </script>
+</body>
+</html>

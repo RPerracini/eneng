@@ -1,0 +1,48 @@
+/* ============== ESTILOS PARA PÁGINA DE SERVIÇOS ============== */
+.main-content.redutores {
+    display: grid;
+    grid-template-columns: 1.6fr 1.6fr;
+    max-width: 1600px;                  
+    gap: 40px;
+    padding: 40px;
+    margin: 0 auto;
+}
+
+.redutores .service-card {
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.redutores .service-card h2 {
+    color:blue;
+    border-bottom: 2px solid #fc9403;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-family: 'Nulshock', sans-serif;
+    font-size: 1.2rem;
+}
+
+.redutores .service-card p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 992px) {
+    .main-content.redutores {
+        max-width: 95%;
+        gap: 30px;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content.redutores {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+    }
+    
+    .redutores .service-card {
+        padding: 20px;
+    }
+}

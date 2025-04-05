@@ -1,0 +1,439 @@
+/* ===== VARIÁVEIS GLOBAIS ===== */
+:root {
+  --azul-principal: #0000e6;
+  --laranja-botao: #fc9403;
+  --cinza-borda: #e0e0e0;
+  --cinza-texto: #333;
+  --vermelho-erro: #e74c3c;
+  --cinza-placeholder: #999;
+  --cor-fundo: rgb(200, 248, 252);
+  --espacamento-padrao: 15px;
+}
+
+/* ===== RESET COMPLETO ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--cinza-texto);
+  background-color: var(--cor-fundo);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== ESTRUTURA PRINCIPAL ===== */
+.container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 var(--espacamento-padrao);
+  flex: 1;
+}
+
+/* ===== CABEÇALHO ===== */
+header .container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+header img {
+  max-height: 60px;
+  width: auto;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+/* ===== NAVEGAÇÃO ===== */
+nav ul {
+  display: flex;
+  gap: var(--espacamento-padrao);
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.body2 {
+  flex: 1;
+  padding: 20px 0;
+}
+
+.content-wrapper {
+  display: flex;
+  gap: 30px;
+  margin: 30px 0;
+  align-items: flex-start;
+}
+
+/* ===== SEÇÃO DE CURSOS ===== */
+.curso-intro {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.titulo-curso {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.titulo-curso::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: var(--laranja-botao);
+}
+
+.destaque-experiencia {
+  font-style: italic;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* ===== COLUNAS DE INFORMAÇÕES ===== */
+.text-info {
+  flex: 0 0 30%;
+}
+
+.text-info h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: var(--azul-principal);
+}
+
+.text-info p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.temas-container {
+  flex: 0 0 30%;
+}
+
+.temas-container h3 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: var(--azul-principal);
+}
+
+.temas-lista {
+  columns: 1;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.temas-lista li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 15px;
+}
+
+.temas-lista li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--laranja-botao);
+}
+
+/* ===== FORMULÁRIO COMPLETO ===== */
+.form-container {
+  flex: 0 0 35%;
+  padding: 25px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.4em;
+  position: relative;
+  padding-bottom: 10px;
+  color: var(--azul-principal);
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: var(--laranja-botao);
+}
+
+/* ===== GRUPOS DE FORMULÁRIO ===== */
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.form-group label:not(.radio-option label) {
+  flex: 0 0 120px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--cinza-texto);
+  margin-right: var(--espacamento-padrao);
+}
+
+/* ===== INPUTS PRINCIPAIS ===== */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select.ddi-select {
+  height: 42px;
+  padding: 10px 14px;
+  border: 1px solid var(--cinza-borda);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 15px;
+  flex: 1;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 0 2px rgba(0, 0, 230, 0.1);
+}
+
+::placeholder {
+  color: var(--cinza-placeholder);
+  opacity: 1;
+}
+
+/* ===== CAMPOS DE TELEFONE (SOLUÇÃO DEFINITIVA) ===== */
+.phone-group {
+  width: 100%;
+}
+
+.phone-inputs {
+  display: flex;
+  gap: 5px;
+  flex: 1;
+  align-items: center;
+}
+
+.phone-inputs select.ddi-select {
+  flex: 0 0 120px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 35px;
+  appearance: none;
+}
+
+.phone-inputs input[placeholder="DDD"] {
+  width: 60px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.phone-inputs input[placeholder="Número"] {
+  flex: 1;
+  min-width: 100px;
+}
+
+/* ===== RADIO BUTTONS ===== */
+.radio-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.radio-container > label.required {
+  flex: 0 0 120px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--cinza-texto);
+  margin-right: var(--espacamento-padrao);
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.radio-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== BOTÃO DE ENVIO ===== */
+.form-actions {
+  margin-left: 135px; /* 120px label + 15px margin */
+  margin-top: 25px;
+}
+
+button[type="submit"] {
+  background-color: var(--laranja-botao);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #e68600;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* ===== VALIDAÇÃO ===== */
+.error {
+  color: var(--vermelho-erro);
+  font-size: 0.8em;
+  margin-left: 135px;
+  height: 16px;
+  display: block;
+}
+
+.required:after {
+  content: " *";
+  color: var(--vermelho-erro);
+  font-weight: bold;
+}
+
+/* ===== RODAPÉ ===== */
+footer {
+  background: var(--azul-principal);
+  color: white;
+  /* padding: 15px 0; */
+  font-size: 0.9rem;
+  width: 100%;
+  margin-top: auto; /* Mágica que fixa o footer no final */
+}
+
+#footer_copyright {
+  text-align: center;
+  font-size: 0.85em;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+  .content-wrapper {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+  
+  .text-info,
+  .temas-container,
+  .form-container {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+  
+  .temas-lista {
+    columns: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-group,
+  .phone-group,
+  .radio-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .form-group label:not(.radio-option label),
+  .radio-container > label.required {
+    flex: 1 1 100%;
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+  
+  .phone-inputs {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .phone-inputs select.ddi-select {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  
+  .phone-inputs input[placeholder="DDD"] {
+    width: 50px;
+  }
+  
+  .phone-inputs input[placeholder="Número"] {
+    width: calc(100% - 55px);
+  }
+  
+  .form-actions,
+  .error {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+  }
+  
+  .temas-lista {
+    columns: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-inputs input[placeholder="DDD"],
+  .phone-inputs input[placeholder="Número"] {
+    width: 100%;
+  }
+  
+  header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+}

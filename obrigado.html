@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="3;url=contato.html">
+    <title>Obrigado!</title>
+    <link rel="stylesheet" href="css/obrigado.css">
+    <link rel="stylesheet" href="css/header-nav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <style>
+        body {
+            margin: 0;
+        }
+        .container {
+            padding-bottom: 80px; /* espaço para o footer fixo */
+        }
+        #footer-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="container">
+        <div class="message-box">
+            <h1>Obrigado pelo seu contato!</h1>
+            <p>Sua mensagem foi enviada com sucesso.</p>
+            <p>Você será redirecionado de volta em 3 segundos...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script>
+        fetch('header-nav.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

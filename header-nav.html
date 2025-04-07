@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENENG</title>
-    <link rel="stylesheet" href="css/header-nav.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENENG</title>
+  <link rel="stylesheet" href="css/header-nav.css">
 </head>
 
 <body>
   <header>
     <div class="header-content">
       <img src="./Imagens/logo-eneng.png" alt="Logo ENENG" class="logo">
-      <h1 class="title">ENENG ENGRENAGENS E REDUTORES</h1>
-      <h2 class="slogan">Inovando o Futuro<br>da Engenharia</h2>
+      <div class="textos-header">
+        <h1 class="title">ENENG ENGRENAGENS E REDUTORES</h1>
+        <h2 class="slogan">Inovando o Futuro<br>da Engenharia</h2>
+        <!-- <div id="relogio" class="relogio"></div> Relógio abaixo do texto -->
+      </div>
     </div>
   </header>
 
@@ -44,5 +47,27 @@
       <li><a href="contatonew.html">CONTATO</a></li>
     </ul>
   </nav>
+
+  <script>
+    // Atualizar o relógio a cada segundo
+    function atualizarRelogio() {
+      const agora = new Date();
+      const horas = agora.getHours().toString().padStart(2, '0');
+      const minutos = agora.getMinutes().toString().padStart(2, '0');
+      const segundos = agora.getSeconds().toString().padStart(2, '0');
+
+      const horaAtual = `${horas}:${minutos}:${segundos}`;
+      document.getElementById('relogio').textContent = horaAtual;
+    }
+
+    // Atualiza o relógio ao carregar a página e a cada segundo
+    document.addEventListener("DOMContentLoaded", function () {
+      atualizarRelogio();
+      setInterval(atualizarRelogio, 1000); // Atualiza o relógio a cada 1 segundo
+    });
+  </script>
+
+  <script src="js/header-nav.js"></script>
+
 </body>
 </html>

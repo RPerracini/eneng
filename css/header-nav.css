@@ -58,7 +58,7 @@ header h1 {
   white-space: nowrap;
 }
 
-/* Slogan à direita com texto em duas linhas e fonte menor */
+/* Slogan agora com o relógio abaixo */
 header .slogan {
   color: #fc9403;
   font-family: 'Nulshock', Impact, sans-serif;
@@ -85,6 +85,17 @@ header .slogan span {
   text-align: center; /* Centraliza o texto */
   width: 100%; /* Faz o texto ocupar toda a largura do container */
   padding: 5px 0; /* Adiciona um pequeno espaço entre as linhas */
+}
+
+header .relogio {
+  color: #fc9403;
+  font-family: 'Nulshock', Impact, sans-serif;
+  font-size: 1.2rem; /* Ajuste no tamanho da fonte do relógio */
+  margin-top: 55px; /* Espaço entre o slogan e o relógio */
+  position: absolute;
+  right: 120px;  /* Move para a lateral direita com 50px de distância da borda direita */
+  top: 60%;     /* Alinha verticalmente com o slogan */
+  transform: translateY(-50%);
 }
 
 /* Animação de brilho neon */
@@ -153,67 +164,87 @@ nav a:hover {
   background-color: #fc9403;
   min-width: 500px;
   z-index: 9999; /* Aumenta o z-index para garantir que o dropdown fique acima de outros elementos */
-  top: 100%;
-  left: 0; /* Ajustado para começar do lado esquerdo */
-  transform: translateX(0) translateY(10px); /* Ajustado para não esconder */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  opacity: 0;
-  transition: all 0.3s ease;
+  padding: 10px;
+  font-family: sans-serif !important
 }
 
 .dropdown:hover .dropdown-menu {
   display: block;
-  opacity: 1;
-  transform: translateX(0) translateY(0);
 }
 
 .dropdown-menu a {
-  color: white;
-  font-family: sans-serif;
-  padding: 12px 20px;
   display: block;
-  font-size: 1rem;
-  white-space: normal;
-  transition: all 0.3s ease;
+  color: #333;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: sans-serif;
 }
 
 .dropdown-menu a:hover {
-  background-color: #020272;
-  transform: none;
+  background-color: #222;
 }
 
-/* =================== FIM DA NAVEGAÇÃO =================== */
+li a {
+  padding-right: 35px;
+  padding-left: 35px;
+}
 
-/* Responsividade para telas menores */
+/* ========== RESPONSIVO: HEADER e NAV ========= */
 @media (max-width: 768px) {
+  header .header-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  header img.logo {
+    margin: 20px auto 10px auto;
+    height: 80px;
+    margin-left: 0;
+  }
+
+  header h1.title {
+    font-size: 1.2rem;
+    position: static;
+    transform: none;
+    white-space: normal;
+    padding: 10px 15px;
+  }
+
+  header .slogan {
+    position: static;
+    transform: none;
+    font-size: 1rem;
+    margin-top: 10px;
+    right: 0;
+    display: block;
+  }
+
+  header .relogio {
+    position: static;
+    margin: 10px 0;
+    text-align: center;
+  }
+
   nav ul {
     flex-direction: column;
     align-items: center;
   }
-  
+
   nav li {
-    margin: 5px 0;
+    margin: 10px 0;
   }
-  
+
   .dropdown-menu {
     position: static;
-    min-width: 100%;
-    box-shadow: none;
-    transform: none;
+    min-width: auto;
+    width: 90%;
   }
-}
 
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.5rem;
-  }
-  
-  nav a {
+  .dropdown-menu a {
     font-size: 1rem;
-    padding: 8px 10px;
-  }
-  
-  .dropdown-menu {
-    min-width: 280px;
+    padding: 8px;
+    text-align: center;
   }
 }

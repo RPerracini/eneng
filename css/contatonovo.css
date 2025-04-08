@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 70px 0 60px; /* espaço para header e footer fixos */
+  background-color: #f9f9f9;
+}
+
+/* Container principal */
+.container-novo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto 80px auto;
+  margin-top: 30px; /* Aumente esse valor conforme necessário */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  gap: 40px;
+}
+
+.col-esquerda,
+.col-direita {
+  flex: 1 1 50%;
+  max-width: 50%;
+  box-sizing: border-box;
+}
+
+/* Texto de contato */
+.col-esquerda h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.linha-degrade {
+  height: 2px;
+  width: 100px;
+  margin: 5px 0 20px 0; /* alinhada à esquerda */
+  border-radius: 2px;
+  background: linear-gradient(to right, transparent, #fc9403, transparent);
+}
+
+.col-esquerda p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+/* Formulário */
+.col-direita form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-duplo {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-duplo input {
+  flex: 1;
+}
+
+.col-direita input,
+.col-direita textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.col-direita button {
+  padding: 12px;
+  background-color: #005baa;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.col-direita button {
+  width: 150px; /* ou outro valor, como 180px */
+  align-self: flex-start; /* para alinhar à esquerda */
+}
+
+.col-direita button:hover {
+  background-color: #004080;
+}
+
+.upload-label {
+  margin: 10px 0;
+  display: block;
+}
+
+/* Header fixo */
+header {
+  background-color: #005baa;
+  color: white;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Footer fixo */
+footer {
+  background-color: #222;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+i,
+svg.lucide {
+  color: #fc9403 !important;
+  stroke: #fc9403 !important;
+  vertical-align: middle;
+  margin-right: 8px;
+}

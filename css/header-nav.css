@@ -87,30 +87,6 @@ header .slogan span {
   padding: 5px 0; /* Adiciona um pequeno espaço entre as linhas */
 }
 
-header .relogio {
-  color: #fc9403;
-  font-family: 'Nulshock', Impact, sans-serif;
-  font-size: 1.2rem; /* Ajuste no tamanho da fonte do relógio */
-  margin-top: 55px; /* Espaço entre o slogan e o relógio */
-  position: absolute;
-  right: 120px;  /* Move para a lateral direita com 50px de distância da borda direita */
-  top: 60%;     /* Alinha verticalmente com o slogan */
-  transform: translateY(-50%);
-}
-
-/* Animação de brilho neon */
-@keyframes neonGlow {
-  0% {
-    text-shadow: 0 0 5px #fc9403, 0 0 10px #fc9403, 0 0 15px #fc9403, 0 0 20px #fc9403, 0 0 25px #fc9403, 0 0 30px #fc9403, 0 0 35px #fc9403;
-  }
-  50% {
-    text-shadow: 0 0 15px #fc9403, 0 0 20px #fc9403, 0 0 30px #fc9403, 0 0 40px #fc9403, 0 0 50px #fc9403, 0 0 60px #fc9403, 0 0 70px #fc9403;
-  }
-  100% {
-    text-shadow: 0 0 5px #fc9403, 0 0 10px #fc9403, 0 0 15px #fc9403, 0 0 20px #fc9403, 0 0 25px #fc9403, 0 0 30px #fc9403, 0 0 35px #fc9403;
-  }
-}
-
 /* =================== NAVEGAÇÃO =================== */
 nav {
   background-color: #020272;
@@ -197,12 +173,12 @@ li a {
     align-items: center;
     text-align: center;
   }
-
+/* 
   header img.logo {
     margin: 20px auto 10px auto;
     height: 80px;
     margin-left: 0;
-  }
+  } */
 
   header h1.title {
     font-size: 1.2rem;

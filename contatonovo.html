@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contato - ENENG</title>
   <link rel="stylesheet" href="css/contatonovo.css">
   <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/umd/lucide.css" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
 
   <div id="header-nav-container"></div>
@@ -24,38 +23,46 @@
     </div>
 
     <div class="col-direita">
-      <form action="https://formsubmit.co/contato@eneng.com.br" method="POST" enctype="multipart/form-data">
+      <form id="contato-form" action="https://formsubmit.co/contato@eneng.com.br" method="POST" enctype="multipart/form-data">
+        
         <div class="input-duplo">
           <div style="flex:1">
-            <label for="nome"><i data-lucide="user"></i> <strong>Nome</strong></label>
+            <label for="nome"><i data-lucide="user"></i> <strong>Nome <span style="color: red;">*</span></strong></label>
             <input type="text" id="nome" name="nome" required>
           </div>
+
           <div style="flex:1">
-            <label for="email"><i data-lucide="mail"></i> <strong>E-mail</strong></label>
+            <label for="email"><i data-lucide="mail"></i> <strong>E-mail <span style="color: red;">*</span></strong></label>
             <input type="email" id="email" name="email" required>
           </div>
         </div>
 
         <div class="input-duplo">
           <div style="flex:1">
-            <label for="telefone"><i data-lucide="phone"></i> <strong>Telefone</strong></label>
+            <label for="telefone"><i data-lucide="phone"></i> <strong>Telefone</strong> <span class="opcional">(opcional)</span></label>
             <input type="tel" id="telefone" name="telefone">
           </div>
+
           <div style="flex:1">
-            <label for="whatsapp"><i data-lucide="message-circle"></i> <strong>WhatsApp</strong></label>
+            <label for="whatsapp"><i data-lucide="message-circle"></i> <strong>WhatsApp</strong> <span class="opcional">(opcional)</span></label>
             <input type="tel" id="whatsapp" name="whatsapp">
           </div>
         </div>
 
-        <label for="mensagem"><i data-lucide="edit-3"></i> <strong>Mensagem</strong></label>
+        <label for="mensagem"><i data-lucide="edit-3"></i> <strong>Mensagem <span style="color: red;">*</span></strong></label>
         <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
 
-        <label for="arquivo" class="upload-label">
-          <i data-lucide="paperclip"></i> <strong>Anexar arquivo (1 máx)</strong>
-        </label>
-        <input type="file" id="arquivo" name="arquivo" accept=".pdf,.doc,.docx,.jpg,.png" max="1">
+        <label for="arquivos" class="upload-label"><i data-lucide="paperclip"></i> <strong>Anexar arquivos (máx. 5)</strong></label>
+        <input type="file" id="arquivos" name="arquivos[]" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
+        <small>Máximo de 5 arquivos com total de 20 MB</small>
+        <div id="lista-arquivos"></div>
+        <div id="tamanho-total" style="margin-bottom: 10px;"></div>
 
-        <button type="submit"><i data-lucide="send"></i> <span>Enviar</span></button>
+        <div class="g-recaptcha" data-sitekey="6LdREw8rAAAAAHosCHGk_-TNV-5m5dSTJUrpqRHN" data-callback="validarRecaptcha"></div>
+
+        <div style="margin-top: 20px;">
+          <button type="submit" disabled><i data-lucide="send"></i> <span>Enviar</span></button>
+        </div>
 
         <input type="hidden" name="_next" value="obrigadonova.html">
         <input type="hidden" name="_captcha" value="false">
@@ -64,28 +71,23 @@
   </main>
 
   <div id="footer-container"></div>
-  
-  <script>
-    fetch('header-nav.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header-nav-container').innerHTML = data;
-        });
-  </script>
-
-  <script>
-      fetch('footer.html')
-          .then(response => response.text())
-          .then(data => {
-              document.getElementById('footer-container').innerHTML = data;
-          });
-  </script>
 
   <script src="js/contatonovo.js" defer></script>
 
   <script>
+    fetch('header-nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-nav-container').innerHTML = data;
+      });
+
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      });
+
     lucide.createIcons();
   </script>
-
 </body>
 </html>

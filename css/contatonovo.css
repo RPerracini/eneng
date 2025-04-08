@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 70px 0 60px; /* espaço para header e footer fixos */
-  background-color: #f9f9f9;
+  /* padding: 70px 0 60px; */
+  background-color:#abdef8;
 }
 
 /* Container principal */
@@ -89,8 +89,9 @@ body {
 }
 
 .col-direita button {
-  width: 150px; /* ou outro valor, como 180px */
-  align-self: flex-start; /* para alinhar à esquerda */
+  width: 150px;
+  align-self: flex-start;
+  margin-top: 16px; /* espaço acima do botão */
 }
 
 .col-direita button:hover {
@@ -130,4 +131,12 @@ svg.lucide {
   stroke: #fc9403 !important;
   vertical-align: middle;
   margin-right: 8px;
+}
+
+.opcional {
+  font-style: italic;
+  font-weight: normal;
+  color: #aaa;
+  font-size: 14px;
+  margin-left: 4px;
 }

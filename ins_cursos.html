@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/header-nav.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
+
 <div id="header-nav-container"></div>
 
 <body>  
@@ -38,7 +39,6 @@
                 <p>Outros tópicos sugeridos podem ser adicionados</p>
             </div>
 
-            <!-- COLUNA 2: TEMAS -->
             <div class="temas-container">
                 <h3>TEMAS</h3>
                 <ul class="temas-lista">
@@ -61,11 +61,11 @@
                 </ul>
             </div>
 
-            <!-- COLUNA 3: FORMULÁRIO -->
             <div id="mensagem-sucesso" class="mensagem-sucesso">
                 <span style="margin-right: 10px;">✓</span>
                 Mensagem enviada com sucesso!
             </div>
+
             <form id="meuFormulario" class="form-container">
                 <h3 class="form-title">FICHA DE INSCRIÇÃO</h3>
                 <div class="subtitulo-curso">CURSO DE MANUTENÇÃO DE REDUTORES</div>
@@ -192,12 +192,13 @@
                                 <img src="instrucoes.png" alt="Instruções para envio">
                             </div>
                         </div>
-                <!-- Modal para as instruções -->
-                <div id="modal-instrucoes" class="modal-instrucoes">
+
+                        <div id="modal-instrucoes" class="modal-instrucoes">
                     <div class="modal-conteudo">
                         <span class="fechar-modal">&times;</span>
                         <img src="instrucoes.png" alt="Instruções para envio">
                     </div>
+
                 </div>
             </form>
         </div>
@@ -210,21 +211,6 @@
     .then(response => response.text())
     .then(data => {
         document.getElementById('header-nav-container').innerHTML = data;
-
-        // ⏰ Inicia o relógio depois que o header foi carregado
-        const relogio = document.getElementById("relogio");
-        if (relogio) {
-            function atualizarRelogio() {
-                const agora = new Date();
-                const horas = agora.getHours().toString().padStart(2, '0');
-                const minutos = agora.getMinutes().toString().padStart(2, '0');
-                const segundos = agora.getSeconds().toString().padStart(2, '0');
-                relogio.textContent = `${horas}:${minutos}:${segundos}`;
-            }
-
-            atualizarRelogio();
-            setInterval(atualizarRelogio, 1000);
-        }
     });
 
 
@@ -237,6 +223,7 @@
     </script>
         
     <script src="js/ins_cursos.js"></script>
+    
 </div>
 </body>
 </html>

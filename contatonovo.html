@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,8 +9,9 @@
   <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/umd/lucide.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
-  <!-- Header será carregado dinamicamente -->
+
   <div id="header-nav-container"></div>
 
   <main class="container-novo">
@@ -61,10 +63,24 @@
     </div>
   </main>
 
-  <!-- Footer será carregado dinamicamente -->
   <div id="footer-container"></div>
+  
+  <script>
+    fetch('header-nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-nav-container').innerHTML = data;
+        });
+  </script>
 
-  <!-- JS do site -->
+  <script>
+      fetch('footer.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('footer-container').innerHTML = data;
+          });
+  </script>
+
   <script src="js/contatonovo.js" defer></script>
 
   <script>

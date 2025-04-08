@@ -23,6 +23,7 @@
 </div>
 
 <body class="calculo-page">
+
     <div id="header-nav-container"></div>
 
     <section class="formulario">
@@ -173,7 +174,6 @@
         </div>
     </section>
 
-    <!-- Modal de Confirmação -->
     <div id="confirmacaoReset" class="modal-reset">
         <div class="modal-content">
             <div class="modal-icon">⚠️</div>
@@ -184,42 +184,28 @@
             </div>
     </div>
 
-    <script src="js/js_calc1.js"></script>
-</body>
+    <div id="footer-container"></div>
 
-<div id="footer-container"></div>
+    <script>
+        fetch('header-nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-nav-container').innerHTML = data;
+                });  
+    </script>
 
-<script>
-      fetch('header-nav.html')
+    <script>
+        // Carrega o footer
+        fetch('footer.html')
             .then(response => response.text())
             .then(data => {
-                document.getElementById('header-nav-container').innerHTML = data;
-    
-                // ⏰ Inicia o relógio depois que o header foi carregado
-                const relogio = document.getElementById("relogio");
-                if (relogio) {
-                    function atualizarRelogio() {
-                        const agora = new Date();
-                        const horas = agora.getHours().toString().padStart(2, '0');
-                        const minutos = agora.getMinutes().toString().padStart(2, '0');
-                        const segundos = agora.getSeconds().toString().padStart(2, '0');
-                        relogio.textContent = `${horas}:${minutos}:${segundos}`;
-                    }
-    
-                    atualizarRelogio();
-                    setInterval(atualizarRelogio, 1000);
-                }
+                document.getElementById('footer-container').innerHTML = data;
             });
-</script>
+    </script>
 
-<script>
-    // Carrega o footer
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer-container').innerHTML = data;
-        });
-</script>
+    <script src="js/js_calc1.js"></script>
 
+    
+</body>
 
 </html>

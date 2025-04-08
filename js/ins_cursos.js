@@ -8,13 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const spanFechar = document.querySelector('.fechar-modal');
     const mensagemSucesso = document.getElementById('mensagem-sucesso');
 
-    // Configuração inicial do botão
     btnEnviar.style.transition = 'opacity 0.3s ease';
     btnEnviar.style.opacity = '0.6';
     btnEnviar.style.cursor = 'not-allowed';
     btnEnviar.disabled = true;
 
-    // ===== [1. CONFIGURAÇÃO DAS BANDEIRAS] =====
     const bandeiras = {
         '54': 'https://flagcdn.com/ar.svg',
         '55': 'https://flagcdn.com/br.svg',
@@ -59,14 +57,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== [2. MODAL DE INSTRUÇÕES] =====
     btnInstrucoes.addEventListener('click', () => modal.style.display = 'block');
     spanFechar.addEventListener('click', () => modal.style.display = 'none');
     window.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
 
-    // ===== [3. FORMATAÇÃO DE TELEFONE] =====
     function formatarTelefone(input) {
         if (!input) return;
 
@@ -82,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== [4. VALIDAÇÃO DO FORMULÁRIO] =====
     function verificarCamposPreenchidos() {
         const camposObrigatorios = [
             form.elements.nome?.value.trim(),
@@ -103,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
         btnEnviar.style.cursor = btnEnviar.disabled ? 'not-allowed' : 'pointer';
     }
 
-    // ===== [5. EVENT LISTENERS] =====
     const eventos = ['input', 'change', 'paste'];
     const camposParaMonitorar = [
         form.elements.nome,
@@ -125,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // ===== [6. ENVIO DO FORMULÁRIO] =====
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (btnEnviar.disabled) return;
@@ -150,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1500);
     });
 
-    // ===== [INICIALIZAÇÃO] =====
     formatarTelefone(document.getElementById('telefone'));
     formatarTelefone(document.getElementById('whatsapp'));
     configurarBandeiras();

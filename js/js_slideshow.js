@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     startSlideshow();
     
-    // const slideshowContainer = document.querySelector('.slideshow-container');
-    // if (slideshowContainer) {
-    //     slideshowContainer.addEventListener('mouseenter', () => {
-    //         clearInterval(slideInterval);
-    //     });
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    if (slideshowContainer) {
+        slideshowContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
         
-    //     slideshowContainer.addEventListener('mouseleave', () => {
-    //         slideInterval = setInterval(nextSlide, 3000);
-    //     });
-    // }
+        slideshowContainer.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 3000);
+        });
+    }
 });

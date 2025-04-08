@@ -1,68 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redutores | ENENG</title>
+    <title>ENENG-SERVIÇOS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/ins_cursos1.css">
+    <link rel="stylesheet" href="css/estilo_servicos.css">
     <link rel="stylesheet" href="css/header-nav.css">
     <link rel="stylesheet" href="css/footer.css">
-
-    <style>
-        body {
-            margin: 0;
-            padding-bottom: 60px; /* altura do footer */
-            box-sizing: border-box;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 1.3fr;
-            gap: 30px;
-            padding: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .service-card h2 {
-            color: #0000e6;
-            border-bottom: 2px solid #fc9403;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            font-family: 'Nulshock', sans-serif;
-        }
-
-        .service-card p {
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-        }
-
-        /* FOOTER FIXO */
-        #footer-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-        }
-    </style>
 </head>
+
 <body>
+
     <div id="header-nav-container"></div>
 
     <main class="content-grid">
@@ -84,35 +34,18 @@
         </div>
 
         <div class="service-card">
-            <!-- Coluna reservada -->
         </div>
     </main>
 
     <div id="footer-container"></div>
 
-        <!-- Carrega o header -->
-        <script>
-            fetch('header-nav.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('header-nav-container').innerHTML = data;
-        
-                    // ⏰ Inicia o relógio depois que o header foi carregado
-                    const relogio = document.getElementById("relogio");
-                    if (relogio) {
-                        function atualizarRelogio() {
-                            const agora = new Date();
-                            const horas = agora.getHours().toString().padStart(2, '0');
-                            const minutos = agora.getMinutes().toString().padStart(2, '0');
-                            const segundos = agora.getSeconds().toString().padStart(2, '0');
-                            relogio.textContent = `${horas}:${minutos}:${segundos}`;
-                        }
-        
-                        atualizarRelogio();
-                        setInterval(atualizarRelogio, 1000);
-                    }
-                });
-        </script>
+    <script>
+        fetch('header-nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-nav-container').innerHTML = data;
+          });
+    </script>
 
     <script>
 
@@ -122,5 +55,6 @@
                 document.getElementById('footer-container').innerHTML = data;
             });
     </script>
+    
 </body>
 </html>

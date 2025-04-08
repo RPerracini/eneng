@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="css/header-nav.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
+
 <body>
+
     <div id="header-nav-container"></div>
 
     <main class="main-content redutores">
@@ -28,7 +30,6 @@
             <p>Assessoria na escolha dos diferentes modelos de redutores...</p>
         </div>
 
-        <!-- Coluna da Direita - Slideshow -->
         <div class="service-card">
             <div class="slideshow-wrapper">
                 <div class="slideshow-container">
@@ -45,28 +46,16 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-nav-container').innerHTML = data;
-    
-                // ⏰ Inicia o relógio depois que o header foi carregado
-                const relogio = document.getElementById("relogio");
-                if (relogio) {
-                    function atualizarRelogio() {
-                        const agora = new Date();
-                        const horas = agora.getHours().toString().padStart(2, '0');
-                        const minutos = agora.getMinutes().toString().padStart(2, '0');
-                        const segundos = agora.getSeconds().toString().padStart(2, '0');
-                        relogio.textContent = `${horas}:${minutos}:${segundos}`;
-                    }
-    
-                    atualizarRelogio();
-                    setInterval(atualizarRelogio, 1000);
-                }
             });
+
         fetch('footer.html')
             .then(res => res.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
             });
     </script>
+
     <script src="js/js_slideshow.js"></script>
+    
 </body>
 </html>

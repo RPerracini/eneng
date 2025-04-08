@@ -11,18 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Configuração inicial do botão
     btnEnviar.style.transition = 'opacity 0.3s ease';
     btnEnviar.style.opacity = '0.6';
     btnEnviar.style.cursor = 'not-allowed';
     btnEnviar.disabled = true;
 
-    // Máscaras para telefone (XXXX-XXXX ou XXXXX-XXXX)
     function aplicarMascaraTelefone(input) {
         if (!input) return;
 
         input.addEventListener('input', function(e) {
-            // Apenas para campos de número (não DDD)
             if (e.target.id.includes('ddd')) {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length > 2) value = value.substring(0, 2);
@@ -31,11 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Para campos de número (telefone/whatsapp)
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 9) value = value.substring(0, 9);
             
-            // Formatação dinâmica (XXXX-XXXX ou XXXXX-XXXX)
             let formattedValue = value;
             if (value.length > 5) {
                 formattedValue = formattedValue.replace(/(\d{5})(\d{1,4})$/, '$1-$2');
@@ -48,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Verificação de campos preenchidos
     function verificarCamposPreenchidos() {
         const camposObrigatorios = [
             form.elements.nome?.value.trim(),
@@ -75,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         btnEnviar.style.cursor = btnEnviar.disabled ? 'not-allowed' : 'pointer';
     }
 
-    // Sincronizar DDIs
     function sincronizarDDIs() {
         const ddiTelefone = document.getElementById('ddi-telefone');
         const ddiWhatsapp = document.getElementById('ddi-whatsapp');
@@ -89,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Event listeners
     const eventos = ['input', 'change', 'paste'];
     const camposParaMonitorar = [
         form.elements.nome,
@@ -113,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Envio do formulário
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (btnEnviar.classList.contains('enviando')) return;
@@ -145,13 +136,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     });
 
-    // Aplicar máscaras
     aplicarMascaraTelefone(form.elements.ddd_telefone);
     aplicarMascaraTelefone(form.elements.telefone);
     aplicarMascaraTelefone(form.elements.ddd_whatsapp);
     aplicarMascaraTelefone(form.elements.whatsapp);
 
-    // Inicializar
     sincronizarDDIs();
     verificarCamposPreenchidos();
 });

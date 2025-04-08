@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/header-nav.css" />
     <link rel="stylesheet" href="css/footer.css" />
 </head>
+
 <body>
     <div id="header-nav-container"></div>
 
@@ -52,31 +54,14 @@
 
     <div id="footer-container"></div>
 
-    <!-- Carrega o header -->
     <script>
         fetch('header-nav.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-nav-container').innerHTML = data;
-    
-                // ⏰ Inicia o relógio depois que o header foi carregado
-                const relogio = document.getElementById("relogio");
-                if (relogio) {
-                    function atualizarRelogio() {
-                        const agora = new Date();
-                        const horas = agora.getHours().toString().padStart(2, '0');
-                        const minutos = agora.getMinutes().toString().padStart(2, '0');
-                        const segundos = agora.getSeconds().toString().padStart(2, '0');
-                        relogio.textContent = `${horas}:${minutos}:${segundos}`;
-                    }
-    
-                    atualizarRelogio();
-                    setInterval(atualizarRelogio, 1000);
-                }
             });
     </script>
 
-    <!-- Carrega o footer -->
     <script>
         fetch('footer.html')
             .then(response => response.text())
@@ -85,7 +70,6 @@
             });
     </script>
 
-    <script src="js/js_calc1.js"></script>
     <script>
         var url = 'https://cdn.waplus.io/waplus-crm/settings/ossembed.js';
         var s = document.createElement('script');
@@ -114,5 +98,6 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
+
 </body>
 </html>

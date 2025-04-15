@@ -1,5 +1,3 @@
-// contatonovo.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contato-form");
   const arquivosInput = document.getElementById("arquivos");
@@ -15,9 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function validarFormulario() {
     const todosPreenchidos = camposObrigatorios.every(campo => campo.value.trim() !== "");
-    const captchaRespondido = grecaptcha.getResponse().trim() !== "";
 
-    if (todosPreenchidos && captchaRespondido) {
+    if (todosPreenchidos) {
       botaoEnviar.disabled = false;
       botaoEnviar.style.opacity = "1";
       botaoEnviar.style.cursor = "pointer";
@@ -31,8 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   camposObrigatorios.forEach(campo => {
     campo.addEventListener("input", validarFormulario);
   });
-
-  window.validarRecaptcha = validarFormulario; // usado pelo reCAPTCHA callback
 
   arquivosInput.addEventListener("change", () => {
     const arquivos = Array.from(arquivosInput.files);
@@ -63,5 +58,15 @@ document.addEventListener("DOMContentLoaded", () => {
       listaArquivos.innerHTML = "";
       tamanhoTotalDiv.textContent = "";
     }
+  });
+
+  validarFormulario(); // garante que o botão comece desativado
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  const botao = form.querySelector(".btn-enviar");
+
+  form.addEventListener("submit", () => {
+    botao.classList.add("spin");
   });
 });

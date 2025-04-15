@@ -1,85 +1,135 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contato Novo</title>
-  <link rel="stylesheet" href="site/css/contatonovo.css">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contato</title>
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+      <link rel="stylesheet" href="css/contatonovo.css" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
-  <div id="header"></div>
 
-  <main>
-    <section class="contato-container">
-      <form action="https://formsubmit.co/seu@email.com" method="POST" class="formulario" enctype="multipart/form-data">
-        <div class="campo">
-          <label for="nome"><strong>Nome</strong></label>
-          <input type="text" id="nome" name="nome" required>
+  <div id="header-nav-container"></div>
+
+  <main class="container-novo">
+    
+    <section class="left-column">
+      <h2>CONTATO</h2>
+      <p><strong>Engº Roberto Perracini</strong> </p>
+      <p><strong><i data-lucide="mail"></i> Email:</strong> roberto@eneng.com.br</p>
+      <p><strong><i data-lucide="phone"></i> Telefone:</strong> (+55) (11) 98540-0421</p>
+      
+      <p>
+        <strong><i data-lucide="message-circle"></i> WhatsApp:</strong>
+        <a href="https://wa.me/5511985400421" target="_blank" rel="noopener noreferrer">
+          (+55) (11) 98540-0421
+        </a>
+      </p>
+      
+    </section>
+
+    <section class="right-column">
+      <form action="https://formsubmit.co/roberto@eneng.com" method="POST" enctype="multipart/form-data">
+    
+        <!-- Linha Nome + Email -->
+        <div class="linha-dupla">
+          <div class="form-group">
+            <label for="nome"><strong><i data-lucide="user"></i> Nome:</strong></label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div class="form-group">
+            <label for="email"><strong><i data-lucide="mail"></i> Email:</strong></label>
+            <input type="email" id="email" name="email" required>
+          </div>
         </div>
+    
+        <!-- Linha Telefone + WhatsApp -->
+        <div class="linha-dupla">
+          <div class="form-group">
+            <select id="ddi-select" name="ddi" style="width: 100%">
+              <option value="+55" data-flag="br">🇧🇷 +55 (Brasil)</option>
+              <option value="+1" data-flag="us">🇺🇸 +1 (EUA)</option>
+              <option value="+44" data-flag="gb">🇬🇧 +44 (Reino Unido)</option>
+              <option value="+351" data-flag="pt">🇵🇹 +351 (Portugal)</option>
+              <option value="+34" data-flag="es">🇪🇸 +34 (Espanha)</option>
+            </select>
+            
+            <label for="telefone"><strong><i data-lucide="phone"></i> Telefone:</strong></label>
+            <input type="tel" id="telefone" name="telefone">
+          </div>
 
-        <div class="campo">
-          <label for="email"><strong>E-mail</strong></label>
-          <input type="email" id="email" name="email" required>
+          <div class="form-group">
+            <select id="ddi-select" name="ddi" style="width: 100%">
+              <option value="+55" data-flag="br">🇧🇷 +55 (Brasil)</option>
+              <option value="+1" data-flag="us">🇺🇸 +1 (EUA)</option>
+              <option value="+44" data-flag="gb">🇬🇧 +44 (Reino Unido)</option>
+              <option value="+351" data-flag="pt">🇵🇹 +351 (Portugal)</option>
+              <option value="+34" data-flag="es">🇪🇸 +34 (Espanha)</option>
+            </select>
+            
+            <label for="whatsapp"><strong><i data-lucide="message-circle"></i> WhatsApp:</strong></label>
+            <input type="tel" id="whatsapp" name="whatsapp">
+          </div>
         </div>
-
-        <div class="campo">
-          <label for="mensagem"><strong>Mensagem</strong></label>
-          <textarea id="mensagem" name="mensagem" required></textarea>
+    
+        <!-- Mensagem -->
+        <div class="form-group">
+          <label for="mensagem"><strong><i data-lucide="message-square"></i> Mensagem:</strong></label>
+          <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
         </div>
-
-        <div class="g-recaptcha" data-sitekey="<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contato Novo</title>
-  <link rel="stylesheet" href="site/css/contatonovo.css">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</head>
-<body>
-  <div id="header"></div>
-
-  <main>
-    <section class="contato-container">
-      <form action="https://formsubmit.co/seu@email.com" method="POST" class="formulario" enctype="multipart/form-data">
-        <div class="campo">
-          <label for="nome"><strong>Nome</strong></label>
-          <input type="text" id="nome" name="nome" required>
+    
+        <!-- Arquivo -->
+        <div class="form-group">
+          <label for="arquivo"><strong><i data-lucide="paperclip"></i> Anexar arquivo:</strong></label>
+          <input type="file" name="arquivo" accept=".pdf,.doc,.docx,.jpg,.png">
         </div>
-
-        <div class="campo">
-          <label for="email"><strong>E-mail</strong></label>
-          <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="campo">
-          <label for="mensagem"><strong>Mensagem</strong></label>
-          <textarea id="mensagem" name="mensagem" required></textarea>
-        </div>
-
-        <div class="g-recaptcha" data-sitekey="6LcGGw8rAAAAAHOs8XEBob-jKXY76Me14vIKpNwh" data-callback="recaptchaCallback"></div>
-
-        <button type="submit" class="botao-enviar" disabled>Enviar</button>
+    
+        <!-- Redirecionamento -->
+        <input type="hidden" name="_next" value="https://seudominio.com/obrigadonova.html">
+        <input type="hidden" name="_captcha" value="false">
+    
+        <!-- Botão -->
+        <button type="submit" class="btn-enviar">
+          <i data-lucide="send"></i> Enviar
+        </button>
+    
       </form>
     </section>
+    
   </main>
 
-  <div id="footer"></div>
+  <!-- Footer -->
+  <div id="footer-container"></div>
 
-  <script src="site/js/contatonovo.js"></script>
-  <script src="site/js/contatonovo-header-footer.js"></script>
-</body>
-</html>" data-callback="recaptchaCallback"></div>
+  <script>
+    fetch('header-nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-nav-container').innerHTML = data;
+        });
 
-        <button type="submit" class="botao-enviar" disabled>Enviar</button>
-      </form>
-    </section>
-  </main>
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        });
+  </script>
 
-  <div id="footer"></div>
+  <!-- Inicializa os ícones Lucide -->
+  <script>
+    lucide.createIcons();
+  </script>
 
-  <script src="site/js/contatonovo.js"></script>
-  <script src="site/js/contatonovo-header-footer.js"></script>
+  <script src="contatonovo.js"></script>
 </body>
 </html>

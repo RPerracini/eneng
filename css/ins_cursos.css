@@ -5,7 +5,7 @@
   --cinza-texto: #333;
   --vermelho-erro: #e74c3c;
   --fonte-principal: sans-serif;
-  --cor-texto: #000; /* Nova variável para cor do texto */
+  --cor-texto: #000;
 }
 
 * {
@@ -13,7 +13,7 @@
   margin: 0;
   padding: 0;
   font-family: var(--fonte-principal);
-  color: var(--cor-texto); /* Aplica preto para todos os elementos */
+  color: var(--cor-texto);
 }
 
 html {
@@ -27,17 +27,9 @@ body {
   background-color: #abdef8;
   margin: 0;
   padding: 0;
-  min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
-  display: flex; /* Ativa flexbox */
-  flex-direction: column; /* Organiza os elementos em coluna */
-}
-
-body * {
-  color: inherit;
-}
-
-a {
-  color: var(--azul-principal);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -60,7 +52,7 @@ a {
   position: relative;
   padding-bottom: 10px;
   font-family: var(--fonte-principal);
-  color: var(--cor-texto);
+  color: #fc9403;
 }
 
 .titulo-curso::after {
@@ -88,12 +80,12 @@ a {
 
 .content-wrapper {
   display: flex;
-  justify-content: center; /* Centraliza as colunas horizontalmente */
-  margin: 30px auto; /* Centraliza verticalmente com margem automática */
+  justify-content: center;
+  margin: 30px auto;
   align-items: flex-start;
   gap: 20px 50px;
-  max-width: 1500px; /* Define uma largura máxima para o conteúdo */
-  padding: 0 20px; /* Adiciona padding para evitar colar nas bordas */
+  max-width: 1500px;
+  padding: 0 20px;
 }
 
 .text-info {
@@ -117,7 +109,7 @@ a {
 .temas-container h3 {
   font-family: var(--fonte-principal);
   font-size: 1.3em;
-  color: var(--cor-texto);
+  color: #fc9403;
   margin-bottom: 10px;
 }
 
@@ -177,7 +169,6 @@ a {
   color: var(--cor-texto);
 }
 
-/* CAMPOS DE ENTRADA */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -194,25 +185,26 @@ select.ddi-select {
 }
 
 .ddi-select {
-  padding-left: 50px !important; /* Aumente o espaço para a bandeira */
+  padding-left: 40px !important;
   background-repeat: no-repeat;
-  background-position: left 10px center; /* Posição mais precisa */
-  background-size: 20px; /* Tamanho um pouco menor */
-  width: 150px; /* Largura fixa para melhor visualização */
+  background-position: 10px center;
+  background-size: 20px;
+  width: 150px;
+  position: relative;
 }
 
 .ddi-select option {
-  padding-left: 60px !important;
-  background-position: left 12px center;
-  min-width: 300px;
-  font-size: 14px;
+  padding-left: 40px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px;
 }
 
 .phone-inputs select.ddi-select {
-  width: 270px!important;
-  padding-left: 48px !important;
-  background-position: left 15px center;
-  background-size: 25px;
+  width: 270px !important;
+  padding-left: 40px !important;
+  background-position: 10px center;
+  background-size: 20px;
   font-size: 14px;
 }
 
@@ -290,7 +282,7 @@ select.ddi-select {
 ::placeholder {
   font-family: var(--fonte-principal);
   font-size: 0.9em;
-  color: #777; /* Placeholder mais claro, mas texto digitado será preto */
+  color: #777;
 }
 
 .form-actions {
@@ -298,62 +290,7 @@ select.ddi-select {
   justify-content: center;
   gap: 15px;
   margin-top: 20px;
-}
-
-.btn-instrucoes {
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 12px 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.btn-instrucoes:hover {
-  background-color: #e0e0e0;
-}
-
-.modal-instrucoes {
-  display: none;
-  position: fixed;
-  z-index: 1001;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7);
-}
-
-.modal-conteudo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 80%;
-  max-height: 80%;
-  text-align: center;
-}
-
-.modal-conteudo img {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 8px;
-}
-
-.fechar-modal {
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  color: white;
-  font-size: 35px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.fechar-modal:hover {
-  color: #fc9403;
+  padding: 0px;
 }
 
 .error {
@@ -376,7 +313,7 @@ select.ddi-select {
   font-size: 13px;
   width: 2px;
   max-width: 70%;
-  margin-left: 20px; /* Margem à esquerda atual */
+  margin-left: 20px;
   color: var(--cor-texto);
 }
 
@@ -386,7 +323,7 @@ select.ddi-select {
   font-size: 13px;
   width: 2px;
   max-width: 70%;
-  margin-left: 25px; /* Margem à esquerda atual */
+  margin-left: 25px;
   color: var(--cor-texto);
 }
 
@@ -396,7 +333,7 @@ select.ddi-select {
   font-size: 13px;
   width: 2px;
   max-width: 70%;
-  margin-left: 25px; /* Margem à esquerda atual */
+  margin-left: 25px;
   color: var(--cor-texto);
 }
 
@@ -406,7 +343,7 @@ select.ddi-select {
   font-size: 13px;
   width: 2px;
   max-width: 70%;
-  margin-left: 25px; /* Margem à esquerda atual */
+  margin-left: 25px;
   color: var(--cor-texto);
 }
 
@@ -426,27 +363,27 @@ select.ddi-select {
 }
 
 button[type="submit"]:disabled {
-  background-color: #cccccc; /* Cinza claro */
-  color: #666666; /* Texto cinza mais escuro */
-  cursor: not-allowed; /* Cursor indicando que não é clicável */
-  opacity: 0.7; /* Leve transparência */
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 button[type="submit"]:not(:disabled) {
-  background-color: var(--azul-principal); /* Azul definido na variável */
-  color: white; /* Texto branco */
-  cursor: pointer; /* Cursor normal */
-  opacity: 1; /* Sem transparência */
+  background-color: var(--azul-principal);
+  color: white;
+  cursor: pointer;
+  opacity: 1;
 }
 
 button[type="submit"]:not(:disabled):hover {
-  background-color: #0000cc; /* Azul mais escuro no hover */
+  background-color: #0000cc;
   color: white;
 }
 
 .mensagem-sucesso {
-  background-color: #fc9403; /* Laranja */
-  color: #0000e6; /* Azul */
+  background-color: #fc9403;
+  color: #0000e6;
   padding: 15px 30px;
   border-radius: 5px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -456,7 +393,7 @@ button[type="submit"]:not(:disabled):hover {
   display: none;
   opacity: 0;
   transition: opacity 0.5s ease;
-  position: relative; /* Posicionamento relativo ao formulário */
+  position: relative;
   z-index: 1;
 }
 
@@ -477,8 +414,8 @@ button[type="submit"]:not(:disabled):hover {
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #fc9403; /* Laranja igual ao botão */
-  color: #0000e6; /* Azul principal */
+  background-color: #fc9403;
+  color: #0000e6;
   padding: 15px 30px;
   border-radius: 5px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -490,8 +427,8 @@ button[type="submit"]:not(:disabled):hover {
 }
 
 .btn-instrucoes {
-  background-color:#0000e6;
-  color:white;
+  background-color: #0000e6;
+  color: white;
   padding: 12px 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -502,8 +439,8 @@ button[type="submit"]:not(:disabled):hover {
 }
 
 .btn-instrucoes:hover {
-  background-color:#fc9403;
-  color:black;
+  background-color: #fc9403;
+  color: black;
 }
 
 .modal-instrucoes {
@@ -575,7 +512,6 @@ button[type="submit"]:not(:disabled):hover {
   100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
 }
 
-/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 1200px) {
   .content-wrapper {
     gap: 20px;
@@ -585,20 +521,18 @@ button[type="submit"]:not(:disabled):hover {
 @media (max-width: 992px) {
     .content-wrapper {
       flex-direction: column;
-      align-items: center; /* Centraliza os itens quando em coluna */
+      align-items: center;
     }
     
     .text-info,
     .temas-container,
     .form-container {
       width: 100%;
-      max-width: 500px; /* Define uma largura máxima para mobile */
+      max-width: 500px;
     }
 }
 
-
 @media (max-width: 768px) {
-
     .phone-inputs {
         flex-wrap: wrap;
     }
@@ -612,74 +546,74 @@ button[type="submit"]:not(:disabled):hover {
         width: calc(100% - 110px) !important;
     }
 
-  .form-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  #nome,
-  .phone-inputs,
-  select.ddi-select,
-  #telefone,
-  #whatsapp {
-    width: 100%;
-    margin-left: 0;
-  }
-  
-  .error {
-    margin-left: 0;
-  }
-  
-  .radio-container > label.required {
-    margin-bottom: 10px;
-    margin-right: 0;
-  }
-  
-  .phone-inputs {
-    flex-wrap: wrap;
-    width: 100%;
-    margin-left: 0;
-    gap: 5px;
-  }
-  
-  select.ddi-select {
-    width: 100%;
-    margin-bottom: 5px;
-  }
-  
-  #ddd-telefone,
-  #ddd-whatsapp {
-    width: 50px;
-  }
-  
-  #telefone,
-  #whatsapp {
-    width: calc(100% - 55px);
-  }
-  
-  .temas-lista {
-    columns: 1;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  select.ddi-select {
-    height: 46px;
-    font-size: 16px;
-  }
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #nome,
+    .phone-inputs,
+    select.ddi-select,
+    #telefone,
+    #whatsapp {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .error {
+        margin-left: 0;
+    }
+    
+    .radio-container > label.required {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
+    .phone-inputs {
+        flex-wrap: wrap;
+        width: 100%;
+        margin-left: 0;
+        gap: 5px;
+    }
+    
+    select.ddi-select {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    #ddd-telefone,
+    #ddd-whatsapp {
+        width: 50px;
+    }
+    
+    #telefone,
+    #whatsapp {
+        width: calc(100% - 55px);
+    }
+    
+    .temas-lista {
+        columns: 1;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select.ddi-select {
+        height: 46px;
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 992px) {
-  .content-wrapper {
-    flex-direction: column;
-  }
-  
-  .text-info,
-  .temas-container,
-  .form-container {
-    flex: 0 0 100%;
-    width: 100%;
-    margin: 0 0 30px 0;
-  }
+    .content-wrapper {
+        flex-direction: column;
+    }
+    
+    .text-info,
+    .temas-container,
+    .form-container {
+        flex: 0 0 100%;
+        width: 100%;
+        margin: 0 0 30px 0;
+    }
 }

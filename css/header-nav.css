@@ -157,13 +157,70 @@ nav a:hover {
   font-family: sans-serif;
 }
 
-.dropdown-menu a:hover {
-  background-color: #222;
-}
-
 li a {
   padding-right: 35px;
   padding-left: 35px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown > a::after {
+  font-size: 0.9rem;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover > a::after {
+  transform: rotate(180deg);
+}
+
+/* Estilo do menu dropdown */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fc9403;
+  min-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  z-index: 9999;
+  opacity: 0;
+  /* transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease; */
+}
+
+/* Mostra com efeito */
+.dropdown:hover .dropdown-menu {
+display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Itens do dropdown */
+.dropdown-menu a {
+  display: block;
+  color: #222;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+/* .dropdown-menu a:hover {
+  background-color: #222;
+  color: #fff; */
+  /* padding-left: 28px; */
+  /* border-left: 4px solid white; */
+/* } */
+
+.dropdown-menu a:hover {
+  /* background-color: white; */
+  color: white;
+  /* border-left: 4px solid #fc9403; */
 }
 
 /* ========== RESPONSIVO: HEADER e NAV ========= */
@@ -173,12 +230,12 @@ li a {
     align-items: center;
     text-align: center;
   }
-/* 
+
   header img.logo {
     margin: 20px auto 10px auto;
     height: 80px;
     margin-left: 0;
-  } */
+  }
 
   header h1.title {
     font-size: 1.2rem;
@@ -224,3 +281,18 @@ li a {
     text-align: center;
   }
 }
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: static;
+    background-color: #fc9403;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: none;
+    border-radius: 0;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+

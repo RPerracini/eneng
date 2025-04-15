@@ -13,35 +13,35 @@ document.addEventListener('DOMContentLoaded', function() {
     btnEnviar.style.cursor = 'not-allowed';
     btnEnviar.disabled = true;
 
-    const bandeiras = {
-        '54': 'https://flagcdn.com/ar.svg',
-        '55': 'https://flagcdn.com/br.svg',
-        '56': 'https://flagcdn.com/cl.svg',
-        '57': 'https://flagcdn.com/co.svg',
-        '591': 'https://flagcdn.com/bo.svg',
-        '506': 'https://flagcdn.com/cr.svg',
-        '593': 'https://flagcdn.com/ec.svg',
-        '503': 'https://flagcdn.com/sv.svg',
-        '502': 'https://flagcdn.com/gt.svg',
-        '592': 'https://flagcdn.com/gy.svg',
-        '509': 'https://flagcdn.com/ht.svg',
-        '504': 'https://flagcdn.com/hn.svg',
-        '1876': 'https://flagcdn.com/jm.svg',
-        '505': 'https://flagcdn.com/ni.svg',
-        '507': 'https://flagcdn.com/pa.svg',
-        '595': 'https://flagcdn.com/py.svg',
-        '51': 'https://flagcdn.com/pe.svg',
-        '1787': 'https://flagcdn.com/pr.svg',
-        '597': 'https://flagcdn.com/sr.svg',
-        '598': 'https://flagcdn.com/uy.svg',
-        '58': 'https://flagcdn.com/ve.svg'
+     const bandeiras = {
+        '54': 'https://flagcdn.com/w20/ar.png',
+        '55': 'https://flagcdn.com/w20/br.png',
+        '56': 'https://flagcdn.com/w20/cl.png',
+        '57': 'https://flagcdn.com/w20/co.png',
+        '591': 'https://flagcdn.com/w20/bo.png',
+        '506': 'https://flagcdn.com/w20/cr.png',
+        '593': 'https://flagcdn.com/w20/ec.png',
+        '503': 'https://flagcdn.com/w20/sv.png',
+        '502': 'https://flagcdn.com/w20/gt.png',
+        '592': 'https://flagcdn.com/w20/gy.png',
+        '509': 'https://flagcdn.com/w20/ht.png',
+        '504': 'https://flagcdn.com/w20/hn.png',
+        '1876': 'https://flagcdn.com/w20/jm.png',
+        '505': 'https://flagcdn.com/w20/ni.png',
+        '507': 'https://flagcdn.com/w20/pa.png',
+        '595': 'https://flagcdn.com/w20/py.png',
+        '51': 'https://flagcdn.com/w20/pe.png',
+        '1787': 'https://flagcdn.com/w20/pr.png',
+        '597': 'https://flagcdn.com/w20/sr.png',
+        '598': 'https://flagcdn.com/w20/uy.png',
+        '58': 'https://flagcdn.com/w20/ve.png'
     };
 
     function atualizarBandeira(select) {
         const codigo = select.value;
         const bandeira = bandeiras[codigo];
         if (bandeira) {
-            select.style.backgroundImage = `url(${bandeira})`;
+            select.style.backgroundImage = `url(${bandeira})`;  // Note as crases
         } else {
             select.style.backgroundImage = 'none';
         }

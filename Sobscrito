@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste de Subscritos e Sobrescritos</title>
+  <style>
+    @font-face {
+      font-family: "font_grega";
+      src: url("data:font/woff2;base64,cm9ib3RvLWl0YWxpYy12YXJpYWJsZWZvbnRfd2R0aHdnaHQtd2ViZm9udC53b2ZmMg==") format("woff2");
+    }
+
+    body {
+      font-family: "font_grega", sans-serif;
+    }
+
+    .sub {
+      font-size: 0.8em;
+      vertical-align: sub;
+    }
+
+    .sup {
+      font-size: 1.2em;
+      vertical-align: super;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teste de Subscritos e Sobrescritos</h1>
+  <p>Se a fonte suportar subscritos e sobrescritos, você verá os seguintes exemplos:</p>
+  <p>Água (H<sub>2</sub>O) e dióxido de carbono (CO<sub>2</sub>) são compostos químicos.</p>
+  <p>A equação é E = mc<sup>2</sup>, onde "c" é a velocidade da luz.</p>
+</body>
+</html>

@@ -22,15 +22,15 @@ body {
   gap: 40px;
 }
 
-.col-esquerda,
-.col-direita {
+.left-column,
+.right-column{
   flex: 1 1 50%;
   max-width: 50%;
   box-sizing: border-box;
 }
 
 /* Texto de contato */
-.col-esquerda h2 {
+.left-column h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -43,14 +43,14 @@ body {
   background: linear-gradient(to right, transparent, #fc9403, transparent);
 }
 
-.col-esquerda p {
+.left-column p {
   font-size: 16px;
   line-height: 1.6;
   margin: 8px 0;
 }
 
 /* Formulário */
-.col-direita form {
+.right-column form {
   display: flex;
   flex-direction: column;
 }
@@ -65,8 +65,8 @@ body {
   flex: 1;
 }
 
-.col-direita input,
-.col-direita textarea {
+.right-column input,
+.right-column textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -77,7 +77,7 @@ body {
   margin-bottom: 10px;
 }
 
-.col-direita button {
+.right-column button {
   padding: 12px;
   background-color: #005baa;
   color: white;
@@ -88,13 +88,13 @@ body {
   transition: background-color 0.3s;
 }
 
-.col-direita button {
+.right-column button {
   width: 150px;
   align-self: flex-start;
   margin-top: 16px; /* espaço acima do botão */
 }
 
-.col-direita button:hover {
+.right-column button:hover {
   background-color: #004080;
 }
 
@@ -103,32 +103,10 @@ body {
   display: block;
 }
 
-/* Header fixo */
-header {
-  background-color: #005baa;
-  color: white;
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-/* Footer fixo */
-footer {
-  background-color: #222;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
 i,
 svg.lucide {
-  color: #fc9403 !important;
-  stroke: #fc9403 !important;
+  color: #fc9403;
+  stroke: #fc9403;
   vertical-align: middle;
   margin-right: 8px;
 }
@@ -139,4 +117,29 @@ svg.lucide {
   color: #aaa;
   font-size: 14px;
   margin-left: 4px;
+}
+
+.linha-dupla {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.linha-dupla .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.left-column a {
+  color: black;
+  text-decoration: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-enviar.spin svg {
+  animation: spin 1s linear infinite;
 }

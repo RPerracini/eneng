@@ -1,0 +1,362 @@
+/* ===== VARIÁVEIS E ESTILOS GERAIS ===== */
+:root {
+    --azul-escuro: #020272;
+    --laranja: #fc9403;
+    --azul-claro: #abdef8;
+    --branco: #ffffff;
+    --cinza-claro: #f0f0f0;
+    --cinza-borda: #ccc;
+    --vermelho: #ff0000;
+    --verde: #4caf50;
+    --azul: #0000e6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--azul-claro);
+    font-family: sans-serif;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+/* ===== FORMULÁRIO PRINCIPAL ===== */
+.formulario {
+    padding: 8px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.boxInput,
+.boxOutput {
+    background: var(--branco);
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dados_de_saída p {
+    color: black;
+    padding-bottom: 10px;
+}
+
+.boxInput {
+    position: relative;
+    padding-bottom: 70px;
+}
+
+.tituloCalc {
+    color: var(--azul);
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--laranja);
+    padding-bottom: 6px;
+}
+
+/* ===== ESTILOS DOS CAMPOS ===== */
+.boxInput1,
+.boxInput2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.boxInput1 label,
+.boxInput2 label {
+    color: #333;
+    font-size: 0.85rem;
+    text-align: left;
+    min-width: 60px;
+}
+
+.boxInput1 input[type='text'],
+.boxInput1 input[type='number'],
+.boxInput1 select,
+.boxInput2 input[type='text'] {
+    width: 100px;
+    padding: 0px 0px;
+    font-size: 14px;
+    text-align: center;
+    border: 2px solid var(--cinza-borda);
+    border-radius: 5px;
+    height: 24px;
+}
+
+.boxInput2 input[type='text'] {
+    width: 300px;
+}
+
+/* Campos de resultado */
+.resultado-calculado {
+    width: 120px;
+    height: 28px;
+    padding: 4px 8px;
+    text-align: center;
+    border: 2px solid var(--cinza-borda) !important;
+    background-color: var(--cinza-claro) !important;
+    border-radius: 5px;
+    color: var(--azul);
+}
+
+/* Foco nos inputs */
+.boxInput1 input:focus,
+.boxInput2 input:focus,
+.boxInput1 select:focus {
+    border: 2px solid var(--azul);
+    box-shadow: 0 0 0 2px rgba(0, 0, 230, 0.2);
+}
+
+.boxInput1:focus-within label,
+.boxInput2:focus-within label {
+    color: var(--azul);
+    font-weight: bold;
+}
+
+/* ===== BOTÕES ===== */
+.btn-container {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 120px;
+}
+
+#btnReset,
+#btnPDF {
+    width: 100%;
+    height: 28px;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#btnReset {
+    background: var(--vermelho);
+    color: var(--branco);
+}
+
+#btnPDF {
+    background: var(--verde);
+    color: var(--branco);
+}
+
+#btnReset:hover,
+#btnPDF:hover {
+    background: var(--laranja);
+    color: #000;
+}
+
+/* ===== MODAIS ===== */
+.modal-reset,
+.modal-help {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--laranja);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border: 2px solid var(--azul);
+}
+
+.modal-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--azul);
+    margin-bottom: 25px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.modal-buttons button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#btnSim {
+    background: var(--vermelho);
+    color: var(--branco);
+}
+
+#btnNao {
+    background: var(--verde);
+    color: var(--branco);
+}
+
+.modal-buttons button:hover {
+    background: #ffcc00;
+    color: #000;
+}
+
+/* Ícones de informação */
+.info-icon {
+    color: var(--azul);
+    margin-left: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.info-icon:hover {
+    color: var(--laranja);
+    transform: scale(1.2);
+}
+
+/* Remove as setas/spins dos campos number */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#alfa-wrapper {
+    transition: all 0.3s ease;
+}
+
+/* Para Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+/* Adicione estas regras ao seu arquivo CSS */
+
+/* Container dos resultados */
+.boxOutput {
+    display: flex;
+    flex-direction: column;
+}
+
+.dados_de_saída {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Estilo para cada linha de resultado */
+.dados_de_saída p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 0px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Estilo para os valores dos resultados */
+.dados_de_saída span {
+    text-align: right;
+    min-width: 100px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: var(--azul-escuro);
+}
+
+/* Ajuste para os títulos dos resultados */
+.dados_de_saída p:has(span) {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Ajuste para linhas sem span (como o título de tolerância) */
+.dados_de_saída p:not(:has(span)) {
+    display: block;
+    margin-top: 0px;
+}
+
+/* Ajuste para as sublinhas de tolerância */
+.dados_de_saída p:has(#tolerancia_positiva),
+.dados_de_saída p:has(#tolerancia_negativa),
+.dados_de_saída p:has(#aw_max),
+.dados_de_saída p:has(#aw_min) {
+    padding-left: 15px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .boxInput2 input[type='text'] {
+        width: 120px;
+    }
+
+    .btn-container {
+        position: static;
+        margin-top: 15px;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .boxInput1,
+    .boxInput2 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .boxInput1 label,
+    .boxInput2 label {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .boxInput1 input[type='text'],
+    .boxInput1 input[type='number'],
+    .boxInput1 select,
+    .boxInput2 input[type='text'],
+    .resultado-calculado {
+        width: 100%;
+        margin: 0;
+    }
+
+    .modal-message {
+        font-size: 1rem;
+    }
+}

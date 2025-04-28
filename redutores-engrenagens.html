@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redutores e Engrenagens | ENENG</title>
+    <title>ENENG-SERVIÇOS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/estilo_servicos.css">
-    <link rel="stylesheet" href="css/estilo_slideshow.css">
+    <link rel="stylesheet" href="css/servicos.css">
     <link rel="stylesheet" href="css/header-nav.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
@@ -15,47 +15,118 @@
 
     <div id="header-nav-container"></div>
 
-    <main class="main-content redutores">
-        <!-- Coluna da Esquerda -->
+    <div class="content-grid">
         <div class="service-card">
-            <h2>Redutores</h2>
-            <p>Projetos e reformas de redutores com acompanhamento na fabricação...</p>
-            <h2>Engrenagens</h2>
-            <p>Projetos, desenhos e cálculo de engrenagens com acompanhamento...</p>
+            <h2>Projetos e Reformas</h2>
+            <p>Projetos e reformas de redutores com acompanhamento na fabricação, ensaios químicos e mecânicos dos materiais, testes e montagens com emissão de relatórios técnicos.</p>
+
             <h2>Repotenciamento</h2>
             <p>Projetos de repotenciamento.</p>
+
             <h2>Soluções Personalizadas</h2>
-            <p>Podemos ajudá-lo a entender melhor suas necessidades...</p>
+            <p>Podemos ajudá-lo a entender melhor suas necessidades, recomendando a melhor solução e também executar os projetos, acompanhar a fabricação e tudo o que for necessário para obter um ótimo produto final.</p>
+
             <h2>Assessoria Técnica</h2>
-            <p>Assessoria na escolha dos diferentes modelos de redutores...</p>
+            <p>Assessoria na escolha dos diferentes modelos no mercado, bem como execução dos cálculos para verificação da capacidade necessária.</p>
         </div>
 
-        <div class="service-card">
-            <div class="slideshow-wrapper">
-                <div class="slideshow-container">
-                    <!-- Slides aqui -->
+        <div class="slideshow-container">
+            <div class="slides-inner">
+                <div class="slide active">
+                    <div class="image-wrapper">
+                        <img src="imagens/Redutor_Duo.png" alt="Redutor Duo">
+                    </div>
+                    <p class="slide-texto">Redutor Duo</p>
                 </div>
-            </div>
-        </div>
-    </main>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Redutordapaginainicial2.png" alt="Redutor Trio">
+                    </div>
+                    <p class="slide-texto">Redutor Trio com engrenagens bi-helicoidais</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Caixa_trio.png" alt="Caixa Trio">
+                    </div>
+                    <p class="slide-texto">Caixa Trio</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Acoplamento_Trebor.png" alt="Acoplamento Trebor">
+                    </div>
+                    <p class="slide-texto">Acoplamento Trebor</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Labirinto3.png" alt="Labirinto">
+                    </div>
+                    <p class="slide-texto">Labirinto para substituir retentor</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/lubri1.png" alt="Sistema de lubrificação">
+                    </div>
+                    <p class="slide-texto">Sistema de lubrificação de redutor</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Moitão1.png" alt="Moitão">
+                    </div>
+                    <p class="slide-texto">Moitão para ponte rolante de giro de barras</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Redutor_helicoidal.png" alt="Redutor helicoidal">
+                    </div>
+                    <p class="slide-texto">Redutor helicoidal não padrão</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Redutor_Morgan.png" alt="Redutor Morgan">
+                    </div>
+                    <p class="slide-texto">Redutor com engrenagens bi-helicoidais</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Redutor_para_tesoura.png" alt="Redutor para tesoura">
+                    </div>
+                    <p class="slide-texto">Redutor para tesoura de barras</p>
+                </div>
+                <div class="slide">
+                    <div class="image-wrapper">
+                        <img src="imagens/Truque.png" alt="Truque">
+                    </div>
+                    <p class="slide-texto">Truque para empilhadora de minérios</p>
+                </div>
 
+            </div>
+            
+            <button class="slideshow-control prev" aria-label="Slide anterior">❮</button>
+            <button class="slideshow-control next" aria-label="Próximo slide">❯</button>
+            
+            <div class="slideshow-indicators"></div>
+        </div>
+    </div>
+          
     <div id="footer-container"></div>
 
     <script>
-      fetch('header-nav.html')
+        fetch('header-nav.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-nav-container').innerHTML = data;
             });
+    </script>
 
+    <script>
         fetch('footer.html')
-            .then(res => res.text())
+            .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
             });
     </script>
 
-    <script src="js/js_slideshow.js"></script>
+    <script src="js/slideshow.js"></script>
     
 </body>
 </html>

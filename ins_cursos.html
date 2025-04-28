@@ -13,8 +13,9 @@
 <div id="header-nav-container"></div>
 
 <body>  
+
     <div class="body2">
-        <main class="container">
+
         <div class="curso-intro">
             <h2 class="titulo-curso">CURSO DE MANUTENÇÃO DE REDUTORES</h2>
             <p class="destaque-experiencia">
@@ -25,7 +26,9 @@
         </div>
 
         <div class="content-wrapper">
+
             <!-- COLUNA 1: INFORMAÇÕES -->
+
             <div class="text-info">
                 <h3>PÚBLICO OBJETIVO</h3>
                 <p>Pessoas que atuam ou querem atuar na área de manutenção de redutores de velocidade.</p>
@@ -37,19 +40,17 @@
                 <p>Conhecimentos básicos na área de manutenção de equipamentos.</p>
                 
                 <h3>OUTROS TÓPICOS</h3>
-                <p>Outros tópicos sugeridos podem ser adicionados</p>
+                <p>Outros tópicos sugeridos podem ser adicionados.</p>
             </div>
 
             <div class="temas-container">
                 <h3>TEMAS</h3>
                 <ul class="temas-lista">
                     <li>Evolução dos redutores</li>
-                    <li>Tipos de engrenagens</li>
-                    <li>Funções de uma engrenagem</li>
+                    <li>Tipos e funções das engrenagens</li>
                     <li>Relação de transmissão</li>
                     <li>Cálculo da temperatura de montagem em peças com interferência</li>
-                    <li>Cálculo da folga nas tampas em rolamentos cilíndricos</li>
-                    <li>Cálculo da folga nas tampas em rolamentos cônicos</li>
+                    <li>Cálculo da folga nas tampas em rolamentos</li>
                     <li>Folga (Backlash) nas engrenagens</li>
                     <li>Contato nos dentes das engrenagens</li>
                     <li>Viscosidade do óleo – definição e como calcular</li>
@@ -58,7 +59,6 @@
                     <li>Limpeza do óleo – Norma ISO 4406</li>
                     <li>Respiros</li>
                     <li>Falhas nas engrenagens</li>
-                    <li>Leitura de desenho de engrenagens</li>
                 </ul>
             </div>
 
@@ -68,6 +68,7 @@
             </div>
 
             <form id="meuFormulario" class="form-container">
+
                 <h3 class="form-title">FICHA DE INSCRIÇÃO</h3>
                 <div class="subtitulo-curso">CURSO DE MANUTENÇÃO DE REDUTORES</div>
                 <div class="form-group">
@@ -178,50 +179,40 @@
                               </div>
                             </div>
                         </div> 
-                        
+                       
                         <div class="form-actions">
+                            <button type="reset" id="resetar" class="botao-reset">Limpar Formulário</button>
                             <button type="submit" id="enviar" disabled>Enviar Inscrição</button>
-                        </div>
-                        
-                        <!-- Modal para as instruções -->
-                        <div id="modal-instrucoes" class="modal-instrucoes">
-                            <div class="modal-conteudo">
-                                <span class="fechar-modal">&times;</span>
-                                <img src="instrucoes.png" alt="Instruções para envio">
+                            <div class="texto-ajuda">
+                                <p>O botão enviar só é liberado após o</p>
+                                <p>preenchimento correto dos campos</p>
                             </div>
                         </div>
 
-                        <div id="modal-instrucoes" class="modal-instrucoes">
-                    <div class="modal-conteudo">
-                        <span class="fechar-modal">&times;</span>
-                        <img src="instrucoes.png" alt="Instruções para envio">
                     </div>
-
                 </div>
             </form>
         </div>
-    </main>
     
-    <div id="footer-container"></div>
+        <div id="footer-container"></div>
 
-    <script>
-    fetch('header-nav.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('header-nav-container').innerHTML = data;
-    });
-
-
-        // Carrega o footer
-        fetch('footer.html')
+        <script>
+            fetch('header-nav.html')
             .then(response => response.text())
             .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
+                document.getElementById('header-nav-container').innerHTML = data;
             });
-    </script>
+
+            // Carrega o footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                });
+        </script>
+            
+        <script src="js/ins_cursos.js"></script>
         
-    <script src="js/ins_cursos.js"></script>
-    
-</div>
+    </div>
 </body>
 </html>

@@ -1,19 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('meuFormulario');
-    if (!form) return;
+    if (!form) {
+        console.error("Formulário não encontrado!");
+        return;
+    }
 
     const btnEnviar = document.getElementById('enviar');
-    const btnInstrucoes = document.getElementById('btn-instrucoes');
-    const modal = document.getElementById('modal-instrucoes');
-    const spanFechar = document.querySelector('.fechar-modal');
     const mensagemSucesso = document.getElementById('mensagem-sucesso');
 
+    // Configuração inicial do botão
     btnEnviar.style.transition = 'opacity 0.3s ease';
     btnEnviar.style.opacity = '0.6';
     btnEnviar.style.cursor = 'not-allowed';
     btnEnviar.disabled = true;
 
-     const bandeiras = {
+    const bandeiras = {
         '54': 'https://flagcdn.com/w20/ar.png',
         '55': 'https://flagcdn.com/w20/br.png',
         '56': 'https://flagcdn.com/w20/cl.png',
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const codigo = select.value;
         const bandeira = bandeiras[codigo];
         if (bandeira) {
-            select.style.backgroundImage = `url(${bandeira})`;  // Note as crases
+            select.style.backgroundImage = `url(${bandeira})`;
         } else {
             select.style.backgroundImage = 'none';
         }
@@ -49,19 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function configurarBandeiras() {
         document.querySelectorAll('.ddi-select').forEach(select => {
-            // Atualiza ao mudar seleção
             select.addEventListener('change', () => atualizarBandeira(select));
-            
-            // Atualiza inicialmente
             atualizarBandeira(select);
         });
     }
-
-    btnInstrucoes.addEventListener('click', () => modal.style.display = 'block');
-    spanFechar.addEventListener('click', () => modal.style.display = 'none');
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    });
 
     function formatarTelefone(input) {
         if (!input) return;
@@ -79,72 +71,95 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function verificarCamposPreenchidos() {
-        const camposObrigatorios = [
-            form.elements.nome?.value.trim(),
-            form.elements.email?.value.trim(),
-            form.elements.ddi_telefone?.value,
-            form.elements.telefone?.value.replace(/\D/g, '').length >= 8,
-            form.elements.ddi_whatsapp?.value,
-            form.elements.whatsapp?.value.replace(/\D/g, '').length >= 8,
-            form.elements.empresa?.value.trim(),
-            form.elements.funcao?.value.trim(),
-            [...form.elements.experiencia || []].some(radio => radio.checked)
-        ];
+        const nomeValido = form.elements.nome?.value.trim() !== '';
+        const emailValido = form.elements.email?.value.trim() !== '';
+        
+        const telefoneDDIValido = form.elements.ddi_telefone?.value !== '';
+        const telefoneNumeroValido = form.elements.telefone?.value.replace(/\D/g, '').length >= 8;
+        
+        const whatsappDDIValido = form.elements.ddi_whatsapp?.value !== '';
+        const whatsappNumeroValido = form.elements.whatsapp?.value.replace(/\D/g, '').length >= 8;
+        
+        const empresaValida = form.elements.empresa?.value.trim() !== '';
+        const funcaoValida = form.elements.funcao?.value.trim() !== '';
+        
+        const experienciaValida = [...form.elements.experiencia || []].some(radio => radio.checked);
 
-        const todosPreenchidos = camposObrigatorios.every(campo => !!campo);
+        const todosPreenchidos = nomeValido && emailValido && 
+                               telefoneDDIValido && telefoneNumeroValido && 
+                               whatsappDDIValido && whatsappNumeroValido && 
+                               empresaValida && funcaoValida && 
+                               experienciaValida;
         
         btnEnviar.disabled = !todosPreenchidos;
         btnEnviar.style.opacity = btnEnviar.disabled ? '0.6' : '1';
         btnEnviar.style.cursor = btnEnviar.disabled ? 'not-allowed' : 'pointer';
     }
 
+    // Configurar eventos para todos os campos
     const eventos = ['input', 'change', 'paste'];
-    const camposParaMonitorar = [
-        form.elements.nome,
-        form.elements.email,
-        form.elements.ddi_telefone,
-        form.elements.telefone,
-        form.elements.ddi_whatsapp,
-        form.elements.whatsapp,
-        form.elements.empresa,
-        form.elements.funcao,
-        ...(form.elements.experiencia || [])
-    ];
-
-    camposParaMonitorar.forEach(campo => {
-        if (campo) {
+    
+    Array.from(form.elements).forEach(element => {
+        if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') {
             eventos.forEach(evento => {
-                campo.addEventListener(evento, verificarCamposPreenchidos);
+                element.addEventListener(evento, verificarCamposPreenchidos);
             });
         }
     });
 
-    form.addEventListener('submit', function(e) {
+    // Eventos específicos para radios de experiência
+    const radiosExperiencia = form.elements.experiencia;
+    if (radiosExperiencia) {
+        Array.from(radiosExperiencia).forEach(radio => {
+            eventos.forEach(evento => {
+                radio.addEventListener(evento, verificarCamposPreenchidos);
+            });
+        });
+    }
+
+    // Configurar formatação e bandeiras
+    formatarTelefone(document.getElementById('telefone'));
+    formatarTelefone(document.getElementById('whatsapp'));
+    configurarBandeiras();
+
+    // Verificação inicial
+    verificarCamposPreenchidos();
+
+    // Configurar envio do formulário
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
         if (btnEnviar.disabled) return;
         
-        btnEnviar.disabled = true;
-        btnEnviar.textContent = 'Enviando...';
-
-        setTimeout(() => {
+        try {
+            btnEnviar.disabled = true;
+            btnEnviar.textContent = 'Enviando...';
+            
+            // Simulação de envio (substitua por sua lógica real)
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Alteração visual após envio
+            document.body.style.backgroundColor = 'white';
+            document.documentElement.style.backgroundColor = 'white'; // HTML
+            document.querySelector('.container').style.backgroundColor = 'white';
+            
             mensagemSucesso.style.display = 'block';
             mensagemSucesso.style.opacity = '1';
-
+            
             setTimeout(() => {
                 mensagemSucesso.style.opacity = '0';
                 setTimeout(() => {
                     mensagemSucesso.style.display = 'none';
+                    form.reset();
+                    btnEnviar.textContent = 'Enviar Inscrição';
+                    btnEnviar.disabled = false;
                 }, 500);
             }, 3000);
-
-            form.reset();
+            
+        } catch (error) {
+            console.error('Erro no envio:', error);
+            btnEnviar.disabled = false;
             btnEnviar.textContent = 'Enviar Inscrição';
-            verificarCamposPreenchidos();
-        }, 1500);
+        }
     });
-
-    formatarTelefone(document.getElementById('telefone'));
-    formatarTelefone(document.getElementById('whatsapp'));
-    configurarBandeiras();
-    verificarCamposPreenchidos();
 });

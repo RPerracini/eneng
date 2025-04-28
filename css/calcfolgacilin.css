@@ -1,330 +1,306 @@
 /* ESTILOS GERAIS */
 body {
-  font-family: sans-serif;
-  margin: 0;
-  background-color: #abdef8;
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #abdef8;
 }
 
 .container {
-  max-width: 1600px;
-  margin: auto;
-  margin-top: 1px;
-  padding: 2rem;
+    max-width: 1600px;
+    margin: auto;
+    margin-top: 1px;
+    padding: 2rem;
 }
 
 .titulo-principal {
-  text-align: center;
-  color: #fc9403;
-  font-size: 1.8rem;
-  margin-top: -4px;
+    text-align: center;
+    color: #020272;
+    font-size: 1.8rem;
+    margin-top: -4px;
 }
 
 .linha-azul {
-  height: 2px;
-  background: linear-gradient(to right, transparent, #020272, transparent);
-  margin: 0.5rem 0 1.5rem 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #020272, transparent);
+    margin: 0.5rem 0 1.5rem 0;
 }
 
 /* LAYOUT DAS COLUNAS */
 .form-grid {
-  display: flex;
-  gap: 2rem;
-  align-items: stretch;
+    display: flex;
+    gap: 2rem;
+    align-items: stretch;
 }
 
 .coluna {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .coluna-dados {
-  flex: 0 0 35%;
-  min-width: 400px;
+    flex: 0 0 35%;
+    min-width: 400px;
 }
 
 .coluna-imagem {
-  flex: 0 0 25%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
 }
 
 .coluna:last-child {
-  flex: 1;
+    flex: 1;
 }
 
 /* ESTILOS DOS FORMULÁRIOS */
 .form-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
 }
 
 .form-row label {
-  flex: 0 0 55%;
-  margin: 0;
-  padding-right: 10px;
+    flex: 0 0 75%;
+    margin: 0;
+    padding-right: 10px;
+}
+
+/* Estilo para o label quando o input está focado */
+.form-row:focus-within label {
+    color: blue;
+    font-weight: normal;
 }
 
 .form-row input,
 .form-row select {
-  flex: 1;
-  padding: 0.4rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  background-color: white;
-}
-
-input, select {
-  width: 1%;
-  margin-top: 0.3rem;
+    flex: 1;
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    background-color: white;
+    width: 100%; /* Ajuste a largura conforme necessário */
 }
 
 /* Remover controles de incremento numérico */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
+input[type='number'] {
+    -moz-appearance: textfield;
 }
 
 /* ESTILOS ESPECÍFICOS PARA INPUTS */
-#cliente, #projeto, #observacao {
-  width: 100%;
-  max-width: 500px;
+#cliente,
+#projeto,
+#observacao {
+    width: calc(200%);
+    margin-left: -35%;
 }
 
 /* ESTILOS DOS BOTÕES */
 .botoes {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 1.5rem;
-}
-
-.botoes button {
-  background-color: #e60000;
-  color: white;
-  border: none;
-  padding: 0.5rem 0.9rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.botoes button:hover {
-  background-color: white;
-  color: #e60000;
-  border: 1px solid #e60000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1.5rem;
 }
 
 /* IMAGEM */
 .coluna-imagem img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  padding: 0px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    padding: 0px;
 }
 
 .coluna h2 {
-  color: #fc9403;
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin: -1rem 0 1.0rem 0;
-  padding: 0;
-  position: relative;
-  top: 1px;
+    color: #fc9403;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: -1rem 0 1rem 0;
+    padding: 0;
+    position: relative;
+    top: 1px;
 }
 
 #deltaT {
-  cursor: default;
-  background-color: #f0f0f0;
+    cursor: default;
+    background-color: #f0f0f0;
 }
 
 #deltaT:focus {
-  outline: none;
-  box-shadow: none;
+    outline: none;
+    box-shadow: none;
 }
 
 /* BOTÕES DE ENTRADA - SOLUÇÃO DEFINITIVA */
 .botoes-entrada {
-  display: flex;
-  justify-content: flex-end; /* Alinha à direita */
-  width: 100%;
-  margin-top: 1.5rem;
-  gap: 15px; /* Espaço entre os botões */
+    display: flex;
+    justify-content: flex-end; /* Alinha à direita */
+    width: 100%;
+    margin-top: 1.5rem;
+    gap: 15px; /* Espaço entre os botões */
 }
 
 /* BOTÃO RESETAR */
 .btn-reset {
-  background-color: #ff0505;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-/* BOTÃO CALCULAR */
-#btnCalcular {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: not-allowed;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  margin-left: 0; /* Reset qualquer margem */
-}
-
-/* ESTADOS HOVER */
-#btnCalcular:not(:disabled):hover {
-  background-color: #0069d9;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: #ff0505;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-family: sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .btn-reset:hover {
-  background-color: #fc9403;
-  color: black;
-  transform: translateY(-1px);
-}
-
-/* EFEITO DE PULSAR */
-#btnCalcular.pulsar {
-  animation: pulsar 1.5s infinite;
-}
-
-@keyframes pulsar {
-  0% {
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
-    transform: scale(1.02);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-    transform: scale(1);
-  }
-}
-
-/* ESTADO DESABILITADO */
-#btnCalcular:disabled {
-  background-color: #cccccc;
-  color: #555555;
-  opacity: 0.7;
+    background-color: #fc9403;
+    color: black;
 }
 
 /* RESPONSIVIDADE */
 @media (max-width: 1200px) {
-  .form-grid {
-    flex-direction: column;
-  }
-  
-  .coluna-dados,
-  .coluna-imagem,
-  .coluna:last-child {
-    flex: 1 1 100%;
-    min-width: 100%;
-  }
+    .form-grid {
+        flex-direction: column;
+    }
+
+    .coluna-dados,
+    .coluna-imagem,
+    .coluna:last-child {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
 }
 
 /* ESTILOS DE IMPRESSÃO */
 @media print {
-  main {
-    font-family: "font_personalizada", sans-serif;
-    color: #000;
-    padding: 20px;
-    margin: 0;
-  }
+    main {
+        font-family: 'font_personalizada', sans-serif;
+        color: #000;
+        padding: 20px;
+        margin: 0;
+    }
 
-  h2 {
-    font-size: 18px;
-    border-bottom: 1px solid #999;
-    padding-bottom: 5px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
+    h2 {
+        font-size: 18px;
+        border-bottom: 1px solid #999;
+        padding-bottom: 5px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
 
-  .form-row {
-    display: block;
-    margin-bottom: 10px;
-  }
+    .form-row {
+        display: block;
+        margin-bottom: 10px;
+    }
 
-  label {
-    display: inline-block;
-    font-weight: bold;
-    width: auto;
-    margin-right: 10px;
-  }
+    label {
+        display: inline-block;
+        font-weight: bold;
+        width: auto;
+        margin-right: 10px;
+    }
 
-  input, select {
-    display: inline-block;
-    width: auto;
-    font-size: 14px;
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-  }
+    input,
+    select {
+        display: inline-block;
+        width: auto;
+        font-size: 14px;
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+    }
 
-  button, nav, footer {
-    display: none;
-  }
+    button,
+    nav,
+    footer {
+        display: none;
+    }
 }
 
 /* ESTILOS ADICIONAIS PARA INPUTS */
 input[readonly] {
-  background-color: #f8f9fa;
-  color: #333;
-  border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
 }
 
 #deltaT {
-  background-color: #e3eaf1;
+    background-color: #e3eaf1;
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px white inset !important;
-  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-  -webkit-text-fill-color: #000 !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
 }
 
-input:focus, select:focus {
-  border-color: #fc9403;
-  outline: none;
-  box-shadow: 0 0 3px #fc9403;
-}
-
-/* REMOÇÃO DEFINITIVA DO FOCO LARANJA */
-#deltaT, #deltaT:focus, #deltaT:hover {
-  outline: none !important;
-  box-shadow: none !important;
-  border: 1px solid #ccc !important;
-  background-color: #f0f0f0 !important;
+input:focus,
+select:focus {
+    border-color: #fc9403;
+    outline: none;
+    box-shadow: 0 0 3px #fc9403;
 }
 
 #deltaT:focus-visible {
-  outline: none !important;
+    outline: none !important;
 }
 
 #deltaT:hover {
-  border-color: #ccc !important;
+    border-color: #ccc !important;
+}
+
+/* BOTÃO GERAR PDF - VERSÃO COMPLETA */
+.botoes {
+    display: flex;
+    justify-content: flex-end; /* Alinha à direita por padrão */
+    width: 100%;
+    margin: 2rem 0 1rem 0;
+    padding-right: 1rem; /* Espaçamento da borda direita */
+}
+
+.botoes button {
+    background-color: #f6260a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 150px;
+}
+
+.botoes button:hover {
+    background-color: #fc9403;
+    color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Se quiser adicionar um ícone ao botão */
+.botoes button::before {
+    content: '📄';
+    margin-right: 8px;
+    font-size: 1.1em;
 }

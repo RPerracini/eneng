@@ -1,0 +1,202 @@
+/* ===== BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    height: 100%;
+  }
+  
+  body {
+    background-color: #abdef8;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .container {
+    color: #fc9403;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    font-family: Nulshock;
+  }
+  
+  /* ===== FONT ===== */
+  @font-face {
+    font-family: 'Nulshock';
+    src: url('Fontes/NulshockBd.otf') format('opentype');
+  }
+  
+  /* ===== MAIN GRID LAYOUT ===== */
+  .main-grid {
+    display: grid;
+    grid-template-areas:
+      "hero"
+      "texto"
+      "representadas"
+      "info";
+    gap: 10px;
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* ===== HERO SECTION ===== */
+  .hero {
+    grid-area: hero;
+    background-color: #abdef8;
+    padding: 40px 0;
+    margin-bottom: 0;
+  }
+  
+  .hero-container {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+  
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+  
+  .hero-text {
+    flex: 0 0 65%;
+    text-align: left;
+    margin-left: 5px;
+  }
+  
+  .hero-text h1 {
+    font-family: 'Nulshock', Impact, sans-serif;
+    font-size: 3rem;
+    line-height: 1.2;
+    color: #020272;
+    margin: 0;
+  }
+  
+  /* ===== SECTIONS ===== */
+  .texto_representadas {
+    grid-area: texto;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .texto_representadas p {
+    font-size: 2rem;
+    color: #020272;
+    margin: 0 auto 5px;
+    text-align: center;
+    max-width: 1600px;
+    padding: 0 10px;
+  }
+  
+  .representadas {
+    grid-area: representadas;
+    width: 100%;
+    max-width: 100%;
+    padding: 5px 0;
+  }
+  
+  .representadas .container {
+    max-width: 100%;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+  }
+  
+  .representadas img {
+    max-width: 85%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .representadas img:hover {
+    transform: scale(1.3);
+  }
+  
+  .mais_informações {
+    grid-area: info;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 10px;
+  }
+  
+  .mais_informações p {
+    font-size: 1.0rem;
+    color: #020272;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: sans-serif;
+  }
+  
+  /* ===== RESPONSIVENESS ===== */
+  @media (max-width: 1200px) {
+    .hero-text h1 {
+      font-size: 2.2rem;
+    }
+    
+    .texto_representadas p {
+      font-size: 1.8rem;
+    }
+  
+    .mais_informações p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-container {
+      flex-direction: column;
+      padding: 0 20px;
+      gap: 30px;
+    }
+    
+    .hero-image, .hero-text {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .hero-text h1 {
+      font-size: 1.8rem;
+    }
+    
+    .representadas .container {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-text h1 {
+      font-size: 1.6rem;
+    }
+    
+    .texto_representadas p {
+      font-size: 1.4rem;
+    }
+  
+    .mais_informações p {
+      font-size: 0.9rem;
+    }
+    
+    .representadas .container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }

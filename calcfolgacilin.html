@@ -1,141 +1,251 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Folga Cilíndrica</title>
-  <link rel="stylesheet" href="css/header-nav.css" />
-  <link rel="stylesheet" href="css/footer.css" />
-  <link rel="stylesheet" href="css/calcfolgacilin.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jspdf-customfonts@latest/dist/jspdf.customfonts.min.js"></script>
-</head>
-<body>
-  <div id="header-nav-container"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Folga Cilíndrica</title>
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <link rel="stylesheet" href="css/calcfolgacilin.css" />
+        <link rel="stylesheet" href="css/modal.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jspdf-customfonts@latest/dist/jspdf.customfonts.min.js"></script>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
 
-  <main class="container">
-    <h1 class="titulo-principal">Cálculo da folga em tampas para rolamentos cilíndricos</h1>
-    <div class="linha-azul"></div>
-
-    <form id="formCalc" class="form-grid">
-      <div class="coluna coluna-dados">
-        <h2>Dados de Entrada</h2>
-
-        <div class="form-row"><label for="cliente">Cliente</label><input type="text" id="cliente" /></div>
-        <div class="form-row"><label for="projeto">Projeto</label><input type="text" id="projeto" /></div>
-        <div class="form-row"><label for="observacao">Eixo</label><input type="text" id="observacao" /></div>
-        <div class="form-row">
-          <label for="distancia">Distância entre centros <span>L<sub>0</sub></span> (mm)</label>
-          <input type="number" id="distancia" required />
+        <!-- Modal Aviso Legal -->
+        <div id="avisoModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Aviso Legal</h2>
+                <p>
+                    A ENENG não se responsabiliza pela precisão, confiabilidade
+                    ou consequências dos resultados gerados por este programa de
+                    cálculo. Os valores obtidos são fornecidos apenas para fins
+                    informativos e não substituem a avaliação de um profissional
+                    qualificado. Recomendamos a verificação independente de
+                    todos os dados antes de qualquer aplicação prática.
+                </p>
+            </div>
         </div>
 
-        <div class="form-row"><label for="materialEixo">Material do eixo</label>
-          <select id="materialEixo">
-            <option value="aco">Aço</option>
-            <option value="aluminio">Alumínio</option>
-            <option value="ferro">Ferro Fundido</option>
-          </select>
-        </div>
+        <main class="container">
+            <h1 class="titulo-principal">
+                Cálculo da folga em tampas para rolamentos cilíndricos
+            </h1>
+            <div class="linha-azul"></div>
 
-        <div class="form-row"><label for="materialCaixa">Material da caixa</label>
-          <select id="materialCaixa">
-            <option value="aco">Aço</option>
-            <option value="aluminio">Alumínio</option>
-            <option value="ferro">Ferro Fundido</option>
-          </select>
-        </div>
- 
-        <div class="form-row"><label for="tempAmbiente">Temperatura ambiente (°C)</label><input type="number" id="tempAmbiente" required /></div>
-        <div class="form-row"><label for="tempCaixa">Temperatura da caixa (°C)</label><input type="number" id="tempCaixa" required /></div>
-    
-        <div class="form-row"><label for="rotacao">Rotação do eixo (rpm)</label><input type="number" id="rotacao" required /></div>
-        
-        <div class="form-row">
-          <label for="deltaT">Diferença de temperatura entre caixa e eixo (ºC)</label>
-          <input type="text" id="deltaT" name="deltaT" readonly tabindex="-1" class="no-focus-style">
-        </div>
+            <form id="formCalc" class="form-grid">
+                <div class="coluna coluna-dados">
+                    <h2>Dados de Entrada</h2>
 
-        <div class="botoes-entrada">
-          <button type="button" id="btnReset" class="btn-reset">Resetar Dados</button>
-          <button id="btnCalcular">Calcular</button>
-        </div>
+                    <div class="form-row">
+                        <label for="cliente">Cliente</label>
+                        <input type="text" id="cliente" />
+                    </div>
+                    <div class="form-row">
+                        <label for="projeto">Projeto</label>
+                        <input type="text" id="projeto" />
+                    </div>
+                    <div class="form-row">
+                        <label for="observacao">Eixo</label>
+                        <input type="text" id="observacao" />
+                    </div>
+                    <div class="form-row">
+                        <label for="distancia">
+                            Distância entre centros dos rolamentos
+                            <span>
+                                L
+                                <sub>0</sub>
+                            </span>
+                            (mm)
+                        </label>
+                        <input type="number" id="distancia" required />
+                    </div>
 
-      </div>
+                    <div class="form-row">
+                        <label for="materialEixo">Material do eixo</label>
+                        <select id="materialEixo">
+                            <option value="aco">Aço</option>
+                            <option value="aluminio">Alumínio</option>
+                            <option value="ferro">Ferro Fundido</option>
+                        </select>
+                    </div>
 
-      <div class="coluna coluna-imagem">
-        <img src="imagens/Eixo1.png" alt="Imagem de exemplo" />
-      </div>
+                    <div class="form-row">
+                        <label for="materialCaixa">Material da caixa</label>
+                        <select id="materialCaixa">
+                            <option value="aco">Aço</option>
+                            <option value="aluminio">Alumínio</option>
+                            <option value="ferro">Ferro Fundido</option>
+                        </select>
+                    </div>
 
-      <div class="coluna">
-        <h2>Resultados</h2>
-        <div class="form-row"><label>Coef. dilatação do eixo (°C⁻¹):</label><input type="text" id="coefEixo" readonly /></div>
-        <div class="form-row"><label>Coef. dilatação da caixa (°C⁻¹):</label><input type="text" id="coefCaixa" readonly /></div>
-        <div class="form-row"><label>ΔT caixa-meio (°C):</label><input type="text" id="res2" readonly /></div>
-        <div class="form-row"><label>ΔT eixo-meio (°C):</label><input type="text" id="res3" readonly /></div>
-        <div class="form-row"><label>Dilatação eixo (mm):</label><input type="text" id="res4" readonly /></div>
-        <div class="form-row"><label>Dilatação caixa (mm):</label><input type="text" id="res5" readonly /></div>
-        <div class="form-row"><label>Diferença de dilatação (mm):</label><input type="text" id="res6" readonly /></div>
-        <div class="form-row"><label>Folga necessária (mm):</label><input type="text" id="res7" readonly /></div>
-        <div class="form-row"><label>Tolerância da folga (mm):</label><input type="text" id="res8" readonly /></div>
-        <div class="botoes">
-          <button type="button" onclick="gerarPDF()">Gerar PDF</button>
-        </div>
-      </div>     
-    </form>
-  </main>
+                    <div class="form-row">
+                        <label for="tempAmbiente">
+                            Temperatura ambiente (°C)
+                        </label>
+                        <input type="number" id="tempAmbiente" required />
+                    </div>
+                    <div class="form-row">
+                        <label for="tempCaixa">Temperatura da caixa (°C)</label>
+                        <input type="number" id="tempCaixa" required />
+                    </div>
 
-  <div id="footer-container"></div>
+                    <div class="form-row">
+                        <label for="rotacao">Rotação do eixo (rpm)</label>
+                        <input type="number" id="rotacao" required />
+                    </div>
 
-  <script src="js/calcfolgacilin.js"></script>
-  <script>
-    fetch('header-nav.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('header-nav-container').innerHTML = data);
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('footer-container').innerHTML = data);
-  </script>
+                    <div class="form-row">
+                        <label for="deltaT">
+                            Diferença de temperatura entre caixa e eixo (ºC)
+                        </label>
+                        <input
+                            type="text"
+                            id="deltaT"
+                            name="deltaT"
+                            readonly
+                            tabindex="-1"
+                            class="no-focus-style"
+                        />
+                    </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("formCalc");
+                    <div class="botoes-entrada">
+                        <button type="button" id="btnAviso" class="btn-aviso">
+                            Aviso Legal
+                        </button>
+                        <button type="button" id="btnReset" class="btn-reset">
+                            Resetar Dados
+                        </button>
+                        <!-- <button id="btnCalcular">Calcular</button> -->
+                    </div>
+                </div>
 
-      const campos = Array.from(form.querySelectorAll("input, select, textarea"))
-        .filter(campo => !campo.disabled && campo.offsetParent !== null);
+                <div class="coluna coluna-imagem">
+                    <img src="imagens/Eixo1.png" alt="Imagem de exemplo" />
+                </div>
 
-      campos.forEach((campo, index) => {
-        campo.addEventListener("keydown", (event) => {
-          if (event.key === "Enter") {
-            event.preventDefault();
+                <div class="coluna">
+                    <h2>Resultados</h2>
+                    <div class="form-row">
+                        <label>Coeficiente de dilatação do eixo (°C⁻¹):</label>
+                        <input type="text" id="coefEixo" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>Coeficiente de dilatação da caixa (°C⁻¹):</label>
+                        <input type="text" id="coefCaixa" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            Diferença de temperatura entre caixa e meio ambiente
+                            (°C):
+                        </label>
+                        <input type="text" id="res2" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            Diferença de temperatura entre eixo e meio ambiente
+                            (°C):
+                        </label>
+                        <input type="text" id="res3" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>Dilatação eixo (mm):</label>
+                        <input type="text" id="res4" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>Dilatação caixa (mm):</label>
+                        <input type="text" id="res5" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>Diferença de dilatação (mm):</label>
+                        <input type="text" id="res6" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>Folga necessária (mm):</label>
+                        <input type="text" id="res7" readonly />
+                    </div>
+                    <div class="form-row">
+                        <label>Tolerância da folga (mm):</label>
+                        <input type="text" id="res8" readonly />
+                    </div>
+                    <div class="botoes">
+                        <button type="button" onclick="gerarPDF()">
+                            Gerar PDF
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </main>
 
-            const proximoCampo = campos[index + 1];
-            if (proximoCampo) {
-              proximoCampo.focus();
-            } else {
-              campo.blur(); // Último campo
+        <div id="footer-container"></div>
+
+        <script src="js/calcfolgacilin.js"></script>
+        <script src="js/modal.js"></script>
+
+        <script>
+            fetch('header-nav.html')
+                .then((res) => res.text())
+                .then(
+                    (data) =>
+                        (document.getElementById(
+                            'header-nav-container'
+                        ).innerHTML = data)
+                );
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then(
+                    (data) =>
+                        (document.getElementById('footer-container').innerHTML =
+                            data)
+                );
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const form = document.getElementById('formCalc');
+
+                const campos = Array.from(
+                    form.querySelectorAll('input, select, textarea')
+                ).filter(
+                    (campo) => !campo.disabled && campo.offsetParent !== null
+                );
+
+                campos.forEach((campo, index) => {
+                    campo.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter') {
+                            event.preventDefault();
+
+                            const proximoCampo = campos[index + 1];
+                            if (proximoCampo) {
+                                proximoCampo.focus();
+                            } else {
+                                campo.blur(); // Último campo
+                            }
+
+                            // Executa o cálculo ao sair do último campo de entrada
+                            if (campo.id === 'tempCaixa') {
+                                calcular(); // Nome da função de cálculo
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <style>
+            /* Estilo adicional para garantir o bloqueio visual */
+            #deltaT {
+                cursor: default !important;
+                background-color: #f0f0f0 !important;
+                caret-color: transparent !important;
             }
 
-            // Executa o cálculo ao sair do último campo de entrada
-            if (campo.id === "tempCaixa") {
-              calcular(); // Nome da função de cálculo
+            #deltaT:focus {
+                outline: none !important;
             }
-          }
-        });
-      });
-    });
-  </script>
-
-  <style>
-    /* Estilo adicional para garantir o bloqueio visual */
-    #deltaT {
-      cursor: default !important;
-      background-color: #f0f0f0 !important;
-      caret-color: transparent !important;
-    }
-    
-    #deltaT:focus {
-      outline: none !important;
-    }
-  </style>
-</body>
+        </style>
+    </body>
 </html>

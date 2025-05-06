@@ -1,0 +1,103 @@
+/* =================== ESTILO GERAL =================== */
+body {
+    font-family: Arial, sans-serif;
+    color: #003c74; /* Cor do texto */
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* =================== CONTAINER PARA TEXTO E FLECHA =================== */
+.container {
+    display: flex;
+    flex-direction: row; /* Organiza o texto e a imagem na mesma linha */
+    align-items: flex-start; /* Alinha os itens no topo */
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    margin-top: 50px; /* Ajusta o espaço entre o conteúdo e o topo */
+    width: 100%;
+    padding: 0 20px; /* Adiciona algum espaçamento nas laterais */
+}
+
+/* =================== TEXTO À ESQUERDA =================== */
+.texto-principal {
+    padding: 20px; /* Ajusta o padding para criar espaçamento ao redor do texto */
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #0000d1;
+    text-align: justify; /* Alinha o texto à esquerda */
+    flex: 1; /* Garante que o texto ocupe o espaço restante */
+    margin-top: 0; /* Remove a margem superior excessiva */
+    max-width: 30%; /* Ajusta a largura do texto */
+}
+
+/* =================== FLECHA =================== */
+.flecha-container {
+    max-width: 33%; /* Limita a largura da imagem da flecha */
+    height: auto;
+    margin-left: -200px; /* Ajusta a margem para ficar mais próximo do texto */
+}
+
+.flecha-container img {
+    width: 100%; /* Limita a largura da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* =================== TEXTO ADICIONAL (AO LADO DA FLECHA) - ORGANIZADO VERTICALMENTE =================== */
+.texto-adicional-container {
+    display: flex;
+    flex-direction: column; /* Organiza os textos adicionais em coluna */
+    justify-content: flex-start; /* Alinha o conteúdo ao topo */
+    margin-left: 20px; /* Ajusta o espaçamento */
+    flex: 1; /* Garante que ocupe o espaço restante */
+}
+
+.texto-adicional,
+.texto-adicional1,
+.texto-adicional2,
+.texto-adicional3,
+.texto-adicional4 {
+    font-size: 1.1rem;
+    color: #0000d1;
+    line-height: 1.5;
+    text-align: justify;
+    max-width: 100%; /* Ajusta a largura do texto */
+    padding-left: 10px; /* Adiciona um pequeno espaçamento ao lado */
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.texto-adicional {
+    margin-left: -17px;
+}
+
+.texto-adicional1 {
+    margin-left: -90px;
+}
+
+.texto-adicional2 {
+    margin-left: -162px;
+}
+
+.texto-adicional3 {
+    margin-left: -225px;
+}
+
+.texto-adicional4 {
+    margin-left: -365px;
+}
+
+/* =================== NEGRITO =================== */
+.negrito {
+    font-weight: bold;
+    color: #f5a002;
+}
+
+/* =================== LINHA LARANJA =================== */
+
+.linha-laranja-texto {
+    color: #0000d1;
+    font-weight: bold;
+    font-size: 1.5rem; /* Ajuste o tamanho do texto conforme necessário */
+    text-align: left;
+    margin-top: 40px;
+}

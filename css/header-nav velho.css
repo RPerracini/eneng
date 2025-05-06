@@ -15,16 +15,16 @@ body {
 /* =================== HEADER =================== */
 header {
     background: #0000d1;
-    padding: 0;
+    padding: 0; /* Remover padding para garantir que o header preencha toda a largura */
     width: 100%;
     position: relative;
     overflow: hidden;
-    margin: 0;
+    margin: 0; /* Remover margem que possa estar causando espaçamento extra */
 }
 
 header .container {
-    width: 100%;
-    margin: 0;
+    width: 100%; /* Remover max-width */
+    margin: 0; /* Garantir que o container ocupe toda a largura */
     padding-right: 50px;
     position: relative;
     display: flex;
@@ -39,10 +39,10 @@ header img {
     z-index: 2;
     margin-top: 50px;
     margin-left: 100px;
-    max-width: 100%;
 }
 
 header h1 {
+    /* color: #fc9403; */
     color: #f5a002;
     font-family: 'Nulshock', Impact, sans-serif;
     font-size: 2.5rem;
@@ -61,9 +61,10 @@ header h1 {
 }
 
 header .slogan {
+    /* color: #fc9403; */
     color: #f5a002;
     font-family: 'Nulshock', Impact, sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Fonte menor */
     position: absolute;
     right: 50px;
     top: 60%;
@@ -71,40 +72,40 @@ header .slogan {
     margin: 0;
     padding: 0;
     z-index: 1;
-    text-align: center;
+    text-align: center; /* Centraliza as duas linhas */
     pointer-events: none;
-    white-space: normal;
+    white-space: normal; /* Permite a quebra de linha */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: auto;
+    justify-content: center; /* Garante que o texto esteja centralizado */
+    align-items: center; /* Garante que as linhas fiquem centralizadas */
+    width: auto; /* Não fixar a largura para que se ajuste ao conteúdo */
 }
 
 header .slogan span {
-    display: block;
-    text-align: center;
-    width: 100%;
-    padding: 5px 0;
+    display: block; /* Garante que o texto fique em duas linhas */
+    text-align: center; /* Centraliza o texto */
+    width: 100%; /* Faz o texto ocupar toda a largura do container */
+    padding: 5px 0; /* Adiciona um pequeno espaço entre as linhas */
 }
 
 /* =================== NAVEGAÇÃO =================== */
 nav {
     background-color: #0000d1;
-    padding: 0;
-    padding-bottom: 20px;
+    padding: 0; /* Remover padding para que o nav preencha toda a largura */
+    padding-bottom: 20px; /* Aumenta o padding-bottom */
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centraliza horizontalmente */
     width: 100%;
-    z-index: 10;
-    margin: 0;
+    z-index: 10; /* Certifique-se de que o menu de navegação tem um z-index maior */
+    margin: 0; /* Remover margem */
 }
 
 nav .container {
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    width: 100%; /* Remover largura fixa */
+    margin: 0; /* Remover margens */
+    padding: 0; /* Remover padding */
 }
 
 nav ul {
@@ -112,8 +113,7 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: center; /* Centraliza os itens */
 }
 
 nav li {
@@ -122,6 +122,7 @@ nav li {
 }
 
 nav a {
+    /* color: #fc9403; */
     color: #f5a002;
     font-family: 'Nulshock', Impact, sans-serif;
     font-size: 1rem;
@@ -141,7 +142,7 @@ nav a:hover {
     position: absolute;
     background-color: #fc9403;
     min-width: 500px;
-    z-index: 9999;
+    z-index: 9999; /* Aumenta o z-index para garantir que o dropdown fique acima de outros elementos */
     padding: 10px;
     font-family: sans-serif !important;
 }
@@ -178,8 +179,48 @@ li a {
     transform: rotate(180deg);
 }
 
-/* =================== RESPONSIVO =================== */
-@media (max-width: 1200px) {
+/* Estilo do menu dropdown */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fc9403;
+    min-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+    z-index: 9999;
+    opacity: 0;
+    /* transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease; */
+}
+
+/* Mostra com efeito */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Itens do dropdown */
+.dropdown-menu a {
+    display: block;
+    color: #222;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    /* background-color: white; */
+    color: white;
+    /* border-left: 4px solid #fc9403; */
+}
+
+/* ========== RESPONSIVO: HEADER e NAV ========= */
+@media (max-width: 768px) {
     header .header-content {
         flex-direction: column;
         align-items: center;
@@ -188,13 +229,12 @@ li a {
 
     header img.logo {
         margin: 20px auto 10px auto;
-        height: auto;
-        max-width: 80%;
+        height: 80px;
         margin-left: 0;
     }
 
     header h1.title {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         position: static;
         transform: none;
         white-space: normal;
@@ -208,6 +248,12 @@ li a {
         margin-top: 10px;
         right: 0;
         display: block;
+    }
+
+    header .relogio {
+        position: static;
+        margin: 10px 0;
+        text-align: center;
     }
 
     nav ul {
@@ -232,7 +278,7 @@ li a {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
     .dropdown-menu {
         position: static;
         background-color: #fc9403;
@@ -242,51 +288,5 @@ li a {
         border-radius: 0;
         opacity: 1;
         transform: none;
-    }
-}
-
-.title .linha-mobile {
-    display: none;
-}
-
-@media (max-width: 1200px) {
-    .title .linha-desktop {
-        display: none;
-    }
-
-    .title .linha-mobile {
-        display: inline;
-        white-space: normal;
-        line-height: 1.3;
-    }
-}
-
-@media (max-width: 1200px) {
-    header .header-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px 10px;
-    }
-
-    header img.logo {
-        margin: 10px 0;
-        max-width: 80%;
-        height: auto;
-    }
-
-    header h1.title {
-        font-size: 1.4rem;
-        margin: 10px 0;
-        white-space: normal;
-        line-height: 1.4;
-    }
-
-    header .slogan {
-        font-size: 1rem;
-        margin: 10px 0;
-        line-height: 1.4;
-        white-space: normal;
-        display: block;
     }
 }

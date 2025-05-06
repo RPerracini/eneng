@@ -2,7 +2,7 @@
 body {
     font-family: sans-serif;
     margin: 0;
-    background-color: #abdef8;
+    background-color: white;
 }
 
 .container {
@@ -14,14 +14,14 @@ body {
 
 .titulo-principal {
     text-align: center;
-    color: #020272;
+    color: #0000e6;
     font-size: 1.8rem;
     margin-top: -4px;
 }
 
 .linha-azul {
     height: 2px;
-    background: linear-gradient(to right, transparent, #020272, transparent);
+    background: linear-gradient(to right, transparent, #0000e6, transparent);
     margin: 0.5rem 0 1.5rem 0;
 }
 
@@ -36,7 +36,8 @@ body {
     background: white;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 0 10px black;
     display: flex;
     flex-direction: column;
 }
@@ -292,6 +293,11 @@ select:focus {
     margin-left: 150px;
 }
 
+.btn-aviso {
+    background-color: blue !important;
+    color: white;
+}
+
 .botoes button:hover {
     background-color: #fc9403;
     color: black;
@@ -303,4 +309,15 @@ select:focus {
     content: '📄';
     margin-right: 8px;
     font-size: 1.1em;
+}
+
+.botoes-entrada button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }

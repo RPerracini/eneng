@@ -1,0 +1,696 @@
+:root {
+    --azul-principal: #0000e6;
+    --laranja-botao: #fc9403;
+    --cinza-borda: #e0e0e0;
+    --cinza-texto: #333;
+    --vermelho-erro: #e74c3c;
+    --fonte-principal: sans-serif;
+    --cor-texto: #000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    line-height: 1.5;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-family: sans-serif;
+}
+
+.contact-info h3 {
+    margin-bottom: 15px;
+    font-family: sans-serif;
+    color: #0000e6;
+}
+
+.container {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 15px;
+    flex: 1;
+}
+
+.curso-intro {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.titulo-curso {
+    margin-top: 0;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 10px;
+    font-family: var(--fonte-principal);
+    color: #0000e6;
+}
+
+.titulo-curso::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--laranja-botao),
+        transparent
+    );
+}
+
+.destaque-experiencia {
+    font-family: var(--fonte-principal);
+    font-style: italic;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1.1em;
+    color: var(--cor-texto);
+}
+
+.destaque-experiencia span {
+    display: block;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+    margin-left: 70px;
+    align-items: flex-start;
+    gap: 20px 50px;
+    max-width: 1500px;
+    padding: 0 20px;
+}
+
+.text-info {
+    flex: 0 0 28%;
+}
+
+.temas-container {
+    flex: 0 0 32%;
+    margin-right: -50px;
+}
+
+.form-container {
+    flex: 0 0 60%;
+    padding: 15px;
+    background: white;
+    border-color: #0000e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 18px #0000e6;
+    max-width: 1900px;
+}
+
+.text-info h3,
+.temas-container h3 {
+    font-family: var(--fonte-principal);
+    font-size: 1.3em;
+    color: #0000e6;
+    margin-bottom: 10px;
+}
+
+.text-info p {
+    font-family: var(--fonte-principal);
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--cor-texto);
+}
+
+.temas-lista {
+    columns: 1;
+    padding: 0;
+    margin: 10px 0 0 0;
+    list-style: none;
+}
+
+.temas-lista li {
+    margin-bottom: 7px;
+    line-height: 1.4;
+    font-family: var(--fonte-principal);
+    font-size: 17px;
+    color: var(--cor-texto);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    position: relative;
+    padding-bottom: 10px;
+    font-family: var(--fonte-principal);
+    color: #0000e6;
+}
+
+.form-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--laranja-botao),
+        transparent
+    );
+}
+
+textarea {
+    width: 80%;
+    max-width: 550px;
+    height: 140px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 4px;
+    resize: vertical;
+    margin-left: 25px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-left: 60px;
+}
+
+.form-group label {
+    flex: 0 0 120px;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--cor-texto);
+}
+
+.form-group1 label {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--cor-texto);
+}
+
+.form-group1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 63px;
+    margin-top: 25px;
+}
+
+.custom-file-upload {
+    padding: 200px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+select.ddi-select {
+    height: 36px;
+    padding: 8px 12px;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+    max-width: 250px;
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto);
+}
+
+.ddi-select {
+    padding-left: 40px !important;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px;
+    width: 150px;
+    position: relative;
+}
+
+.ddi-select option {
+    padding-left: 40px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px;
+}
+
+.phone-inputs select.ddi-select {
+    width: 270px !important;
+    padding-left: 40px !important;
+    background-position: 10px center;
+    background-size: 20px;
+    font-size: 14px;
+}
+
+.email-input {
+    margin-left: 200px;
+}
+
+select.ddi-select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 35px;
+}
+
+.phone-inputs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 20px;
+    flex: 1;
+}
+
+#ddd-telefone,
+#ddd-whatsapp {
+    width: 65px;
+    height: 36px;
+    text-align: center;
+}
+
+#ddi-telefone,
+#ddi-whatsapp {
+    width: 130px;
+    height: 36px;
+    text-align: center;
+}
+
+#telefone,
+#whatsapp {
+    width: 120px;
+    height: 36px;
+}
+
+::placeholder {
+    font-family: var(--fonte-principal);
+    font-size: 0.9em;
+    color: #777;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.botao-reset {
+    padding: 12px 30px;
+    margin-left: 55px;
+    min-width: 150px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    background-color: var(--vermelho-erro);
+    color: white;
+}
+
+.botao-reset:hover {
+    background-color: var(--laranja-botao);
+    color: black;
+    border-color: var(--laranja-botao);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button[type='submit'] {
+    padding: 12px 30px;
+    min-width: 180px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 30px;
+}
+
+button[type='submit']:not(:disabled) {
+    background-color: #0000cc;
+    color: white;
+}
+
+button[type='submit']:not(:disabled):hover {
+    background-color: #fc9403;
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button[type='submit']:disabled {
+    background-color: #e0e0e8;
+    color: #666;
+}
+
+.texto-ajuda {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    max-width: 300px;
+}
+
+.error {
+    color: var(--vermelho-erro);
+    font-size: 0.8em;
+    margin-left: 140px;
+    height: 16px;
+    display: block;
+}
+
+.required:after {
+    content: ' *';
+    color: var(--vermelho-erro);
+    font-weight: bold;
+}
+
+#nome {
+    height: 32px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 2px;
+    max-width: 70%;
+    margin-left: 20px;
+    color: var(--cor-texto);
+}
+
+#email {
+    height: 32px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 2px;
+    max-width: 70%;
+    margin-left: 25px;
+    color: var(--cor-texto);
+}
+
+#empresa {
+    height: 32px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 2px;
+    max-width: 70%;
+    margin-left: 25px;
+    color: var(--cor-texto);
+}
+
+#funcao {
+    height: 32px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 2px;
+    max-width: 70%;
+    margin-left: 25px;
+    color: var(--cor-texto);
+}
+
+#ddi-telefone,
+#ddi-whatsapp {
+    height: 32px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 100px;
+    max-width: 70%;
+    margin-left: 5px;
+    color: var(--cor-texto);
+}
+
+.phone-inputs .ddi_telefone {
+    width: 300px;
+}
+
+.mensagem-sucesso {
+    background-color: #fc9403;
+    color: #0000e6;
+    padding: 15px 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.mensagem-sucesso.mostrar {
+    display: block;
+    opacity: 1;
+    animation: fadeOut 3s forwards 0.5s;
+}
+
+.subtitulo-curso {
+    text-align: center;
+    color: black;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.subtitulo-curso::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--laranja-botao),
+        transparent
+    );
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-info,
+    .temas-container,
+    .form-container {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .phone-inputs {
+        flex-wrap: wrap;
+    }
+
+    .phone-inputs select.ddi-select {
+        width: 100% !important;
+        margin-bottom: 8px;
+    }
+
+    .phone-inputs input[type='tel'] {
+        width: calc(100% - 110px) !important;
+    }
+
+    #nome,
+    .phone-inputs,
+    select.ddi-select,
+    #telefone,
+    #whatsapp {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .error {
+        margin-left: 0;
+    }
+
+    .radio-container > label.required {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    .phone-inputs {
+        flex-wrap: wrap;
+        width: 100%;
+        margin-left: 0;
+        gap: 5px;
+    }
+
+    select.ddi-select {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    #ddd-telefone,
+    #ddd-whatsapp {
+        width: 50px;
+    }
+
+    #telefone,
+    #whatsapp {
+        width: calc(100% - 55px);
+    }
+
+    .temas-lista {
+        columns: 1;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='tel'],
+    select.ddi-select {
+        height: 46px;
+        font-size: 16px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .botao-reset,
+    button[type='submit'] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .texto-ajuda {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .text-info,
+    .temas-container,
+    .form-container {
+        flex: 0 0 100%;
+        width: 100%;
+        margin: 0 0 30px 0;
+    }
+}
+
+input[type='file'] {
+    display: none;
+}
+
+.form-group .file {
+    margin-top: 200px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0000cc;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.custom-file-upload:hover {
+    background-color: #fc9403;
+}
+
+#file-info {
+    margin-top: 0px;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.texto-vermelho {
+    color: red;
+    font-weight: normal;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.texto-ajuda {
+    font-size: 14px;
+    font-family: sans-serif;
+    color: #666;
+    line-height: 1.4;
+    margin-left: 30px;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.button1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.mensagem-arquivos {
+    font-family: sans-serif;
+    font-size: 16px;
+}

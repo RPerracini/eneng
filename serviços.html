@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENENG-SERVIÇOS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/estilo_servicos.css">
+    <link rel="stylesheet" href="css/servicos.css">
+    <link rel="stylesheet" href="css/slideshow.css">
     <link rel="stylesheet" href="css/header-nav.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
@@ -29,8 +30,28 @@
             <h2>Assessoria Técnica</h2>
             <p>Assessoria na escolha dos diferentes modelos no mercado, bem como execução dos cálculos para verificação da capacidade necessária.</p>
 
-            <h2>Análise de Falhas</h2>
-            <p>Análise de falhas de engrenagens, rolamentos e outros componentes do redutor. Qual é o verdadeiro motivo da falha?</p>
+        </div>
+
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="imagens/Redutor Duo.JPG" alt="Imagem 1">
+                <p class="slide-texto">Aqui vai o texto abaixo da imagem 1</p>
+            </div>
+            <div class="slide">
+                <img src="imagens/Redutordapaginainicial2.png" alt="Imagem 2">
+                <p class="slide-texto">Aqui vai o texto abaixo da imagem 2</p>
+            </div>
+            <div class="slide">
+                <img src="imagens/Rolamento de esferas.png" alt="Imagem 3">
+                <p class="slide-texto">Aqui vai o texto abaixo da imagem 3</p>
+            </div>
+        </div>
+        
+        <!-- Pontinhos -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
         </div>
 
         <div class="service-card">
@@ -48,13 +69,14 @@
     </script>
 
     <script>
-
         fetch('footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
             });
     </script>
+
+    <script src="js/slideshow.js"></script>
     
 </body>
 </html>

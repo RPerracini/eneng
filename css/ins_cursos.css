@@ -12,8 +12,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: var(--fonte-principal);
-    color: var(--cor-texto);
 }
 
 html {
@@ -23,7 +21,7 @@ html {
 body {
     font-family: var(--fonte-principal);
     line-height: 1.5;
-    background-color: #abdef8;
+    background-color: white;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -105,8 +103,9 @@ body {
     flex: 0 0 32%;
     padding: 15px;
     background: white;
+    border-color: #0000e6;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 18px #0000e6;
 }
 
 .text-info h3,
@@ -168,7 +167,7 @@ body {
 .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 17px;
 }
 
 .form-group label:not(.radio-option label) {

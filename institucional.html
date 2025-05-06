@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ENENG</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/flag-icons@7.1.0/css/flag-icons.min.css"
+        />
+        <link rel="stylesheet" href="css/institucional.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+    </head>
+
+    <body>
+        <div id="header-nav-container"></div>
+
+        <div class="container">
+            <!-- Texto à esquerda -->
+            <div class="texto-principal">
+                <h1>NOSSA EVOLUÇÃO</h1>
+                Atualmente o nosso portfólio abrange desde serviços de
+                <span class="negrito">
+                    Projeto, Fabricação, Montagem e Testes
+                </span>
+                de forma diversificada para todos os tipos de equipamentos, bem
+                como
+                <span class="negrito">Retrofit e Upgrade</span>
+                de equipamentos existentes.
+
+                <div class="linha-laranja">
+                    <div class="linha-laranja-texto">
+                        PORQUE TAMBÉM OFERECEMOS CURSOS
+                    </div>
+                </div>
+
+                Com certeza as empresas perdem tempo e dinheiro pela simples
+                falta de percepção de que bem treinar é necessário. Lembramos
+                que ninguém nasce sabendo, mas todos crescem nas suas
+                habilidades se bem treinados. Com a crescente necessidade de
+                sobrevivência, temos que ter colaboradores competitivos e
+                excelentes nas suas atividades.
+            </div>
+
+            <!-- Imagem da flecha à direita -->
+            <div class="flecha-container">
+                <img src="Imagens/flecha.png" alt="Flecha" />
+            </div>
+
+            <!-- Container de Texto Adicional -->
+            <div class="texto-adicional-container">
+                <div class="texto-adicional">
+                    2016 - Com a participação efetiva do Eng.º Luís A. Morgado,
+                    agregamos as especializações dos seguintes equipamentos:
+                    Pontes e Pórticos Rolantes, Máquinas de Pátio e Máquinas
+                    Portuárias, Manipuladores de Lingotes e Transportadores de
+                    Correia com ênfase em Transportadores Tubulares, know-how
+                    adquirido através de trabalhos desenvolvidos com as
+                    principais empresas mundiais do setor: MITSUI MIIKE, MHI,
+                    ITALIMPIANTI, ALLIANCE E KOCH. Neste ano também passamos a
+                    representar a
+                    <strong>Fresadora Sant’Ana</strong>
+                    , Indústria de Engrenagens e Redutores.
+                </div>
+                <div class="texto-adicional1">
+                    2014 - Com mais uma nova experiência passamos a prestar
+                    serviços de assessoria especializada em
+                    <strong>
+                        Sondas Rotopneumáticas de Perfuração de Poços
+                    </strong>
+                    , que se estende desde a análise da proposta técnica e
+                    validação do projeto até o completo acompanhamento da
+                    fabricação e testes, de forma a garantir ao cliente uma
+                    excelente performance do equipamento.
+                </div>
+                <div class="texto-adicional2">
+                    2010 - Com grande conhecimento no assunto passamos a
+                    oferecer os serviços de assessoria na implantação de
+                    <strong>ERP</strong>
+                    , assim como no preenchimento da planilha de
+                    <strong>Conteúdo Local</strong>
+                    .
+                </div>
+
+                <div class="texto-adicional3">
+                    2007 - Com a necessidades de nossos clientes passamos a
+                    prestar assessoria completa e voltada para a indústria em
+                    geral, em
+                    <strong>
+                        projetos, suprimentos, reformas, montagem e testes
+                    </strong>
+                    , de diversos tipos de equipamentos.
+                </div>
+
+                <div class="texto-adicional4">
+                    2006 - Fundação da ENENG pelo Eng.º Roberto Perracini com a
+                    missão de promover o conhecimento da vasta área de
+                    <strong>Redutores de Velocidade e Engrenagens</strong>
+                    .
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+
+        <script>
+            fetch('header-nav.html')
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        data;
+                });
+
+            // Carrega o footer
+            fetch('footer.html')
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById('footer-container').innerHTML =
+                        data;
+                });
+        </script>
+    </body>
+</html>

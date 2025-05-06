@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('meuFormulario');
     if (!form) {
-        console.error("Formulário não encontrado!");
+        console.error('Formulário não encontrado!');
         return;
     }
 
     const btnEnviar = document.getElementById('enviar');
-    const mensagemSucesso = document.getElementById('mensagem-sucesso');
+    // const mensagemSucesso = document.getElementById('mensagem-sucesso');
 
     // Configuração inicial do botão
     btnEnviar.style.transition = 'opacity 0.3s ease';
@@ -15,27 +15,27 @@ document.addEventListener('DOMContentLoaded', function() {
     btnEnviar.disabled = true;
 
     const bandeiras = {
-        '54': 'https://flagcdn.com/w20/ar.png',
-        '55': 'https://flagcdn.com/w20/br.png',
-        '56': 'https://flagcdn.com/w20/cl.png',
-        '57': 'https://flagcdn.com/w20/co.png',
-        '591': 'https://flagcdn.com/w20/bo.png',
-        '506': 'https://flagcdn.com/w20/cr.png',
-        '593': 'https://flagcdn.com/w20/ec.png',
-        '503': 'https://flagcdn.com/w20/sv.png',
-        '502': 'https://flagcdn.com/w20/gt.png',
-        '592': 'https://flagcdn.com/w20/gy.png',
-        '509': 'https://flagcdn.com/w20/ht.png',
-        '504': 'https://flagcdn.com/w20/hn.png',
-        '1876': 'https://flagcdn.com/w20/jm.png',
-        '505': 'https://flagcdn.com/w20/ni.png',
-        '507': 'https://flagcdn.com/w20/pa.png',
-        '595': 'https://flagcdn.com/w20/py.png',
-        '51': 'https://flagcdn.com/w20/pe.png',
-        '1787': 'https://flagcdn.com/w20/pr.png',
-        '597': 'https://flagcdn.com/w20/sr.png',
-        '598': 'https://flagcdn.com/w20/uy.png',
-        '58': 'https://flagcdn.com/w20/ve.png'
+        54: 'https://flagcdn.com/w20/ar.png',
+        55: 'https://flagcdn.com/w20/br.png',
+        56: 'https://flagcdn.com/w20/cl.png',
+        57: 'https://flagcdn.com/w20/co.png',
+        591: 'https://flagcdn.com/w20/bo.png',
+        506: 'https://flagcdn.com/w20/cr.png',
+        593: 'https://flagcdn.com/w20/ec.png',
+        503: 'https://flagcdn.com/w20/sv.png',
+        502: 'https://flagcdn.com/w20/gt.png',
+        592: 'https://flagcdn.com/w20/gy.png',
+        509: 'https://flagcdn.com/w20/ht.png',
+        504: 'https://flagcdn.com/w20/hn.png',
+        1876: 'https://flagcdn.com/w20/jm.png',
+        505: 'https://flagcdn.com/w20/ni.png',
+        507: 'https://flagcdn.com/w20/pa.png',
+        595: 'https://flagcdn.com/w20/py.png',
+        51: 'https://flagcdn.com/w20/pe.png',
+        1787: 'https://flagcdn.com/w20/pr.png',
+        597: 'https://flagcdn.com/w20/sr.png',
+        598: 'https://flagcdn.com/w20/uy.png',
+        58: 'https://flagcdn.com/w20/ve.png',
     };
 
     function atualizarBandeira(select) {
@@ -49,48 +49,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function configurarBandeiras() {
-        document.querySelectorAll('.ddi-select').forEach(select => {
+        document.querySelectorAll('.ddi-select').forEach((select) => {
             select.addEventListener('change', () => atualizarBandeira(select));
             atualizarBandeira(select);
-        });
-    }
-
-    function formatarTelefone(input) {
-        if (!input) return;
-
-        input.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length > 2) {
-                value = value.replace(/^(\d{2})(\d{4,5})(\d{4})$/, '$1 $2-$3');
-            }
-            
-            e.target.value = value;
-            verificarCamposPreenchidos();
         });
     }
 
     function verificarCamposPreenchidos() {
         const nomeValido = form.elements.nome?.value.trim() !== '';
         const emailValido = form.elements.email?.value.trim() !== '';
-        
-        const telefoneDDIValido = form.elements.ddi_telefone?.value !== '';
-        const telefoneNumeroValido = form.elements.telefone?.value.replace(/\D/g, '').length >= 8;
-        
+
         const whatsappDDIValido = form.elements.ddi_whatsapp?.value !== '';
-        const whatsappNumeroValido = form.elements.whatsapp?.value.replace(/\D/g, '').length >= 8;
-        
+        const whatsappNumeroValido =
+            form.elements.whatsapp?.value.replace(/\D/g, '').length >= 8;
+
         const empresaValida = form.elements.empresa?.value.trim() !== '';
         const funcaoValida = form.elements.funcao?.value.trim() !== '';
-        
-        const experienciaValida = [...form.elements.experiencia || []].some(radio => radio.checked);
 
-        const todosPreenchidos = nomeValido && emailValido && 
-                               telefoneDDIValido && telefoneNumeroValido && 
-                               whatsappDDIValido && whatsappNumeroValido && 
-                               empresaValida && funcaoValida && 
-                               experienciaValida;
-        
+        const experienciaValida = [...(form.elements.experiencia || [])].some(
+            (radio) => radio.checked
+        );
+
+        const todosPreenchidos =
+            nomeValido &&
+            emailValido &&
+            whatsappDDIValido &&
+            whatsappNumeroValido &&
+            empresaValida &&
+            funcaoValida &&
+            experienciaValida;
+
         btnEnviar.disabled = !todosPreenchidos;
         btnEnviar.style.opacity = btnEnviar.disabled ? '0.6' : '1';
         btnEnviar.style.cursor = btnEnviar.disabled ? 'not-allowed' : 'pointer';
@@ -98,10 +86,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Configurar eventos para todos os campos
     const eventos = ['input', 'change', 'paste'];
-    
-    Array.from(form.elements).forEach(element => {
-        if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') {
-            eventos.forEach(evento => {
+
+    Array.from(form.elements).forEach((element) => {
+        if (
+            element.tagName === 'INPUT' ||
+            element.tagName === 'SELECT' ||
+            element.tagName === 'TEXTAREA'
+        ) {
+            eventos.forEach((evento) => {
                 element.addEventListener(evento, verificarCamposPreenchidos);
             });
         }
@@ -110,56 +102,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // Eventos específicos para radios de experiência
     const radiosExperiencia = form.elements.experiencia;
     if (radiosExperiencia) {
-        Array.from(radiosExperiencia).forEach(radio => {
-            eventos.forEach(evento => {
+        Array.from(radiosExperiencia).forEach((radio) => {
+            eventos.forEach((evento) => {
                 radio.addEventListener(evento, verificarCamposPreenchidos);
             });
         });
     }
 
-    // Configurar formatação e bandeiras
-    formatarTelefone(document.getElementById('telefone'));
-    formatarTelefone(document.getElementById('whatsapp'));
+    // formatarTelefone(document.getElementById('whatsapp'));
     configurarBandeiras();
 
     // Verificação inicial
     verificarCamposPreenchidos();
 
-    // Configurar envio do formulário
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
+    // Não é necessário usar `fetch` ou AJAX, já que o FormSubmit cuida disso.
+    // O formulário será enviado diretamente quando o usuário clicar no botão "Enviar".
+
+    // Configurar envio do formulário - VERSÃO CORRIGIDA
+    form.addEventListener('submit', function (e) {
+        // Não faz nada com `e.preventDefault()`, já que o FormSubmit lida com o envio do formulário
         if (btnEnviar.disabled) return;
-        
-        try {
-            btnEnviar.disabled = true;
-            btnEnviar.textContent = 'Enviando...';
-            
-            // Simulação de envio (substitua por sua lógica real)
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // Alteração visual após envio
-            document.body.style.backgroundColor = 'white';
-            document.documentElement.style.backgroundColor = 'white'; // HTML
-            document.querySelector('.container').style.backgroundColor = 'white';
-            
-            mensagemSucesso.style.display = 'block';
-            mensagemSucesso.style.opacity = '1';
-            
-            setTimeout(() => {
-                mensagemSucesso.style.opacity = '0';
-                setTimeout(() => {
-                    mensagemSucesso.style.display = 'none';
-                    form.reset();
-                    btnEnviar.textContent = 'Enviar Inscrição';
-                    btnEnviar.disabled = false;
-                }, 500);
-            }, 3000);
-            
-        } catch (error) {
-            console.error('Erro no envio:', error);
-            btnEnviar.disabled = false;
-            btnEnviar.textContent = 'Enviar Inscrição';
-        }
+
+        // Mostrar mensagem de sucesso imediatamente
+        mensagemSucesso.style.display = 'block';
+        mensagemSucesso.style.opacity = '1';
     });
 });

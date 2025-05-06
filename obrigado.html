@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obrigado - Perracini Engenharia</title>
-  <link rel="stylesheet" href="css/header-nav.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/contatonovo.css">
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Obrigado - Perracini Engenharia</title>
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <link rel="stylesheet" href="css/obrigado.css" />
+    </head>
 
-<body>
-  
-  <div id="header-nav-container"></div>
+    <body>
+        <div id="header-nav-container"></div>
 
-  <main class="contato-container">
-    <section class="contato-formulario" style="width: 100%;">
-      <h2>Mensagem enviada com sucesso!</h2>
-      <p>Obrigado por entrar em contato. Em breve retornaremos sua mensagem.</p>
-      <a href="contatonew.html" class="btn-enviar" style="margin-top: 2rem;">
-        <i class="fas fa-arrow-left"></i> Voltar para o formulário
-      </a>
-    </section>
-  </main>
+        <main class="contato-container">
+            <section class="contato-formulario" style="width: 100%">
+                <h2>Mensagem enviada com sucesso!</h2>
 
-  <div id="footer-container"></div>
+                <div class="imagem-agradecimento-container">
+                    <img
+                        src="imagens/Obrigado.png"
+                        alt="Obrigado pelo contato"
+                        class="imagem-agradecimento"
+                    />
+                </div>
 
-  <script>
-    fetch('header-nav.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-nav-container').innerHTML = data;
-      });
+                <p>Em breve retornaremos sua mensagem.</p>
+            </section>
+        </main>
 
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-      });
-  </script>
-</body>
+        <div id="footer-container"></div>
+
+        <script>
+            fetch('header-nav.html')
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        data;
+                });
+
+            fetch('footer.html')
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById('footer-container').innerHTML =
+                        data;
+                });
+
+            // Redirecionar automaticamente após 5 segundos
+            setTimeout(function () {
+                window.location.href = 'index.html';
+            }, 5000); // 5000 milissegundos = 5 segundos
+        </script>
+    </body>
 </html>

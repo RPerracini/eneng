@@ -1,264 +1,269 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* ===== ESTRUTURA BASE ===== */
 html {
-  height: 100%;
+    height: 100%;
 }
 
 /* Container principal deve crescer para empurrar o footer para baixo */
 .container {
-  flex: 1;
+    flex: 1;
 }
 
 body {
-  background-color: #abdef8;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    /* background-color: #abdef8; */
+    background-color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
-  color:#fc9403;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
-  font-family: Nulshock;
+    color: #fc9403;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    font-family: Nulshock;
 }
 
 /* ============== FONTE PERSONALIZADA ============== */
 @font-face {
-  font-family: 'Nulshock';
-  src: url('Fontes/NulshockBd.otf') format('opentype');
+    font-family: 'Nulshock';
+    src: url('Fontes/NulshockBd.otf') format('opentype');
 }
 
 /* ============== MAIN GRID LAYOUT ============== */
 .main-grid {
-  display: grid;
-  grid-template-areas:
-    "hero"
-    "texto"
-    "representadas"
-    "info";
-  gap: 10px;
-  padding: 0;
-  width: 100%;
+    display: grid;
+    grid-template-areas:
+        'hero'
+        'texto'
+        'representadas'
+        'info';
+    gap: 10px;
+    padding: 0;
+    width: 100%;
 }
 
 /* ============== HERO SECTION ============== */
 .hero {
-  grid-area: hero;
-  background-color: #abdef8;
-  padding: 40px 0;
-  margin-bottom: 0;
+    grid-area: hero;
+    /* background-color: #abdef8; */
+    background-color: white;
+    padding: 40px 0;
+    margin-bottom: 0;
 }
 
 .hero-container {
-  display: flex;
-  align-items: center;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0 5%;
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 5%;
 }
 
 .hero-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-image img {
-  max-width: 100%;
-  height: auto;
-  max-height: 300px;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
 }
 
 .hero-text {
-  flex: 0 0 65%;
-  text-align: left;
-  margin-left: 5px;
+    flex: 0 0 65%;
+    text-align: left;
+    margin-left: 5px;
 }
 
 .hero-text h1 {
-  font-family: 'Nulshock', Impact, sans-serif;
-  font-size: 3rem;
-  line-height: 1.2;
-  color: #020272;
-  margin: 0;
+    font-family: 'Nulshock', Impact, sans-serif;
+    font-size: 3rem;
+    line-height: 1.2;
+    /* color: #020272; */
+    color: #0000e6;
+    margin: 0;
 }
 
 /* ============== SEÇÕES ============== */
 .texto_representadas {
-  grid-area: texto;
-  width: 100%;
-  max-width: 100%;
+    grid-area: texto;
+    width: 100%;
+    max-width: 100%;
 }
 
 .texto_representadas p {
-  font-size: 2rem;
-  color: #020272;
-  margin: 0 auto 5px;
-  text-align: center;
-  max-width: 1600px;
-  padding: 0 10px;
+    font-size: 2rem;
+    /* color: #020272; */
+    color: #0000e6;
+    margin: 0 auto 5px;
+    text-align: center;
+    max-width: 1600px;
+    padding: 0 10px;
 }
 
 .representadas {
-  grid-area: representadas;
-  width: 100%;
-  max-width: 100%;
-  padding: 5px 0;
+    grid-area: representadas;
+    width: 100%;
+    max-width: 100%;
+    padding: 5px 0;
 }
 
 .representadas .container {
-  max-width: 100%;
-  padding: 0 5%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-  align-items: center;
-  justify-items: center;
+    max-width: 100%;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
 }
 
 .representadas img {
-  max-width: 85%;
-  height: auto;
-  transition: transform 0.3s ease;
+    max-width: 85%;
+    height: auto;
+    transition: transform 0.3s ease;
 }
 
 .representadas img:hover {
-  transform: scale(1.3);
+    transform: scale(1.3);
 }
 
 .mais_informações {
-  grid-area: info;
-  width: 100%;
-  max-width: 100%;
-  padding-top: 10px;
+    grid-area: info;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 10px;
 }
 
 .mais_informações p {
-  font-size: 1.0rem;
-  color: #020272;
-  text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: sans-serif;
+    font-size: 1rem;
+    /* color: #020272; */
+    color: #0000e6;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: sans-serif;
 }
 
 /* ============== FORMULÁRIO DE CÁLCULO ============== */
 .formulario {
-  padding: 8px;
-  flex: 1;
-  width: 100%;
-  max-width: 100%;
+    padding: 8px;
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 8px;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .boxInput {
-  grid-column: 1;
-  background: white;
-  border-radius: 6px;
-  padding: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  width: 100%;
-  position: relative;
-  padding-bottom: 70px;
+    grid-column: 1;
+    background: white;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: relative;
+    padding-bottom: 70px;
 }
 
 .boxOutput {
-  background: white;
-  border-radius: 6px;
-  padding: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  width: 100%;
+    background: white;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .tituloCalc {
-  color: #0000e6;
-  font-family: 'Nulshock', Impact, sans-serif;
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-  text-align: center;
-  border-bottom: 1px solid #fc9403;
-  padding-bottom: 6px;
-  width: 100%;
+    color: #0000e6;
+    font-family: 'Nulshock', Impact, sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    text-align: center;
+    border-bottom: 1px solid #fc9403;
+    padding-bottom: 6px;
+    width: 100%;
 }
 
 /* CONTAINERS DOS CAMPOS */
 .boxInput1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    width: 100%;
 }
 
 .boxInput1 label {
-  color: #333;
-  white-space: nowrap;
-  font-size: 0.85rem;
-  text-align: left;
-  min-width: 80px;
+    color: #333;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    text-align: left;
+    min-width: 80px;
 }
 
-.boxInput1 input[type="text"],
-.boxInput1 input[type="number"],
+.boxInput1 input[type='text'],
+.boxInput1 input[type='number'],
 .boxInput1 select {
-  width: 120px;
-  margin-left: auto;
-  margin-right: 40px;
-  padding: 4px 8px;
-  font-size: 14px;
-  text-align:center;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  height: 28px;
-  box-sizing: border-box;
+    width: 120px;
+    margin-left: auto;
+    margin-right: 40px;
+    padding: 4px 8px;
+    font-size: 14px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 28px;
+    box-sizing: border-box;
 }
 
-.boxInput2, 
+.boxInput2,
 .boxObservacoes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    width: 100%;
 }
 
 .boxInput2 label {
-  color: #333;
-  white-space: nowrap;
-  font-size: 0.85rem;
-  text-align: left;
-  min-width: 80px;
-  margin-right: 10px;
+    color: #333;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    text-align: left;
+    min-width: 80px;
+    margin-right: 10px;
 }
 
-.boxInput2 input[name="cliente"],
-.boxInput2 input[name="projeto"],
-.boxInput2 input[name="observacoes"] {
-  width: 300px; 
-  height: 28px;
-  padding: 4px 8px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  box-sizing: border-box;
+.boxInput2 input[name='cliente'],
+.boxInput2 input[name='projeto'],
+.boxInput2 input[name='observacoes'] {
+    width: 300px;
+    height: 28px;
+    padding: 4px 8px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
 .boxInput1 input:focus,
@@ -277,315 +282,320 @@ body {
 }
 
 .dados_de_saída .resultado-calculado {
-  width: 12ch;
-  height: 28px;
-  padding: 4px 8px;
-  text-align: center;
-  border: 2px solid #ccc !important;
-  background-color: #f0f0f0 !important;
-  border-radius: 5px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
-  color: #0000e6;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  box-sizing: border-box;
+    width: 12ch;
+    height: 28px;
+    padding: 4px 8px;
+    text-align: center;
+    border: 2px solid #ccc !important;
+    background-color: #f0f0f0 !important;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    color: #0000e6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 /* ============== BOTÕES ============== */
 
-#btnCalcular, #btnReset, #btnPDF {
-  width: 120px;
-  height: 28px;
-  border: none;
-  border-radius: 3px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  margin-top: 0; /* Remove a margem superior se existir */
+#btnCalcular,
+#btnReset,
+#btnPDF {
+    width: 120px;
+    height: 28px;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-top: 0; /* Remove a margem superior se existir */
 }
 
 /* Cores específicas para cada botão */
 #btnCalcular {
-  background: #0000e6;
-  color: white;
+    background: #0000e6;
+    color: white;
 }
 
 #btnReset {
-  background: #ff0000;
-  color: white;
+    background: #ff0000;
+    color: white;
 }
 
 #btnPDF {
-  background: #4CAF50;
-  color: white;
+    background: #4caf50;
+    color: white;
 }
 
 /* Efeitos hover */
-#btnCalcular:hover, #btnReset:hover, #btnPDF:hover {
-  background: #fc9403;
-  color: black;
+#btnCalcular:hover,
+#btnReset:hover,
+#btnPDF:hover {
+    background: #fc9403;
+    color: black;
 }
 
 /* RESPONSIVIDADE*/
 @media (max-width: 480px) {
-  .btn-container {
-    position: static;
-    width: 100%;
-    align-items: center;
-    margin-top: 15px;
-  }
-  
-  #btnCalcular, #btnReset {
-    width: 100%;
-  }
+    .btn-container {
+        position: static;
+        width: 100%;
+        align-items: center;
+        margin-top: 15px;
+    }
+
+    #btnCalcular,
+    #btnReset {
+        width: 100%;
+    }
 }
 
 #btnCalcular {
-  background: #0000e6;
-  color: white;
+    background: #0000e6;
+    color: white;
 }
 
 #btnReset {
-  background: #ff0000;
-  color: white;
+    background: #ff0000;
+    color: white;
 }
 
-#btnCalcular:hover, #btnReset:hover {
-  background: #fc9403;
-  color: black;
+#btnCalcular:hover,
+#btnReset:hover {
+    background: #fc9403;
+    color: black;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
     -moz-appearance: textfield;
 }
 
 /* ============== MODAL DE RESET ============== */
 .modal-reset {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
-  background: #fc9403; /* Fundo laranja */
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  border: 2px solid #0000e6; /* Borda azul */
+    background: #fc9403; /* Fundo laranja */
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #0000e6; /* Borda azul */
 }
 
 .modal-icon {
-  font-size: 60px;
-  margin-bottom: 20px;
-  color: #0000e6; /* Ícone azul */
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #0000e6; /* Ícone azul */
 }
 
 .modal-message {
-  font-size: 20px;
-  font-weight: bold;
-  color: #0000e6; /* Texto azul */
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #0000e6; /* Texto azul */
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 25px;
 }
 
 .modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 .modal-buttons button {
-  padding: 10px 25px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: white; /* Texto branco padrão */
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white; /* Texto branco padrão */
 }
 
 #btnSim {
-  background-color: #d9534f; /* Vermelho */
-  box-shadow: 0 4px 0 #c12e2a;
+    background-color: #d9534f; /* Vermelho */
+    box-shadow: 0 4px 0 #c12e2a;
 }
 
 #btnNao {
-  background-color: #5cb85c; /* Verde */
-  box-shadow: 0 4px 0 #449d44;
+    background-color: #5cb85c; /* Verde */
+    box-shadow: 0 4px 0 #449d44;
 }
 
 /* Efeitos hover - AMARELO COM TEXTO PRETO */
 #btnSim:hover,
 #btnNao:hover {
-  background-color: #ffcc00; /* Amarelo vibrante */
-  color: #000000; /* Texto preto */
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #e6b800;
+    background-color: #ffcc00; /* Amarelo vibrante */
+    color: #000000; /* Texto preto */
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #e6b800;
 }
 
 /* Efeito ao clicar */
 #btnSim:active,
 #btnNao:active {
-  transform: translateY(4px);
-  box-shadow: none;
-  background-color: #e6b800; /* Amarelo mais escuro ao clicar */
+    transform: translateY(4px);
+    box-shadow: none;
+    background-color: #e6b800; /* Amarelo mais escuro ao clicar */
 }
 
 /* Efeito ao clicar */
 #btnSim:active {
-  transform: translateY(4px);
-  box-shadow: none;
+    transform: translateY(4px);
+    box-shadow: none;
 }
 
 #btnNao:active {
-  transform: translateY(4px);
-  box-shadow: none;
+    transform: translateY(4px);
+    box-shadow: none;
 }
 
 /* Modal de Ajuda */
 .modal-help {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.8);
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-help-content {
-  position: relative;
-  margin: 5% auto;
-  width: 80%;
-  max-width: 800px;
+    position: relative;
+    margin: 5% auto;
+    width: 80%;
+    max-width: 800px;
 }
 
 #imagemHelp {
-  width: 100%;
-  border: 3px solid #fc9403;
-  border-radius: 5px;
+    width: 100%;
+    border: 3px solid #fc9403;
+    border-radius: 5px;
 }
 
 .close-help {
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  color: white;
-  font-size: 35px;
-  font-weight: bold;
-  cursor: pointer;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .close-help:hover {
-  color: #fc9403;
+    color: #fc9403;
 }
 
 /* Ícone de Informação - AZUL */
 .info-icon {
-  color: #0000e6; /* Azul padrão do seu site */
-  margin-left: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s;
+    color: #0000e6; /* Azul padrão do seu site */
+    margin-left: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
 }
 
 .info-icon:hover {
-  color:#fc9403;
-  transform: scale(1.5);
+    color: #fc9403;
+    transform: scale(1.5);
 }
 
 /* ============== ESTILO PARA INPUTS COM ÍCONES ============== */
 .input-with-info {
-  display: flex;
-  align-items: center;
-  width: 120px; /* Mesma largura dos seus inputs */
-  margin-left: auto;
-  margin-right: 40px;
+    display: flex;
+    align-items: center;
+    width: 120px; /* Mesma largura dos seus inputs */
+    margin-left: auto;
+    margin-right: 40px;
 }
 
 .info-icon {
-  color: #0000e6; /* Azul padrão */
-  margin-left: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s;
-  display: inline-flex;
+    color: #0000e6; /* Azul padrão */
+    margin-left: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    display: inline-flex;
 }
 
 .info-icon:hover {
-  color: #fc9403; /* Laranja no hover */
-  transform: scale(1.2);
+    color: #fc9403; /* Laranja no hover */
+    transform: scale(1.2);
 }
 
 /* Ajuste para inputs dentro do container */
 .input-with-info .campo-limite {
-  margin-right: 0;
-  flex-grow: 1;
+    margin-right: 0;
+    flex-grow: 1;
 }
 
 /* Modal de Ajuda (certifique-se que existe no HTML) */
 .modal-help {
-  display: none;
-  position: fixed;
-  z-index: 1000;
+    display: none;
+    position: fixed;
+    z-index: 1000;
 }
 
 /* Reduz apenas a imagem do módulo */
-#imagemHelp[src*="Módulospadronizados.jpg"] {
-  transform: scale(0.7); /* Reduz para 70% do tamanho original */
-  transform-origin: center;
-  margin: 0 auto; /* Centraliza */
+#imagemHelp[src*='Módulospadronizados.jpg'] {
+    transform: scale(0.7); /* Reduz para 70% do tamanho original */
+    transform-origin: center;
+    margin: 0 auto; /* Centraliza */
 }
 
 #btnPDF {
-  background: #4CAF50;
-  color: white;
-  width: 120px;
-  height: 28px;
-  border: none;
-  border-radius: 3px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+    background: #4caf50;
+    color: white;
+    width: 120px;
+    height: 28px;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
 }
 
 #btnPDF:hover {
-  background: #45a049;
+    background: #45a049;
 }
 
 body {
-  padding-bottom: 50px; /* espaço para não encobrir conteúdo pelo footer */
+    padding-bottom: 50px; /* espaço para não encobrir conteúdo pelo footer */
 }
-
 
 /* ============== RESPONSIVIDADE ============== */
 @media (max-width: 1200px) {
@@ -595,15 +605,15 @@ body {
     .boxInput {
         grid-column: 1 / span 3;
     }
-    
+
     header h1 {
         font-size: 3rem;
     }
-    
+
     .hero-text h1 {
         font-size: 2.2rem;
     }
-    
+
     .texto_representadas p {
         font-size: 1.8rem;
     }
@@ -620,7 +630,7 @@ body {
     .boxInput {
         grid-column: 1 / span 2;
     }
-    
+
     .dropdown-menu {
         min-width: 400px;
     }
@@ -630,44 +640,45 @@ body {
     .grid-container {
         grid-template-columns: 1fr;
     }
-    
+
     .hero-container {
         flex-direction: column;
         padding: 0 20px;
         gap: 30px;
     }
-    
-    .hero-image, .hero-text {
+
+    .hero-image,
+    .hero-text {
         width: 100%;
         text-align: center;
     }
-    
+
     .hero-text h1 {
         font-size: 1.8rem;
     }
-    
+
     nav ul {
         flex-direction: column;
         align-items: center;
     }
-    
+
     nav li {
         margin: 5px 0;
     }
-    
+
     .dropdown-menu {
         position: static;
         min-width: 100%;
         box-shadow: none;
     }
-    
+
     .representadas .container {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
-    input[name="cliente"],
-    input[name="projeto"],
-    input[name="observacoes"] {
+    input[name='cliente'],
+    input[name='projeto'],
+    input[name='observacoes'] {
         width: 100%;
     }
 
@@ -684,77 +695,78 @@ body {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .boxInput1 label {
         width: 100%;
     }
-    
-    .boxInput1 input[type="text"],
-    .boxInput1 input[type="number"],
+
+    .boxInput1 input[type='text'],
+    .boxInput1 input[type='number'],
     .boxInput1 select {
         width: 100%;
         margin: 4px 0 0 0;
     }
-    
+
     .boxInput2 {
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
     }
-    
+
     .dados_de_saída p {
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
     }
-    
+
     .dados_de_saída span {
         width: 100%;
         text-align: left;
     }
 
     .btn-container {
-      position: absolute;
-      right: 53px;
-      bottom: 12px;
-      padding-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      align-items: flex-end;
-      width: 120px;
+        position: absolute;
+        right: 53px;
+        bottom: 12px;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-end;
+        width: 120px;
     }
 
     .pdf-button {
-      width: 120px;
-      height: 28px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 3px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 6px;
-      transition: background-color 0.2s;
-  }
-  
-  .pdf-button:hover {
-      background-color: #45a049;
-  }
-    
-    #btnCalcular, #btnReset {
+        width: 120px;
+        height: 28px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 6px;
+        transition: background-color 0.2s;
+    }
+
+    .pdf-button:hover {
+        background-color: #45a049;
+    }
+
+    #btnCalcular,
+    #btnReset {
         width: 100%;
     }
-    
+
     header h1 {
         font-size: 2rem;
     }
-    
+
     .hero-text h1 {
         font-size: 1.6rem;
     }
-    
+
     .texto_representadas p {
         font-size: 1.4rem;
     }
@@ -762,12 +774,13 @@ body {
     .mais_informações p {
         font-size: 0.9rem;
     }
-    
+
     .representadas .container {
         grid-template-columns: 1fr 1fr;
     }
 
-    #footer_copyright, .versao {
+    #footer_copyright,
+    .versao {
         white-space: normal;
         font-size: 0.8rem;
     }

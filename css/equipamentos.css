@@ -144,7 +144,7 @@ body {
 
 /* Responsividade para as imagens dentro do slideshow */
 .slide img {
-    width: 100%;
+    width: 80%;
     max-width: 100%; /* Garante que as imagens não ultrapassem a largura do contêiner */
     height: auto; /* Mantém a proporção da imagem */
     object-fit: contain;

@@ -3,7 +3,6 @@ body {
     margin: 0;
     padding-bottom: 60px; /* Espaço para o footer fixo */
     box-sizing: border-box;
-    /* background-color: #abdef8; */
     background-color: white;
     font-family: sans-serif;
     line-height: 1.6;
@@ -34,7 +33,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
     height: 100%; /* Ocupa toda altura do grid */
     box-sizing: border-box;
 }
@@ -73,18 +71,20 @@ body {
     font-size: 15px;
 }
 
+/* Responsividade para as imagens dentro dos cards */
 .service-card img {
-    max-width: 100%;
-    height: auto;
+    width: 100%; /* Garante que a imagem ocupe toda a largura do contêiner */
+    height: auto; /* Mantém a proporção da imagem */
+    object-fit: contain; /* Garante que a imagem se ajuste sem distorcer */
     border-radius: 4px;
     margin-bottom: 15px;
 }
 
+/* Estilo dos links dentro dos cards */
 .service-card a {
     color: #0000e6;
     text-decoration: none;
     font-weight: bold;
-    /* transition: color 0.3s ease; */
 }
 
 /* ============== SLIDESHOW CONTAINER ============== */
@@ -103,6 +103,7 @@ body {
     flex-direction: column;
 }
 
+/* Estilo dos slides */
 .slides-inner {
     position: relative;
     width: 100%;
@@ -141,9 +142,11 @@ body {
     padding: 10px;
 }
 
+/* Responsividade para as imagens dentro do slideshow */
 .slide img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    max-width: 100%; /* Garante que as imagens não ultrapassem a largura do contêiner */
+    height: auto; /* Mantém a proporção da imagem */
     object-fit: contain;
     border-radius: 8px;
     transition: transform 0.3s ease;
@@ -162,6 +165,7 @@ body {
     font-weight: 600;
 }
 
+/* Controles do slideshow */
 .slideshow-control {
     position: absolute;
     top: 50%;
@@ -194,6 +198,7 @@ body {
     right: 15px;
 }
 
+/* Indicadores do slideshow */
 .slideshow-indicators {
     position: absolute;
     bottom: 15px;
@@ -229,6 +234,8 @@ body {
 }
 
 /* ============== RESPONSIVIDADE ============== */
+
+/* Para telas grandes */
 @media (max-width: 1200px) {
     .content-grid {
         margin-left: 50px;
@@ -236,6 +243,7 @@ body {
     }
 }
 
+/* Para telas médias */
 @media (max-width: 992px) {
     .content-grid {
         margin-left: 30px;
@@ -247,6 +255,7 @@ body {
     }
 }
 
+/* Para telas pequenas */
 @media (max-width: 768px) {
     .main-content {
         padding: 20px 15px;
@@ -282,6 +291,7 @@ body {
     }
 }
 
+/* Para telas muito pequenas (celulares) */
 @media (max-width: 480px) {
     .service-card {
         padding: 15px;

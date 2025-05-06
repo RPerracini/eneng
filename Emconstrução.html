@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Em construção</title>
+        <link rel="stylesheet" href="css/Emconstrução.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+    </head>
+
+    <body>
+        <div id="header-nav-container"></div>
+
+        <!-- Adicionando a imagem centralizada -->
+        <div class="content">
+            <img src="Imagens/Em construção.png" alt="Em construção" />
+        </div>
+
+        <div id="footer-container"></div>
+
+        <script>
+            fetch('header-nav.html')
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        data;
+                });
+        </script>
+
+        <script>
+            fetch('footer.html')
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById('footer-container').innerHTML =
+                        data;
+                });
+        </script>
+    </body>
+</html>

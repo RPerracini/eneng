@@ -1,0 +1,11 @@
+/* Centralizar o conteúdo na tela */
+.content {
+    text-align: center;
+}
+
+.content img {
+    width: 50%;
+    height: auto;
+    padding: 15px;
+    margin-top: 20px;
+}

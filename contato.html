@@ -52,7 +52,8 @@
                     <input
                         type="hidden"
                         name="_next"
-                        value="https://www.eneng.com.br/obrigado.html"
+                        id="nextRedirect"
+                        value=""
                     />
                     <input
                         type="hidden"
@@ -89,9 +90,69 @@
                                 required
                             >
                                 <option value="">Selecione</option>
-                                <option value="54">🇦🇷 +54 (Argentina)</option>
-                                <option value="591">🇧🇴 +591 (Bolívia)</option>
-                                <option value="55">🇧🇷 +55 (Brasil)</option>
+ <option value="54" data-flag="🇦🇷">
+                                    🇦🇷 +54 (Argentina)
+                                </option>
+                                <option value="591" data-flag="🇧🇴">
+                                    🇧🇴 +591 (Bolívia)
+                                </option>
+                                <option value="55" data-flag="🇧🇷">
+                                    🇧🇷 +55 (Brasil)
+                                </option>
+                                <option value="56" data-flag="🇨🇱">
+                                    🇨🇱 +56 (Chile)
+                                </option>
+                                <option value="57" data-flag="🇨🇴">
+                                    🇨🇴 +57 (Colômbia)
+                                </option>
+                                <option value="506" data-flag="🇨🇷">
+                                    🇨🇷 +506 (Costa Rica)
+                                </option>
+                                <option value="593" data-flag="🇪🇨">
+                                    🇪🇨 +593 (Equador)
+                                </option>
+                                <option value="503" data-flag="🇸🇻">
+                                    🇸🇻 +503 (El Salvador)
+                                </option>
+                                <option value="502" data-flag="🇬🇹">
+                                    🇬🇹 +502 (Guatemala)
+                                </option>
+                                <option value="592" data-flag="🇬🇾">
+                                    🇬🇾 +592 (Guiana)
+                                </option>
+                                <option value="509" data-flag="🇭🇹">
+                                    🇭🇹 +509 (Haiti)
+                                </option>
+                                <option value="504" data-flag="🇭🇳">
+                                    🇭🇳 +504 (Honduras)
+                                </option>
+                                <option value="1876" data-flag="🇯🇲">
+                                    🇯🇲 +1876 (Jamaica)
+                                </option>
+                                <option value="505" data-flag="🇳🇮">
+                                    🇳🇮 +505 (Nicarágua)
+                                </option>
+                                <option value="507" data-flag="🇵🇦">
+                                    🇵🇦 +507 (Panamá)
+                                </option>
+                                <option value="595" data-flag="🇵🇾">
+                                    🇵🇾 +595 (Paraguai)
+                                </option>
+                                <option value="51" data-flag="🇵🇪">
+                                    🇵🇪 +51 (Peru)
+                                </option>
+                                <option value="1787" data-flag="🇵🇷">
+                                    🇵🇷 +1787 (Porto Rico)
+                                </option>
+                                <option value="597" data-flag="🇸🇷">
+                                    🇸🇷 +597 (Suriname)
+                                </option>
+                                <option value="598" data-flag="🇺🇾">
+                                    🇺🇾 +598 (Uruguai)
+                                </option>
+                                <option value="58" data-flag="🇻🇪">
+                                    🇻🇪 +58 (Venezuela)
+                                </option>
                             </select>
                             <input
                                 type="tel"
@@ -219,5 +280,28 @@
 
         <!-- Scripts -->
         <script src="js/contato.js"></script>
+
+        <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const nextRedirect = document.getElementById('nextRedirect');
+        const hostname = window.location.hostname;
+        let urlNext = '';
+
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            urlNext = 'http://localhost:5500/obrigado.html';
+        } else if (hostname === 'rperracini.github.io') {
+            urlNext = 'https://rperracini.github.io/eneng/obrigado.html';
+        } else if (hostname.includes('locaweb.com.br') || hostname.includes('eneng.com.br')) {
+            urlNext = 'https://www.eneng.com.br/obrigado.html';
+        } else {
+            urlNext = window.location.origin + '/obrigado.html';
+        }
+
+        if (nextRedirect) {
+            nextRedirect.value = urlNext;
+        }
+    });
+</script>
+
     </body>
 </html>

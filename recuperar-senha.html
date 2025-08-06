@@ -114,7 +114,6 @@
                 }
             }
         </style>
-        <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
     </head>
     <body>
         <div id="header-nav-container"></div>
@@ -144,85 +143,57 @@
             <div id="successMessage" class="form-success"></div>
         </div>
         <div id="footer-container"></div>
-        <script type="module">
-            import {
-                initializeApp,
-                getApps,
-            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
-            import {
-                getAuth,
-                sendPasswordResetEmail,
-            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
 
-            // Firebase config
-            const firebaseConfig = {
-                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
-                authDomain: 'eneng-b34ee.firebaseapp.com',
-                projectId: 'eneng-b34ee',
-                storageBucket: 'eneng-b34ee.appspot.com',
-                messagingSenderId: '401693608382',
-                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
-                measurementId: 'G-LSC3PG9XKM',
-            };
+<script type="module">
+    import { auth } from './js/auth-state.js';
+    import { sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
 
-            const app = getApps().length
-                ? getApps()[0]
-                : initializeApp(firebaseConfig);
-            const auth = getAuth(app);
+    const emailInput = document.getElementById('email');
+    const sendBtn = document.getElementById('sendResetLink');
+    const spinner = document.getElementById('loadingSpinner');
+    const errorEl = document.getElementById('errorMessage');
+    const successEl = document.getElementById('successMessage');
 
-            const emailInput = document.getElementById('email');
-            const sendBtn = document.getElementById('sendResetLink');
-            const spinner = document.getElementById('loadingSpinner');
-            const errorEl = document.getElementById('errorMessage');
-            const successEl = document.getElementById('successMessage');
+    sendBtn.addEventListener('click', async () => {
+        const email = emailInput.value.trim();
+        errorEl.textContent = '';
+        successEl.textContent = '';
 
-            sendBtn.addEventListener('click', async () => {
-                const email = emailInput.value.trim();
-                errorEl.textContent = '';
-                successEl.textContent = '';
+        if (!email) {
+            errorEl.textContent = 'Por favor, informe seu e-mail.';
+            return;
+        }
 
-                if (!email) {
-                    errorEl.textContent = 'Por favor, informe seu e-mail.';
-                    return;
-                }
+        spinner.style.display = 'block';
 
-                spinner.style.display = 'block';
+        const actionCodeSettings = {
+            url: window.location.origin + '/redefinir-senha.html',
+            handleCodeInApp: false,
+        };
 
-                // Você pode customizar a URL de redirecionamento aqui se quiser:
-                const actionCodeSettings = {
-                    url: window.location.origin + '/redefinir-senha.html',
-                    handleCodeInApp: false,
-                };
+        try {
+            await sendPasswordResetEmail(auth, email, actionCodeSettings);
+            spinner.style.display = 'none';
+            successEl.textContent =
+                'Se o e-mail estiver cadastrado, você receberá o link de recuperação em instantes.';
+            setTimeout(() => (window.location.href = 'index.html'), 3500);
+        } 
+        catch (error) {
+    spinner.style.display = 'none';
+    console.error('Erro ao enviar link de redefinição:', error);
+    if (error.code === 'auth/invalid-email') {
+        errorEl.textContent = 'E-mail inválido.';
+    } else if (error.code === 'auth/user-not-found') {
+        errorEl.textContent = 'E-mail não encontrado.';
+    } else {
+        errorEl.textContent =
+            'Não foi possível enviar o link. Tente novamente mais tarde.';
+    }
+}    });
 
-                try {
-                    await sendPasswordResetEmail(
-                        auth,
-                        email,
-                        actionCodeSettings
-                    );
-                    spinner.style.display = 'none';
-                    successEl.textContent =
-                        'Se o e-mail estiver cadastrado, você receberá o link de recuperação em instantes.';
-                    setTimeout(
-                        () => (window.location.href = 'index.html'),
-                        3500
-                    );
-                } catch (error) {
-                    spinner.style.display = 'none';
-                    if (error.code === 'auth/invalid-email') {
-                        errorEl.textContent = 'E-mail inválido.';
-                    } else if (error.code === 'auth/user-not-found') {
-                        errorEl.textContent = 'E-mail não encontrado.';
-                    } else {
-                        errorEl.textContent =
-                            'Não foi possível enviar o link. Tente novamente mais tarde.';
-                    }
-                }
-            });
-
-            document.addEventListener('DOMContentLoaded', () => {
-                lucide.createIcons();
-            });
+    document.addEventListener('DOMContentLoaded', () => {
+        lucide.createIcons();
+    });
 
             // Header e Footer dinâmicos
             fetch('header-nav.html')

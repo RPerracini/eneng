@@ -95,8 +95,10 @@
                     <input
                         type="hidden"
                         name="_next"
-                        value="http://localhost:5500/obrigado.html"
+                        id="nextRedirect"
+                        value=""
                     />
+
                     <input
                         type="hidden"
                         name="_subject"
@@ -365,5 +367,27 @@
 
         <!-- Scripts da página -->
         <script src="js/ins_cursos.js"></script>
+
+        <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const nextRedirect = document.getElementById('nextRedirect');
+        const hostname = window.location.hostname;
+        let urlNext = '';
+
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            urlNext = 'http://localhost:5500/obrigado.html';
+        } else if (hostname === 'rperracini.github.io') {
+            urlNext = 'https://rperracini.github.io/eneng/obrigado.html';
+        } else if (hostname.includes('locaweb.com.br') || hostname.includes('eneng.com.br')) {
+            urlNext = 'https://eneng.com.br/obrigado.html';
+        } else {
+            urlNext = window.location.origin + '/obrigado.html';
+        }
+
+        if (nextRedirect) {
+            nextRedirect.value = urlNext;
+        }
+    });
+</script>
     </body>
 </html>

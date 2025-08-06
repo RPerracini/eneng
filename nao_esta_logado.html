@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Está logado</title>
+        <script type="module" src="js/auth-state.js"></script>
+
+        <!-- CSS embutido dentro da tag <style> -->
+        <style>
+            /* Estilo para o corpo da página */
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: Arial, sans-serif;
+            }
+
+            /* Centralizando apenas a mensagem verticalmente */
+            .message-container {
+                display: flex;
+                justify-content: center; /* Alinha horizontalmente */
+                align-items: center; /* Alinha verticalmente */
+                height: calc(
+                    100vh - 400px
+                ); /* Subtrai a altura do header fixo */
+            }
+
+            /* Estilo da mensagem */
+            .login-message {
+                background-color: #0000d1;
+                color: white;
+                padding: 20px;
+                color: #f5a002;
+                font-family: 'Nulshock';
+                text-align: center;
+                border-radius: 5px;
+                font-size: 24px;
+                font-weight: bold;
+                max-width: 100%;
+                width: 50%; /* Largura da mensagem (50% da tela) */
+                min-width: 250px; /* Largura mínima */
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Header fixo no topo -->
+        <div id="header-nav-container">Cabeçalho fixo</div>
+
+        <!-- Mensagem personalizada que será exibida se o usuário não estiver logado -->
+        <div class="message-container">
+            <div id="loginMessage" class="login-message" style="display: none">
+                Você precisa estar logado para acessar essa página.
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+
+        <!-- Carregamento do conteúdo dinâmico -->
+        <script>
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+
+                    // Carrega o script de status do usuário no footer
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- Inclua a referência ao Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+        <script>
+            // Inicialização do Firebase (adapte as chaves conforme necessário)
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+            };
+
+            // Inicializa o Firebase apenas uma vez
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+
+            // Código de autenticação do Firebase
+            firebase.auth().onAuthStateChanged((user) => {
+                const loginMessage = document.getElementById('loginMessage'); // Elemento de mensagem personalizada
+
+                // Verifica se o usuário está logado
+                if (!user) {
+                    console.log('Usuário não está logado');
+                    loginMessage.style.display = 'block'; // Exibe a mensagem de erro
+
+                    // Redireciona para a página de login após 3 segundos
+                    setTimeout(() => {
+                        window.location.href = 'login.html'; // Redirecionamento após 3 segundos
+                    }, 3000);
+                } else {
+                    console.log('Usuário logado:', user.email);
+                    loginMessage.style.display = 'none'; // Oculta a mensagem de erro
+                }
+            });
+        </script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+    </body>
+</html>

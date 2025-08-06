@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Redefinir Senha - ENENG</title>
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <style>
+            .form-container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #0002;
+                font-family: sans-serif;
+            }
+            .form-title {
+                font-size: 36px;
+                font-weight: bold;
+                color: #0048ff;
+                margin-bottom: 18px;
+                text-align: center;
+            }
+            .form-subtitle {
+                font-size: 20px;
+                color: #333;
+                margin-bottom: 18px;
+                text-align: center;
+            }
+            .input-group {
+                margin-bottom: 14px;
+                position: relative;
+            }
+            .input-group label {
+                font-size: 20px;
+                font-weight: bold;
+                color: #222;
+            }
+            .input-field {
+                width: 100%;
+                padding: 10px;
+                margin-top: 0; /* CORRIGIDO */
+                font-size: 16px;
+                border-radius: 8px;
+                border: 1px solid #aaa;
+                font-family: inherit;
+                background: #fafbfc;
+                height: 44px; /* Mantém o input consistente */
+                box-sizing: border-box;
+            }
+            .password-container {
+                position: relative;
+                width: 100%;
+            }
+            .password-container input {
+                width: 100%;
+                padding-right: 2.5rem;
+                box-sizing: border-box;
+                height: 44px;
+            }
+            .password-container button {
+                position: absolute;
+                right: 6px;
+                top: 65%;
+                transform: translateY(-50%);
+                height: 36px; /* levemente menor que o input para encaixar no centro */
+                width: 38px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                z-index: 2;
+            }
+            .password-container svg {
+                color: #0048ff !important;
+                width: 26px;
+                height: 26px;
+                pointer-events: none;
+                display: block;
+            }
+            .requirements {
+                margin-bottom: 10px;
+                margin-left: 2px;
+                font-size: 13px;
+                text-align: left;
+            }
+            .req-item {
+                color: #b71c1c;
+                font-size: 13px;
+                font-family: inherit;
+            }
+            .req-ok {
+                color: #18853b;
+                font-weight: bold;
+            }
+            .req-ok::before {
+                content: '✓';
+                color: #18853b;
+                margin-right: 0.3em;
+            }
+            .req-fail::before {
+                content: '✗';
+                color: #b71c1c;
+                margin-right: 0.3em;
+            }
+            .btn-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .btn {
+                background-color: blue;
+                color: #f5a002;
+                border: none;
+                font-size: 20px;
+                font-weight: bold;
+                border-radius: 8px;
+                padding: 10px 16px;
+                cursor: pointer;
+                transition: background 0.15s, color 0.15s;
+                text-align: center;
+            }
+            .btn:hover {
+                background: #f5a002;
+                color: blue;
+            }
+            .form-error {
+                color: red;
+                text-align: center;
+                margin-top: 10px;
+                font-size: 20px;
+            }
+            .form-success {
+                color: green;
+                text-align: center;
+                margin-top: 10px;
+                font-size: 20px;
+            }
+            .spinner {
+                margin: 14px auto 0;
+                width: 40px;
+                height: 40px;
+                border: 5px solid #f3f3f3;
+                border-top: 5px solid #f5a002;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                display: none;
+            }
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            @media (max-width: 700px) {
+                .form-container {
+                    margin: 25px 4px;
+                    padding: 12px;
+                }
+                .form-title {
+                    font-size: 21px;
+                }
+            }
+        </style>
+        <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+        <div class="form-container">
+            <h2 class="form-title">Nova Senha</h2>
+            <p class="form-subtitle">Crie uma nova senha para sua conta.</p>
+            <div class="input-group password-container">
+                <label for="novaSenha">Nova senha</label>
+                <input
+                    type="password"
+                    id="novaSenha"
+                    class="input-field"
+                    autocomplete="off"
+                    minlength="8"
+                    placeholder="Nova senha"
+                />
+                <button type="button" id="toggle-password">
+                    <i data-lucide="eye-closed"></i>
+                </button>
+            </div>
+            <div class="requirements" id="password-requirements">
+                <div id="req-length" class="req-item req-fail">
+                    Mínimo 8 caracteres
+                </div>
+                <div id="req-upper" class="req-item req-fail">
+                    1 letra maiúscula
+                </div>
+                <div id="req-lower" class="req-item req-fail">
+                    1 letra minúscula
+                </div>
+                <div id="req-number" class="req-item req-fail">1 número</div>
+                <div id="req-special" class="req-item req-fail">
+                    1 caractere especial
+                </div>
+            </div>
+            <div class="input-group password-container">
+                <label for="confirmaSenha">Confirme a nova senha</label>
+                <input
+                    type="password"
+                    id="confirmaSenha"
+                    class="input-field"
+                    autocomplete="off"
+                    minlength="8"
+                    placeholder="Confirme a nova senha"
+                />
+                <button type="button" id="toggle-confirm">
+                    <i data-lucide="eye-closed"></i>
+                </button>
+            </div>
+            <div class="btn-container">
+                <button class="btn" id="btnRedefinir">Gravar Nova Senha</button>
+            </div>
+            <div id="loadingSpinner" class="spinner"></div>
+            <div id="errorMessage" class="form-error"></div>
+            <div id="successMessage" class="form-success"></div>
+        </div>
+        <div id="footer-container"></div>
+
+        <script type="module">
+            import {
+                initializeApp,
+                getApps,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+            import {
+                getAuth,
+                confirmPasswordReset,
+                verifyPasswordResetCode,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+            // Firebase config
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+                measurementId: 'G-LSC3PG9XKM',
+            };
+
+            const app = getApps().length
+                ? getApps()[0]
+                : initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            // Recupera o código do link
+            function getOobCode() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('oobCode');
+            }
+
+            // Senha feedback
+            const novaSenha = document.getElementById('novaSenha');
+            const confirmaSenha = document.getElementById('confirmaSenha');
+            const btnRedefinir = document.getElementById('btnRedefinir');
+            const spinner = document.getElementById('loadingSpinner');
+            const errorEl = document.getElementById('errorMessage');
+            const successEl = document.getElementById('successMessage');
+
+            function updatePasswordReqs(pwd) {
+                toggleReq('req-length', pwd.length >= 8);
+                toggleReq('req-upper', /[A-Z]/.test(pwd));
+                toggleReq('req-lower', /[a-z]/.test(pwd));
+                toggleReq('req-number', /\d/.test(pwd));
+                toggleReq('req-special', /[\W_]/.test(pwd));
+            }
+            function toggleReq(id, ok) {
+                const el = document.getElementById(id);
+                if (ok) {
+                    el.classList.add('req-ok');
+                    el.classList.remove('req-fail');
+                } else {
+                    el.classList.add('req-fail');
+                    el.classList.remove('req-ok');
+                }
+            }
+            novaSenha.addEventListener('input', () => {
+                updatePasswordReqs(novaSenha.value);
+            });
+
+            // Olhinho mostrar/ocultar senha
+            document
+                .getElementById('toggle-password')
+                .addEventListener('click', () => {
+                    novaSenha.type =
+                        novaSenha.type === 'password' ? 'text' : 'password';
+                    document.getElementById(
+                        'toggle-password'
+                    ).innerHTML = `<i data-lucide="${
+                        novaSenha.type === 'password' ? 'eye-closed' : 'eye'
+                    }"></i>`;
+                    lucide.createIcons();
+                });
+            document
+                .getElementById('toggle-confirm')
+                .addEventListener('click', () => {
+                    confirmaSenha.type =
+                        confirmaSenha.type === 'password' ? 'text' : 'password';
+                    document.getElementById(
+                        'toggle-confirm'
+                    ).innerHTML = `<i data-lucide="${
+                        confirmaSenha.type === 'password' ? 'eye-closed' : 'eye'
+                    }"></i>`;
+                    lucide.createIcons();
+                });
+
+            let oobCode = getOobCode();
+
+            if (!oobCode) {
+                btnRedefinir.disabled = true;
+                errorEl.textContent =
+                    'Link inválido ou expirado. Solicite novo e-mail de recuperação.';
+            } else {
+                verifyPasswordResetCode(auth, oobCode).catch(() => {
+                    btnRedefinir.disabled = true;
+                    errorEl.textContent =
+                        'Link de redefinição de senha expirado ou inválido.';
+                });
+            }
+
+            btnRedefinir.addEventListener('click', async () => {
+                errorEl.textContent = '';
+                successEl.textContent = '';
+
+                if (!oobCode) {
+                    errorEl.textContent = 'Link inválido ou expirado.';
+                    return;
+                }
+
+                const senha1 = novaSenha.value.trim();
+                const senha2 = confirmaSenha.value.trim();
+
+                const valid =
+                    senha1.length >= 8 &&
+                    /[A-Z]/.test(senha1) &&
+                    /[a-z]/.test(senha1) &&
+                    /\d/.test(senha1) &&
+                    /[\W_]/.test(senha1);
+
+                if (!valid) {
+                    errorEl.textContent =
+                        'Senha inválida! Mínimo 8 caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 especial.';
+                    return;
+                }
+                if (senha1 !== senha2) {
+                    errorEl.textContent = 'As senhas não coincidem.';
+                    return;
+                }
+
+                spinner.style.display = 'block';
+                btnRedefinir.disabled = true;
+
+                try {
+                    await confirmPasswordReset(auth, oobCode, senha1);
+                    spinner.style.display = 'none';
+                    successEl.textContent =
+                        'Senha redefinida com sucesso! Redirecionando para o login...';
+                    setTimeout(
+                        () => (window.location.href = 'login.html'),
+                        2500
+                    );
+                } catch (err) {
+                    spinner.style.display = 'none';
+                    btnRedefinir.disabled = false;
+                    if (
+                        err.code === 'auth/expired-action-code' ||
+                        err.code === 'auth/invalid-action-code'
+                    ) {
+                        errorEl.textContent =
+                            'Este link de redefinição está expirado ou inválido.';
+                    } else {
+                        errorEl.textContent =
+                            'Erro ao redefinir senha. Tente novamente.';
+                    }
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                lucide.createIcons();
+                updatePasswordReqs(novaSenha.value);
+            });
+
+            // Header nav dinâmico
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+
+            // Footer dinâmico + status do usuário
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+    </body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Descadastrar - ENENG</title>
+        <link rel="stylesheet" href="css/descadastrar.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
+    </head>
+    <body>
+        <!-- Cabeçalho dinâmico -->
+        <div id="header-nav-container"></div>
+
+        <!-- Formulário de descadastro -->
+        <div class="form-container">
+            <h2>Descadastrar Conta</h2>
+            <p>Para descadastrar sua conta, informe seu e-mail e senha.</p>
+
+            <div class="input-center">
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email atual"
+                    autocomplete="off"
+                />
+            </div>
+            <div class="input-center">
+                <div class="password-container">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Senha atual"
+                        autocomplete="off"
+                    />
+                    <button type="button" id="toggle-password">
+                        <i data-lucide="eye-closed"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="descadastrar">
+                <button id="deleteBtn">Descadastrar</button>
+            </div>
+
+            <div
+                id="errorMessage"
+                style="display: none; color: red; margin-top: 1rem"
+            ></div>
+            <div
+                id="successMessage"
+                style="display: none; color: black; margin-top: 1rem"
+            ></div>
+        </div>
+
+        <!-- Rodapé dinâmico -->
+        <div id="footer-container"></div>
+
+        <script type="module">
+            import {
+                initializeApp,
+                getApps,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+            import {
+                getAuth,
+                reauthenticateWithCredential,
+                EmailAuthProvider,
+                deleteUser,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+            import {
+                getFirestore,
+                deleteDoc,
+                doc,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+            import {
+                getStorage,
+                ref,
+                listAll,
+                deleteObject,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js';
+
+            // Configuração Firebase
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+                measurementId: 'G-LSC3PG9XKM',
+            };
+            const app = getApps().length
+                ? getApps()[0]
+                : initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+            const storage = getStorage(app);
+
+            // Toggle visibilidade senha
+            document.addEventListener('DOMContentLoaded', () => {
+                lucide.createIcons();
+                const toggleButton = document.getElementById('toggle-password');
+                const passwordField = document.getElementById('password');
+                toggleButton.addEventListener('click', () => {
+                    const isHidden = passwordField.type === 'password';
+                    passwordField.type = isHidden ? 'text' : 'password';
+                    toggleButton.innerHTML = `<i data-lucide="${
+                        isHidden ? 'eye' : 'eye-closed'
+                    }"></i>`;
+                    lucide.createIcons();
+                });
+            });
+
+            // Função para apagar arquivos do Storage do usuário
+            async function deleteUserStorageFolder(uid) {
+                const folderRef = ref(storage, `users/${uid}/`);
+                try {
+                    const listResult = await listAll(folderRef);
+                    if (listResult.items.length === 0) {
+                        console.log('Pasta Storage vazia ou não existe.');
+                        return;
+                    }
+                    const deletePromises = listResult.items.map((itemRef) =>
+                        deleteObject(itemRef)
+                    );
+                    await Promise.all(deletePromises);
+                    console.log('Arquivos do Storage apagados.');
+                } catch (error) {
+                    console.warn(
+                        'Erro ao apagar arquivos no Storage (pode ser pasta vazia):',
+                        error
+                    );
+                }
+            }
+
+            // Evento do botão descadastrar
+            document
+                .getElementById('deleteBtn')
+                .addEventListener('click', async () => {
+                    const emailInput = document
+                        .getElementById('email')
+                        .value.trim();
+                    const pwd = document
+                        .getElementById('password')
+                        .value.trim();
+                    const errorEl = document.getElementById('errorMessage');
+                    const successEl = document.getElementById('successMessage');
+
+                    errorEl.style.display = 'none';
+                    successEl.style.display = 'none';
+
+                    if (!emailInput || !pwd) {
+                        errorEl.textContent =
+                            'Por favor, informe seu e-mail e senha para confirmar.';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+
+                    const user = auth.currentUser;
+                    if (!user) {
+                        errorEl.textContent =
+                            'Você precisa estar logado para descadastrar.';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+
+                    if (emailInput !== user.email) {
+                        errorEl.textContent =
+                            'O e-mail informado não corresponde ao usuário logado.';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+
+                    try {
+                        console.log('Reautenticando...');
+                        const cred = EmailAuthProvider.credential(
+                            user.email,
+                            pwd
+                        );
+                        await reauthenticateWithCredential(user, cred);
+                        console.log('Reautenticado com sucesso!');
+
+                        console.log('Apagando arquivos do Storage...');
+                        // await deleteUserStorageFolder(user.uid);
+
+                        console.log('Apagando documento Firestore...');
+                        await deleteDoc(doc(db, 'users', user.uid));
+                        console.log('Documento Firestore apagado.');
+
+                        console.log('Apagando usuário Auth...');
+                        await deleteUser(user);
+                        console.log('Usuário Auth apagado.');
+
+                        successEl.innerHTML =
+                            'Conta descadastrada com sucesso. Redirecionando <i data-lucide="loader" class="lucide-spinner"></i>';
+                        successEl.style.display = 'block';
+                        lucide.createIcons();
+
+                        setTimeout(
+                            () => (window.location.href = 'index.html'),
+                            5000
+                        );
+                    } catch (error) {
+                        console.error('Erro ao descadastrar:', error);
+                        errorEl.textContent =
+                            error.code && error.code.includes('wrong-password')
+                                ? 'Senha incorreta.'
+                                : 'Erro ao descadastrar. Tente novamente.';
+                        errorEl.style.display = 'block';
+                    }
+                });
+
+            // Carrega cabeçalho e rodapé
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+    </body>
+</html>

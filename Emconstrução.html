@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/Emconstrução.css" />
         <link rel="stylesheet" href="css/header-nav.css" />
         <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
     </head>
 
     <body>
@@ -21,20 +22,46 @@
 
         <script>
             fetch('header-nav.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((r) => r.text())
+                .then((html) => {
                     document.getElementById('header-nav-container').innerHTML =
-                        data;
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
                 });
         </script>
 
         <script>
             fetch('footer.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((res) => res.text())
+                .then((html) => {
                     document.getElementById('footer-container').innerHTML =
-                        data;
+                        html;
+
+                    // Carrega o script de status do usuário no footer
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
                 });
         </script>
     </body>
+
+    <!-- coloque imediatamente antes de </body> -->
+    <script
+        src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+        onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+    ></script>
 </html>

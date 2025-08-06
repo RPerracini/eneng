@@ -1,17 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENENG</title>
-    <link rel="stylesheet" href="css/footer.css">
-</head>
-
 <footer>
     <div class="footer-wrapper">
-      <p id="footer_copyright">&copy; 2025 ENGº ROBERTO PERRACINI. Todos os direitos reservados.</p>
-      <p class="versao">Versão 1.0</p>
+        <p id="footer_copyright">
+            &copy; 2025 ENGº ROBERTO PERRACINI. Todos os direitos reservados.
+        </p>
+
+        <!-- Bloco de login com spinner -->
+        <div id="user-email-display" style="display: none">
+            <div
+                id="auth-spinner"
+                style="display: flex; justify-content: center; margin: 1em 0"
+            >
+                <div
+                    class="spinner"
+                    style="
+                        width: 24px;
+                        height: 24px;
+                        border: 4px solid #f5a002;
+                        border-top-color: transparent;
+                        border-radius: 50%;
+                        animation: spin 1s linear infinite;
+                    "
+                ></div>
+            </div>
+            <p id="user-email-text" style="text-align: center">Carregando…</p>
+        </div>
+
+        <p class="versao">Versão 1.0</p>
     </div>
+
+    <style>
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </footer>
-  

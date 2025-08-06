@@ -1,156 +1,286 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo de Engrenagens Helicoidais | ENENG</title>
-    <link rel="stylesheet" href="css/header-nav.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/calculo1.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.legacy.min.js"></script>
-    <!-- Favicon simplificado para evitar erros -->
-    <link rel="icon" href="data:,">
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cálculo de Engrenagens Helicoidais - ENENG</title>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <link rel="stylesheet" href="css/calculo1.css" />
+        <link rel="stylesheet" href="css/pulse.css" />
+        <link rel="stylesheet" href="css/modais.css" />
+        <!-- <link rel="stylesheet" href="css/bloquearCampos.css" /> -->
+        <script type="module" src="js/auth-state.js"></script>
+        <link rel="icon" href="data:," />
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <!-- PDF Generator -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<body>
-
-    <div id="header-nav-container"></div>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.legacy.min.js"></script> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.legacy.min.js"></script> -->
+        <script src="js/visualizarPdfcalculo1.js"></script>
+    </head>
+	
+    <body>
+        <!-- Cabeçalho dinâmico -->
+        <div id="header-nav-container"></div>
 
         <section class="formulario">
-
             <div class="grid-container">
-
-            <!-- PRIMEIRA COLUNA -->
-
-            <div class="boxInput">
-                <div class="tituloCalc">
-                    <p>Dados de entrada</p>
-                </div>
-
-                <div class="boxInput2">
-                    <label>Cliente:</label><input type="text" name="cliente">
-                </div>
-
-                <div class="boxInput2"><label>Projeto:</label>
-                    <input type="text" name="projeto">
-                </div>
-
-                <div class="boxInput2"><label>Referência:</label>
-                    <input type="text" name="observacoes">
-                </div>
-
-                <div class="boxInput1">
-                    <label for="mn">Módulo normal m<sub>n</sub> (mm):</label>
-                    <input type="number" id="mn" class="campo-limite" required>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="z1">Número de dentes Z<sub>1</sub>:</label>
-                    <input type="number" id="z1" class="campo-limite" required>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="z2">Número de dentes Z<sub>2</sub>:</label>
-                    <input type="number" id="z2" autocomplete="off" class="campo-limite" required>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="reducao">Redução (Z<sub>2</sub>/Z<sub>1</sub>):</label>
-                    <input type="text" id="reducao" class="resultado-calculado" readonly>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="aw">Entre centros de trabalho a<sub>w</sub> (mm):</label>
-                    <input type="number" id="aw" class="campo-limite" required>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="alfa">Ângulo de pressão α<sub>n</sub> (°):</label>
-                    <input type="number" id="alfa" class="campo-limite" value="20" required>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="beta">Ângulo de inclinação β (°):</label>
-                    <input type="number" id="beta" class="campo-limite" required>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="somaXn">Soma das correções (ΣX):</label>
-                    <input type="text" id="somaXn" class="resultado-calculado" readonly>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="x1a"> X<sub>1</sub> para um equilíbrio aproximado das razões de deslizamento específico (BSI—BS PD 6457):</label>
-                    <input type="text" id="x1ap" class="resultado-calculado" readonly>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="x1b"> X<sub>1</sub> para garantir a igualdade aproximada dos fatores de resistência à flexão dos dentes do pinhão e da coroa (BSI—BS PD 6457):</label>
-                    <input type="text" id="x1bp" class="resultado-calculado" readonly>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="x1undercut"> X<sub>1</sub> mínimo para evitar undercut:</label>
-                    <input type="text" id="x1u" class="resultado-calculado" readonly>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="x1">Coeficiente de correção X<sub>1</sub> adotado:</label>
-                    <input type="number" id="x1" class="campo-limite" step="0.0001">
-                </div>
-
-                <div class="boxInput1">
-                    <label for="x2undercut"> X<sub>2</sub> mínimo para evitar undercut:</label>
-                    <input type="text" id="x2u" class="resultado-calculado" readonly>
-                </div>
-
-                <div class="boxInput1">
-                    <label for="x2">Coeficiente de correção X<sub>2</sub>:</label>
-                    <input type="text" id="x2" class="resultado-calculado" readonly>
-                </div>
-
-            </div>
-
-            <!-- SEGUNDA COLUNA -->
-
+                <!-- PRIMEIRA COLUNA -->
                 <div class="boxInput">
+                    <div class="tituloCalc">
+                        <p>Dados de entrada</p>
+                    </div>
+                    <div class="boxInput2">
+                        <label>Cliente</label>
+                        <input type="text" name="cliente" />
+                    </div>
+                    <div class="boxInput2">
+                        <label>Projeto</label>
+                        <input type="text" name="projeto" />
+                    </div>
+                    <div class="boxInput2">
+                        <label>Referência</label>
+                        <input type="text" name="observacoes" />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="mn">Módulo normal m<sub>n</sub>(mm)</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalModulos()" title="Tabela de módulos padronizados" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="number" id="mn" class="campo-limite" value="4" required style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="z1">Número de dentes Z<sub>1</sub></label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalZ1()" title="Relação entre largura e diâmetro primitivo do pinhão" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="number" id="z1" class="campo-limite" value="16" required style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="z2">Número de dentes Z<sub>2</sub></label>
+                        <input type="number" id="z2" autocomplete="off" class="campo-limite" value="65" required />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="reducao">Redução (Z<sub>2</sub> / Z<sub>1</sub>)</label>
+                        <input type="text" id="reducao" class="resultado-calculado" readonly />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="aw">Entre centros de trabalho a<sub>w</sub>(mm)</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalEntreCentros()" title="Entre Centros" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="number" id="aw" class="campo-limite" value="168" required style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="toleranciaCentros">Classe de tolerância do entre centros</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalTabelaClassePrecisao()" title="Abrir tabela de classes de precisão e zonas de tolerância ISO" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <select id="toleranciaCentros" class="campo-limite" style="flex-grow: 1">
+                                <option value="">Escolha</option>
+                                <option value="js6">js6</option>
+                                <option value="js7" selected>js7</option>
+                                <option value="js8">js8</option>
+                                <option value="js9">js9</option>
+                                <option value="js10">js10</option>
+                                <option value="js11">js11</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="alfa">Ângulo de pressão normal α<sub>n</sub> (° decimais)</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalAnguloAlfa()" title="Informações sobre o ângulo de pressão αₙ" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="number" id="alfa" name="alfa" class="campo-limite" step="0.01" value="20"style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="beta">Ângulo de hélice β (° decimais)</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalAnguloBeta()" title="Informações sobre o ângulo de inclinação β" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="number" id="beta" name="beta" class="campo-limite" step="0.01" value="12" required placeholder="" style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="beta_b">Ângulo de hélice na base β<sub>b</sub> (° decimais)</label>
+                        <input type="text" id="beta_b" class="resultado-calculado" readonly />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="adendo">Adendo h<sub>a</sub></label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalAdendo()" title="Adendo e Dedendo" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="number" id="adendo" class="campo-limite" step="0.01" value="1.00" style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="dedendo">Dedendo h<sub>f</sub></label>
+                        <input type="number" id="dedendo" class="campo-limite" step="0.01" value="1.25" />
+                    </div>
 
+					<div class="boxInput1">
+                        <label for="tratamento">Engrenagens tem tratamento térmico
+                            <br>(Sim=S / Não=N)</label>
+                        <input type="text" id="tratamento" maxlength="1" value="S"/>
+                    </div>
+                    <script>
+                        document.getElementById('tratamento').addEventListener('input', function(e) {
+                            // Obter o valor digitado e converter para maiúsculo
+                            const value = e.target.value.toUpperCase();
+
+                            // Atualizar o valor do campo para o valor convertido para maiúsculo
+                            e.target.value = value;
+                            // Se o valor não for "S" ou "N", define a mensagem de erro
+                            if (value !== 'S' && value !== 'N') {
+                                e.target.setCustomValidity('Apenas "S" (Sim) ou "N" (Não) são permitidos');
+                            } else {
+                                e.target.setCustomValidity(''); // Limpa a mensagem de erro se for válido
+                            }
+                            // Forçar a validação após o setCustomValidity
+                            e.target.reportValidity(); // Exibe a mensagem de erro imediatamente
+                        });
+                    </script>
+
+                    <div class="boxInput1">
+                        <label for="somaXn">Soma das correções (ΣX)</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModal('modalImagem1')" title="Soma das correções (ΣX)" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="text" id="somaXn" class="resultado-calculado" readonly style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="x1ag">X<sub>1</sub> para casos gerais</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalImagemX1geral()" title="X1 para casos gerais" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="text" id="x1ag" class="resultado-calculado" readonly style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="x1ap">X<sub>1</sub><small> para um equilíbrio aproximado das razões de deslizamento específico</small></label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalImagemDeslizamento()" title="Razões de deslizamento específico" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="text" id="x1ap" class="resultado-calculado" readonly style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="x1bp">X<sub>1</sub> <small>para garantir a igualdade aproximada dos fatores de resistência à flexão dos dentes</small></label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirmodalImagemX1resistenciaaflexao()" title="X1 para igualdade dos fatores de resistência a flexão" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="text" id="x1bp" class="resultado-calculado" readonly style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="x1u">X<sub>1</sub> mínimo para evitar undercut</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirmodalImagemX1undercut()" title="X1 para evitar undercut" style="background: none; border: none; padding: 0; cursor: pointer">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="text" id="x1u" class="resultado-calculado" readonly style="flex-grow: 1" />
+                        </div>
+                    </div>
+                        <div class="boxInput1">
+                        <label for="x1">Coeficiente de correção X<sub>1adotado</sub></label>
+                        <input type="number" id="x1" class="campo-limite" value="0.4" step="0.0001" />
+                    </div>
+
+                </div>
+                <!-- SEGUNDA COLUNA -->
+                <div class="boxInput">
                     <div class="tituloCalc">
                         <p>Dados de entrada (continuação)</p>
                     </div>
-
-                    <div class="btn-container">
-                        <button id="btnReset">Resetar</button>
-                        <button id="btnPDF">Gerar PDF</button>
-                    </div>
-
                     <div class="boxInput1">
-                        <label for="grauTolerancia">Grau de Tolerância do dentado:</label>
-                        <select id="grauTolerancia" class="campo-limite">
-                            <option value="">Selecione</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25" selected>25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                        </select>
+                        <label for="x2u">X<sub>2</sub> mínimo para evitar undercut</label>
+                        <input type="text" id="x2u" class="resultado-calculado" readonly />
                     </div>
-
                     <div class="boxInput1">
-                        <label for="desvioPermitido">Desvio Permitido do dentado:</label>
+                        <label for="x2">Coeficiente de correção X<sub>2</sub> nominal</label>
+                        <input type="text" id="x2" class="resultado-calculado" readonly />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="sa-minimo">Espessura mínima permitida s<sub>a1,2</sub> (mm)</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalEspessuraMinima()" title="Explicação da espessura mínima permitida" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="text" id="sa-minimo" readonly class="resultado-calculado" style="flex-grow: 1" />
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label>Diâmetro primitivo do pinhão d<sub>1</sub> (mm)</label>
+                        <input type="text" id="d1_input" class="resultado-calculado" readonly />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="larguraPinhao">Largura do pinhão b<sub>1</sub>(mm)</label>
+                        <input type="number" id="larguraPinhao" class="campo-limite" min="0" step="0.01" value="40" required />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="relacaoLarguraDiametro">Largura b<sub>1</sub> / diâmetro primitivo d<sub>1</sub></label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModalRelacaoLD()" title="Relação recomendada largura/diâmetro" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <input type="text" id="relacaoLarguraDiametro" class="resultado-calculado" readonly style="flex-grow: 1"/>
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="larguraCoroa">Largura da coroa b<sub>2</sub>(mm)</label>
+                        <input type="number" id="larguraCoroa" class="campo-limite" min="0" step="0.01" value="40" required />
+                    </div>
+                    <div class="boxInput1">
+                        <label for="grauTolerancia">Grau de Tolerância do dentado</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModal('modalGrauTolerancia')" title="Informações sobre grau de tolerância" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <select id="grauTolerancia" class="campo-limite" style="flex-grow: 1">
+                                <option value="">Escolha</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25" selected>25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="boxInput1">
+                        <label for="desvioPermitido">Desvio Permitido do dentado</label>
                         <select id="desvioPermitido" class="campo-limite">
-                            <option value="">Selecione</option>
+                            <option value="">Escolha</option>
                             <option value="a">a</option>
                             <option value="ab">ab</option>
-                            <option value="b" selected>b</option>
+                            <option value="b">b</option>
                             <option value="bc">bc</option>
                             <option value="c">c</option>
-                            <option value="cd">cd</option>
+                            <option value="cd" selected>cd</option>
                             <option value="d">d</option>
                             <option value="e">e</option>
                             <option value="f">f</option>
@@ -158,77 +288,510 @@
                         </select>
                     </div>
                     <div class="boxInput1">
-                        <label for="toleranciaCentros">Classe de tolerânciado do entre centros:</label>
-                        <select id="toleranciaCentros" class="campo-limite">
-                            <option value="h6">h6</option>
-                            <option value="h7">h7</option>
-                            <option value="h8" selected>h8</option>
-                            <option value="js6">js6</option>
-                            <option value="js7">js7</option>
-                            <option value="js8">js8</option>
-                        </select>
+                        <label for="toleranciaEixo">Tolerância do diâmetro externo</label>
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <button onclick="abrirModal('modalToleranciaExterno')" title="Informações sobre tolerância do diâmetro externo" style="background: none; border: none; padding: 0; cursor: pointer;">
+                            <i data-lucide="info" style="width: 16px; height: 20px"></i>
+                            </button>
+                            <select id="toleranciaEixo" class="campo-limite" style="flex-grow: 1">
+                                <option value="">Escolha</option>
+                                <option value="h7">h7</option>
+                                <option value="h8" selected>h8</option>
+                                <option value="h9">h9</option>
+                                <option value="h10">h10</option>
+                                <option value="h11">h11</option>
+                            </select>
+                        </div>
                     </div>
+                    <div class="boxInput1">
+                        <label>Número de dentes para medida W - Z<sub>W</sub></label>
+                    </div>
+                    <div class="boxInput1">
+                        <label>Z<sub>W1</sub> calculado</label>
+                        <input type="text" id="zw1calc" class="resultado-calculado" readonly />
+                    </div>
+                        <div class="boxInput1">
+                        <label for="zw1_adotado">Z<sub>W1</sub> adotado</label>
+                        <input type="number" id="zw1_adotado" class="campo-limite" min="0" step="0.01" value="3" required />
+                    </div>
+                    <div class="boxInput1">
+                        <label>Z<sub>W2</sub> calculado</label>
+                        <input type="text" id="zw2calc" class="resultado-calculado" readonly />
+                    </div>
+                        <div class="boxInput1">
+                        <label for="zw1_adotado">Z<sub>W2</sub> adotado</label>
+                        <input type="number" id="zw2_adotado" class="campo-limite" min="0" step="0.01" value="9" required />
+                    </div>
+
+                    <div class="boxInput1">
+                        <label>Diâm. da esfera para medida M<sub>D</sub> - d<sub>m</sub></label>
+                    </div>
+                        <div class="boxInput1">
+                        <label>d<sub>m1</sub> calculado (mm)</label>
+                        <input type="text" id="d1calc" class="resultado-calculado" readonly />
+                    </div>
+                        <div class="boxInput1">
+                        <label for="d1adotado">d<sub>m1</sub> adotado (mm)</label>
+                        <input type="number" id="d1adotado" class="campo-limite" min="0" step="0.01" value="8" required />
+                    </div>
+                        <div class="boxInput1">
+                        <label>d<sub>m2</sub> calculado (mm)</label>
+                        <input type="text" id="d2calc" class="resultado-calculado" readonly />
+                    </div>
+                        <div class="boxInput1">
+                        <label for="d2adotado">d<sub>m2</sub> adotado (mm)</label>
+                        <input type="number" id="d2adotado" class="campo-limite" min="0" step="0.01" value="7" required />
+                    </div>
+
+                <div style="flex-grow: 1;"></div>
+                  <div class="btn-container">
+                      <button id="btnPDF" onclick="visualizarPdfcalculo1()">PDF</button>
+                      <button id="btnReset">Resetar</button>
+                      <button id="btnCalcular" class="btn-calcular" tabindex="0">Calcular</button>
+                      <button id="btnavisoLegal" class="btn-avisoLegal" tabindex="0">Aviso Legal</button>
+                  </div>
                 </div>
-
-                 <!-- TERCEIRA COLUNA -->
-
+                <!-- TERCEIRA COLUNA -->
+                <!-- <div id="colunas-resultado"> -->
                 <div class="boxOutput">
-                    <div class="tituloCalc"><p>Resultados</p></div>
+                    <div class="tituloCalc"><p>Engrenagem 1</p></div>
                     <div class="dados_de_saída">
-                        <p>Número de dentes virtuais Z<sub>v1</sub>: <span id="zv1">-</span></p>
-                        <p>Passo normal p<sub>n</sub>: <span id="pn">-</span></p>
-                        <p>Passo transversal p<sub>t</sub>: <span id="pt">-</span></p>
-                        <p>Ângulo de pressão de trabalho α<sub>wt</sub>: <span id="alfaWt">-</span></p>
-                        <p>Ângulo de pressão transversal α<sub>t</sub>: <span id="alfaT">-</span></p>
-                        <p>Diâmetro de referência d<sub>1</sub>: <span id="d1">-</span></p>
-                        <p>Diâmetro de referência d<sub>2</sub>: <span id="d2">-</span></p>
-                        <p>Diâmetro base db<sub>1</sub>: <span id="db1">-</span></p>
-                        <p>Diâmetro base db<sub>2</sub>: <span id="db2">-</span></p>
-                        <p>Diâmetro de trabalho dw<sub>1</sub>: <span id="dw1">-</span></p>
-                        <p>Diâmetro de trabalho dw<sub>2</sub>: <span id="dw2">-</span></p>
+                      <div id="resultado-calculo1" style="display: block;">
+                        <p><span>Diâmetro primitivo d<sub>1</sub></span> <span id="d1">-</span></p>
+                        <p><span>Diâmetro de base db<sub>1</sub></span> <span id="db1">-</span></p>
+                        <p><span>Diâmetro de trabalho dw<sub>1</sub></span> <span id="dw1">-</span></p>
+                        <p><span>Diâm. externo máx. com x nom. da<sub>1max xn</sub></span> <span id="da1max">-</span></p>
+                        <p><span>Diâm. externo mín. com x nom. da<sub>1min xn</sub></span> <span id="da1min">-</span></p>
+                        <p><span>Diâm. externo máx. com x máx. da<sub>1max xmax</sub></span> <span id="da1maxxmax">-</span></p>
+                        <p><span>Diâmetro do círculo do pé com x nom. df<sub>1</sub></span> <span id="df1">-</span></p>
+                        <p><span>Número de dentes virtuais Z<sub>v1</sub></span><span id="zv1_mostrar">-</span></p>
+                        <p><span>Afastamento inferior da esp. do dente Asne<sub>1</sub></span> <span id="asne1">-</span></p>
+                        <p><span>Tolerância da espessura do dente Tsn<sub>1</sub></span> <span id="tsn1">-</span></p>
+                        <p><span>Afastamento superior da esp. do dente Asni<sub>1</sub></span> <span id="asni1">-</span></p>
+                        <p><span>Esp. nominal no diâm. primitivo s<sub>n1</sub></span><span id="espessura1_normal">-</span></p>
+                        <p><span>Esp. máx. no diâm. primitivo com x máx. s<sub>1max</sub></span><span id="espessura1_maxima">-</span></p>
+                        <p><span>Esp. mín. no diâm. primitivo com x mín. s<sub>1min</sub></span><span id="espessura1_minima">-</span></p>
+                        <p><span>Esp. mín. na cabeça s<sub>c1min</sub> c/ x nom.</span><span id="sa1">-</span></p>
+                        <p><span>Esp. mín. na cabeça s<sub>c1min</sub> c/ x máx.</span><span id="sa1maxxmax">-</span></p>
+                        <p><span>Correção máxima x<sub>1max</sub></span><span id="x1max">-</span></p>
+                        <p><span>Correção mínima x<sub>1min</sub></span><span id="x1min">-</span></p>
+                        <p><span>Largura mínima para medir W - b<sub>min1</sub></span><span id="larguraMinima1">-</span></p>
+                        <p><span>Medida W<sub>nom1</sub></span><span id="Wnom1">-</span></p>
+                        <p><span>Medida W<sub>xmax1</sub></span><span id="Wxmax1">-</span></p>
+                        <p><span>Medida W<sub>xmin1</sub></span><span id="Wxmin1">-</span></p>
+                        <p><span>Medida M<sub>dnom1</sub></span><span id="Mdnom1">-</span></p>
+                        <p><span>Medida M<sub>dmax1</sub></span><span id="Mdmax1">-</span></p>
+                        <p><span>Medida M<sub>dmin1</sub></span><span id="Mdmin1">-</span></p>
+                      </div>
                     </div>
                 </div>
-
-             <!-- QUARTA COLUNA -->
-
-            <div class="boxOutput">
-                <div class="tituloCalc"><p>Resultados</p></div>
-                <div class="dados_de_saída">
-                    <p>Coeficiente de rebaixamento k: <span id="rebk">-</span></p>
-                    <p>Adendo h<sub>a1</sub>: <span id="ha1">-</span></p>
-                    <p>Adendo h<sub>a2</sub>: <span id="ha2">-</span></p>
-                    <p>Profundidade do dente h: <span id="h">-</span></p>
-                    <p>Diâmetro externo da<sub>1</sub>: <span id="da1">-</span></p>
-                    <p>Diâmetro externo da<sub>2</sub>: <span id="da2">-</span></p>
-                    <p>Diâmetro de raiz df<sub>1</sub>: <span id="df1">-</span></p>
-                    <p>Diâmetro de raiz df<sub>2</sub>: <span id="df2">-</span></p>
-                    <p>Tolerância da distância entre centros:</p>
-                    <p>Valor positivo: <span id="tolerancia_positiva">-</span></p>
-                    <p>Valor negativo: <span id="tolerancia_negativa">-</span></p>
-                    <p>Distância entre centros máxima: <span id="aw_max">-</span></p>
-                    <p>Distância entre centros mínima: <span id="aw_min">-</span></p>
+                <!-- QUARTA COLUNA -->
+                <div class="boxOutput">
+                    <div class="tituloCalc"><p>Engrenagem 2</p></div>
+                    <div class="dados_de_saída">
+                      <div id="resultado-calculo2" style="display: block;">
+                        <p><span>Diâmetro primitivo d<sub>2</sub></span> <span id="d2">-</span></p>
+                        <p><span>Diâmetro de base db<sub>2</sub></span> <span id="db2">-</span></p>
+                        <p><span>Diâmetro de trabalho dw<sub>2</sub></span> <span id="dw2">-</span></p>
+                        <p><span>Diâm. externo máx. com x nom. da<sub>2max xn</sub></span> <span id="da2max">-</span></p>
+                        <p><span>Diâm. externo mín. com x nom. da<sub>2min xn</sub></span> <span id="da2min">-</span></p>
+                        <p><span>Diâm. externo máx. com x máx. da<sub>2max xmax</sub></span> <span id="da2maxxmax">-</span></p>
+                        <p><span>Diâmetro do círculo do pé com x nom. df<sub>2</sub></span> <span id="df2">-</span></p>
+                        <p><span>Número de dentes virtuais Z<sub>v2</sub></span><span id="zv2_mostrar">-</span></p>
+                        <p><span>Afastamento inferior da esp. do dente Asne<sub>2</sub></span> <span id="asne2">-</span></p>
+                        <p><span>Tolerância da espessura do dente Tsn<sub>2</sub></span> <span id="tsn2">-</span></p>
+                        <p><span>Afastamento superior da esp. do dente Asni<sub>2</sub></span> <span id="asni2">-</span></p>
+                        <p><span>Esp. nominal s<sub>n2</sub></span><span id="espessura2_normal">-</span></p>
+                        <p><span>Esp. máx. s<sub>2max</sub></span><span id="espessura2_maxima">-</span></p>
+                        <p><span>Esp. mín. s<sub>2min</sub></span><span id="espessura2_minima">-</span></p>
+                        <p><span>Esp. mín. na cabeça s<sub>2cmin</sub> c/ x nom.</span><span id="sa2">-</span></p>
+                        <p><span>Esp. mín. na cabeça s<sub>c2min</sub> c/ x máx.</span><span id="sa2maxxmax">-</span></p>
+                        <p><span>Correção máxima x<sub>2max</sub></span><span id="x2max">-</span></p>
+                        <p><span>Correção mínima x<sub>2min</sub></span><span id="x2min">-</span></p>
+                        <p><span>Largura mínima para medir W - b<sub>min2</sub></span><span id="larguraMinima2">-</span></p>
+                        <p><span>Medida W<sub>nom2</sub></span><span id="Wnom2">-</span></p>
+                        <p><span>Medida W<sub>xmax2</sub></span><span id="Wxmax2">-</span></p>
+                        <p><span>Medida W<sub>xmin2</sub></span><span id="Wxmin2">-</span></p>
+                        <p><span>Medida M<sub>dnom2</sub></span><span id="Mdnom2">-</span></p>
+                        <p><span>Medida M<sub>dmax2</sub></span><span id="Mdmax2">-</span></p>
+                        <p><span>Medida M<sub>dmin2</sub></span><span id="Mdmin2">-</span></p>
+                      </div>
+                    </div>
                 </div>
+                <!-- QUINTA COLUNA -->
+                <div class="boxOutput">
+                    <div class="tituloCalc"><p>Geral</p></div>
+                    <div class="dados_de_saída">
+                      <div id="resultado-calculo3" style="display: block;">
+                        <p><span>Módulo transversal m<sub>t</sub></span><span id="mt">-</span></p>
+                        <p><span>Entre centros máximo a<sub>wmax</sub></span><span id="aw_max">-</span></p>
+                        <p><span>Entre centros mínimo a<sub>wmin</sub></span><span id="aw_min">-</span></p>
+                        <p><span>Passo normal p<sub>n</sub></span><span id="pn">-</span></p>
+                        <p><span>Passo transversal p<sub>t</sub></span><span id="pt">-</span></p>
+                        <p><span>Ângulo de pressão transversal α<sub>t</sub></span><span id="alfaT">-</span></p>
+                        <p><span>Ângulo de pressão transversal de trabalho α<sub>wt</sub></span><span id="alfaWt">-</span></p>
+                        <p><span>Coef. de rebaixamento k</span><span id="rebk">-</span></p>
+                      </div>
+                    </div>
+                    <div class="botoes-final">
+                      <button id="btnFormulasExemplo" type="button">
+                        Fórmulas e exemplo de cálculo
+                      </button>
+                    </div>
+
+                    <div id="mensagemAviso1" style="display: none;">
+                      <span id="fecharMensagem1" style="position: absolute; top: 8px; right: 12px; cursor: pointer; font-weight: bold;">×</span>
+                      <span id="textoMensagem1"></span>
+                    </div>
+
+              <div id="modalConfirm">
+                  <div class="modal-content">
+                      <p>Tem certeza que deseja resetar todos os valores?</p>
+                      <button id="btnSim" class="btn-modal">Sim</button>
+                      <button id="btnNao" class="btn-modal">Não</button>
+                  </div>
+              </div>
+
+                <!-- </div> -->
+              </div>
             </div>
+            <!-- Campos ocultos para uso interno em cálculos -->
+            <input type="text" id="tolerancia_positiva" style="display: none" />
+            <input type="text" id="tolerancia_negativa" style="display: none" />
+            <input type="text" id="aw_max" style="display: none" />
+            <input type="text" id="aw_min" style="display: none" />
+            <input type="text" id="adendo_real" style="display: none" />
+            <input type="text" id="dedendo_real" style="display: none" />
+            <input type="text" id="zv1" style="display: none" />
+            <input type="text" id="zv11" style="display: none" />
+            <input type="text" id="zv2" style="display: none" />
+            <input type="text" id="zv22" style="display: none" />
+
         </section>
 
-    <div id="footer-container"></div>
+        <div id="mensagemAviso1" style="display: none;"></div>
 
-    <script>
-        fetch('header-nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-nav-container').innerHTML = data;
-            });
+        <!-- Aqui vêm os modais (já estão identados no seu HTML original, só manter) -->
 
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-    </script>
+        <!-- Modal Aviso Legal -->
+        <div id="avisoModal" class="modal">
+            <div class="modal-content aviso-legal">
+                <span class="close-modal">&times;</span>
+                <h2>Aviso Legal</h2>
+                <p>
+                    A ENENG não se responsabiliza pela precisão, confiabilidade
+                    ou consequências dos resultados gerados por este programa de
+                    cálculo. Os valores obtidos são fornecidos apenas para fins
+                    informativos e não substituem a avaliação de um profissional
+                    qualificado. Recomendamos a verificação independente de
+                    todos os dados antes de qualquer aplicação prática.
+                </p>
+            </div>
+        </div>
 
-    <!-- Carrega os scripts na ordem correta -->
-    <script src="js/center-tolerance.js"></script>
-    <script src="js/calculo1.js"></script>
-</body>
+    <div id="modalImagem" class="modal-overlay">
+      <div id="boxImagemModulos" class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalImagem">&times;</span>
+        <h3>Tabela de Módulos Padronizados</h3>
+        <img src="help/modulos-padronizados.jpg" alt="Tabela de Módulos Padronizados" class="imagem-modulo-reduzida" />
+      </div>
+    </div>
+
+    <div id="modalImagemZ1" class="modal-overlay">
+      <div id="boxImagemZ1" class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalImagemZ1">&times;</span>
+        <h3>Número de dentes recomendados para o pinhão</h3>
+        <img src="help/Numero_de_dentes_recomendados_para_o_pinhão.png" alt="Imagem Z1" class="imagem-z1" />
+      </div>
+    </div>
+
+    <div id="modalAnguloAlfa" class="modal-overlay">
+      <div id="boxAnguloAlfa" class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalAnguloAlfa">&times;</span>
+        <h3>
+          Ângulo de pressão normal α
+          <sub>n</sub>
+        </h3>
+        <img src="help/comparacao_angulos_pressao_engrenagens.jpg" alt="Comparação de Ângulos" class="imagem-z1" />
+      </div>
+    </div>
+
+    <div id="modalAnguloBeta" class="modal-overlay">
+      <div id="boxAnguloBeta" class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalAnguloBeta">&times;</span>
+        <h3>Ângulo de Hélice β</h3>
+        <img src="help/Angulo_de_helice.jpg" alt="Ângulo de hélice" class="imagem-z1" />
+      </div>
+    </div>
+
+    <div id="ModalEntreCentros" class="modal-overlay">
+      <div id="boxEntreCentros" class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="ModalEntreCentros">&times;</span>
+        <h3>
+          Entre centros de trabalho a
+          <sub>w</sub>
+        </h3>
+        <img src="help/EntreCentros.jpg" alt="EntreCentros" class="imagem-z1" />
+      </div>
+    </div>
+
+    <!-- Modal 1 -->
+    <div id="modalImagem1" class="modal-overlay">
+      <div class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalImagem1">&times;</span>
+
+        <div class="titulo-com-botoes">
+          <h3>Soma das Correções (ΣX) - Página 1</h3>
+          <button class="botao-canto avancar" onclick="event.stopPropagation(); abrirModal('modalImagem2')">
+            <span style="margin-right: 6px">PRÓXIMA PÁGINA</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="imagem-wrapper">
+          <img src="help/somatoria-correcoes-engrenagens-com-limites.jpg" alt="Imagem 1" class="imagem-somatoria imagem-somatoria--pagina1" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div id="modalImagem2" class="modal-overlay">
+      <div class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalImagem2">&times;</span>
+
+        <div class="titulo-com-botoes">
+          <button class="botao-canto voltar" onclick="event.stopPropagation(); abrirModal('modalImagem1')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            <span style="margin-left: 6px">PÁGINA ANTERIOR</span>
+          </button>
+
+          <h3>Soma das Correções (ΣX) - Página 2</h3>
+
+          <button class="botao-canto avancar" onclick="event.stopPropagation(); abrirModal('modalImagem3')">
+            <span style="margin-right: 6px">PRÓXIMA PÁGINA</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="imagem-wrapper">
+          <img src="help/correção1.jpg" alt="Imagem 2" class="imagem-somatoria" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div id="modalImagem3" class="modal-overlay">
+      <div class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalImagem3">&times;</span>
+
+        <div class="titulo-com-botoes">
+          <button class="botao-canto voltar" onclick="event.stopPropagation(); abrirModal('modalImagem2')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            <span style="margin-left: 6px">PÁGINA ANTERIOR</span>
+          </button>
+
+          <h3>Soma das Correções (ΣX) - Página 3</h3>
+
+          <!-- Se desejar um botão "Finalizar" ou "Fechar", pode adicionar aqui -->
+        </div>
+
+        <div class="imagem-wrapper">
+          <img src="help/correção2.jpg" alt="Imagem 3" class="imagem-somatoria" />
+        </div>
+      </div>
+    </div>
+
+    <div id="modalRelacaoLD" class="modal-overlay">
+      <div class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalRelacaoLD">&times;</span>
+        <h3>Relação recomendada entre largura e diâmetro do pinhão</h3>
+        <img src="help/Relação_largura_e_diâmetro_primitivo_do_pinhão_recomendada.png" alt="Imagem Relação LD" />
+      </div>
+    </div>
+
+    <div id="modalImagemDeslizamento" class="modal-overlay">
+      <div class="modal-conteudo grafico-deslizamento">
+        <span class="fechar-modal" data-modal="modalImagemDeslizamento">&times;</span>
+        <h3>X1 para um equilíbrio aproximado das razões de deslizamento específico (BSI—BS PD 6457)</h3>
+        <img src="help/Razao_de_deslizamento_especifico.jpg" class="img-deslizamento" alt="Razão de Deslizamento" />
+      </div>
+    </div>
+
+    <div id="modalImagemX1geral" class="modal-overlay">
+      <div class="modal-conteudo grafico-deslizamento">
+        <span class="fechar-modal" data-modal="modalImagemX1geral">&times;</span>
+        <h3>X1 Para Casos Gerais</h3>
+        <img src="help/X1_Aplicacoes_Gerais_BSI.jpg" class="img-deslizamento" alt="Razão de Deslizamento" />
+      </div>
+    </div>
+
+<div id="modalImagemX1undercut" class="modal-overlay">
+  <div class="modal-conteudo padrao">
+    <span class="fechar-modal" data-modal="modalImagemX1undercut">&times;</span>
+
+    <div class="titulo-com-botoes">
+      <h3>X₁ mínimo para evitar undercut - Página 1</h3>
+      <button class="botao-canto avancar" onclick="event.stopPropagation(); abrirModal('modalImagemX1undercut2')">
+        <span style="margin-right: 6px">PRÓXIMA PÁGINA</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="help/xParaEvitarUndercut1.jpg" alt="X₁ mínimo para evitar undercut - Página 1" class="imagem-somatoria imagem-somatoria--pagina1" />
+    </div>
+  </div>
+</div>
+
+<div id="modalImagemX1undercut2" class="modal-overlay">
+  <div class="modal-conteudo padrao">
+    <span class="fechar-modal" data-modal="modalImagemX1undercut2">&times;</span>
+
+    <div class="titulo-com-botoes">
+      <button class="botao-canto voltar" onclick="event.stopPropagation(); abrirModal('modalImagemX1undercut')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        <span style="margin-left: 6px">PÁGINA ANTERIOR</span>
+      </button>
+      <h3>X₁ mínimo para evitar undercut - Página 2</h3>
+      <!-- Se quiser uma próxima página, pode adicionar outro botão aqui -->
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="help/xParaEvitarUndercut2.jpg" alt="X₁ mínimo para evitar undercut - Página 2" class="imagem-somatoria imagem-somatoria--pagina2" />
+    </div>
+  </div>
+</div>
+
+    <div id="modalImagemX1resistenciaaflexao" class="modal-overlay">
+      <div class="modal-conteudo grafico-deslizamento">
+        <span class="fechar-modal" data-modal="modalImagemX1resistenciaaflexao">&times;</span>
+        <h3>
+          X
+          <sub>1</sub>
+          para garantir a igualdade aproximada dos fatores
+          <br />
+          de resistência à flexão dos dentes (BSI—BS PD 6457)
+        </h3>
+        <img src="help/X1_Resistencia_Flexao.jpg" class="img-deslizamento" alt="Razão de Deslizamento" />
+      </div>
+    </div>
+
+    <div id="modalAdendo" class="modal-overlay">
+      <div class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalAdendo">&times;</span>
+        <h3>Adendo e Dedendo</h3>
+        <img src="help/Adendo_dedendo.jpg" alt="Esquema de Adendo e Dedendo" class="imagem-z1" />
+      </div>
+    </div>
+
+    <div id="modalEspessuraMinima" class="modal-overlay">
+      <div id="boxImagemEspessuraMinima" class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalEspessuraMinima">&times;</span>
+        <h3>Espessura Mínima na Cabeça do Dente</h3>
+        <img src="help/espessura_minima_cabeca_dente.jpg" alt="Espessura mínima na cabeça do dente" class="imagem-modulo-reduzida" />
+      </div>
+    </div>
+
+    <div id="modalTabelaClassePrecisao" class="modal-overlay">
+      <div class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalTabelaClassePrecisao">&times;</span>
+        <h3 class="titulo-modal-iso">Tolerância da Distância Entre Centros</h3>
+        <div class="conteudo-tabela-iso">
+          <img src="help/tabelaClassedePrecisao.jpg" alt="Tabela ISO Classe de Precisão" class="tabela-classe-precisão" />
+        </div>
+      </div>
+    </div>
+
+    <div id="modalGrauTolerancia" class="modal-overlay">
+      <div class="modal-conteudo padrao">
+        <span class="fechar-modal" data-modal="modalGrauTolerancia">&times;</span>
+        <h3 class="titulo-modal-GraudeTolerancia">Folgas no Dentado</h3>
+        <div class="conteudo-tabela-tolerancias">
+          <img src="help/asneetse.jpg" alt="Tabela de tolerancias" class="tabela-de tolerancias" />
+        </div>
+      </div>
+    </div>
+
+    <div id="modalGrauTolerancia" class="modal-overlay">
+      <div class="modal-conteudo">
+        <span class="fechar-modal" data-modal="modalGrauTolerancia">&times;</span>
+        <h3>Folgas no Dentado</h3>
+        <p>Folgas no dentado</p>
+      </div>
+    </div>
+
+    <div id="modalToleranciaExterno" class="modal-overlay">
+        <div class="modal-conteudo padrao">
+            <span class="fechar-modal" data-modal="modalToleranciaExterno">&times;</span>
+            <h3>Tolerância do Diâmetro Externo da Engrenagem</h3>
+            <img src="help/ToleranciaDiametroExterno.jpg" alt="Tabela de tolerância do diâmetro externo conforme qualidade DIN" style="width: 100%; max-width: 800px; margin-top: 10px;" />
+            <p style="margin-top: 12px;">Fonte: Adaptado da ISO 1328-1 e ISO 286.</p>
+        </div>
+    </div>
+
+</div>
+
+  </div>
+
+        <div id="footer-container"></div>
+
+        <!-- Scripts dinâmicos -->
+        <script>
+            fetch("header-nav.html")
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById("header-nav-container").innerHTML = html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: "#f5a002",
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import("./js/header-nav.js");
+                        import("./js/auth-sync.js");
+                    });
+                });
+
+            fetch("footer.html")
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById("footer-container").innerHTML = html;
+                    const script = document.createElement("script");
+                    script.type = "module";
+                    script.src = "js/footer-status.js";
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- Scripts da lógica do formulário -->
+        <script src="js/espessura.js"></script>
+        <script type="module" src="js/center-tolerance.js"></script>
+        <script type="module" src="js/dom-handlers.js"></script>
+        <script src="js/modais.js"></script>
+        <script src="js/calculo1_pulsante_unificado.js"></script>
+        <script type="module" src="js/calculo1.js"></script>
+        <script src="js/medidaW.js"></script>
+        <script src="js/diametrodaesfera.js"></script>
+        <script src="js/asne-calculo.js"></script>
+        <script src="js/tsn-calculo.js"></script>
+        <!-- <script src="js/recalculo-auto.js"></script> -->
+        <!-- <script src="js/bloquearCampos.js"></script> -->
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"></script>
+    </body>
 </html>

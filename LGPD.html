@@ -4,10 +4,15 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Política de Privacidade - ENENG</title>
+
         <link rel="stylesheet" href="css/politica-privacidade.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
     </head>
+
     <body>
-        <!-- Inclui o header padrão -->
+        <!-- Cabeçalho dinâmico -->
         <div id="header-nav-container"></div>
 
         <!-- Conteúdo da política -->
@@ -119,25 +124,53 @@
             <p>São Paulo, 26 de abril de 2025</p>
         </div>
 
-        <!-- Inclui o footer padrão -->
+        <!-- Rodapé dinâmico -->
         <div id="footer-container"></div>
 
+        <!-- ✅ Carregar header-nav dinamicamente e injetar script Firebase -->
         <script>
             fetch('header-nav.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((r) => r.text())
+                .then((html) => {
                     document.getElementById('header-nav-container').innerHTML =
-                        data;
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
                 });
         </script>
 
+        <!-- ✅ Carregar rodapé dinamicamente -->
         <script>
             fetch('footer.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((res) => res.text())
+                .then((html) => {
                     document.getElementById('footer-container').innerHTML =
-                        data;
+                        html;
+
+                    // Carrega o script de status do usuário no footer
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
                 });
         </script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
     </body>
 </html>

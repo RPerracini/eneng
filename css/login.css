@@ -1,0 +1,239 @@
+body {
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+}
+
+.form-container,
+.container {
+    max-width: fit-content;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    color: blue;
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.form-container p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+input {
+    font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 3rem; /* Espaço para o ícone do eye */
+}
+
+#toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #0000ff;
+}
+
+/* Centraliza os botões */
+.entrar button,
+.cadastrar,
+.criar_conta button,
+.jatenhoconta {
+    background-color: blue;
+    border: none;
+    font-family: sans-serif;
+    color: #f5a002;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    display: block;
+    margin: 20px auto;
+    width: auto;
+    text-align: center;
+}
+
+.entrar button:hover,
+.cadastrar:hover,
+.criar_conta button:hover,
+.jatenhoconta:hover {
+    background-color: #f5a002;
+    color: #0000ff;
+}
+
+.required {
+    color: red;
+    font-size: 1.2rem;
+    margin-left: 5px;
+}
+
+#loggedInMessage {
+    color: red;
+    display: none;
+    text-align: center;
+    font-size: 30px;
+}
+
+.email {
+    font-family: sans-serif;
+    font-size: larger;
+    color: black;
+    text-align: center;
+}
+
+/* MENSAGEM DE ERRO EM 3 LINHAS, CENTRALIZADA, ABAIXO DO BOTÃO CADASTRAR */
+#errorMessage {
+    display: none;
+    color: red;
+    text-align: center;
+    margin: 32px auto 0 auto;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    max-width: 600px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+#successMessage {
+    text-align: center;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #fc9403;
+    background-color: blue;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#reenviarConfirmacao {
+    background-color: blue;
+    color: #f5a002;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 18px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 320px;
+    cursor: pointer;
+    gap: 10px;
+    transition: background 0.2s, color 0.2s;
+}
+#reenviarConfirmacao:hover {
+    background-color: #f5a002;
+    color: blue;
+}
+#reenviarConfirmacao svg {
+    width: 28px;
+    height: 28px;
+    color: #f5a002;
+    margin-right: 6px;
+}
+
+#verificacaoStatus {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 25px;
+    color: #0000ff;
+}
+
+/* Centraliza o link "Cadastrar" */
+.cadastrar {
+    display: flex;
+    justify-content: center;
+}
+.cadastrar a,
+.cadastrar #cadastrar-link {
+    margin: 0 auto;
+}
+
+.spinner {
+    display: inline-block;
+    width: 24px;
+    height: 4px;
+    margin-left: 8px;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.2) 25%,
+        rgba(0, 0, 0, 0.8) 50%,
+        rgba(0, 0, 0, 0.2) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1s linear infinite;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+/* spinner maior (32 × 32 px) */
+.lucide.big-spinner {
+    width: 32px;
+    height: 32px;
+    /* se quiser um pouco mais de espaço à direita */
+    margin-right: 8px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ─── spinner para qualquer SVG com a classe .spinning ─── */
+@keyframes spin360 {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.lucide.spinning {
+    /* <svg class="lucide spinning"> */
+    animation: spin360 1s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px; /* opcional – espaço antes do texto */
+}

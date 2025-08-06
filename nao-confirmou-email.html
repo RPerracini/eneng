@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Confirmação de E-mail - ENENG</title>
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <style>
+            .form-container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 32px 24px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #0002;
+                font-family: sans-serif;
+                text-align: center;
+            }
+            .form-title {
+                font-size: 36px;
+                font-weight: bold;
+                color: #0048ff;
+                margin-bottom: 18px;
+            }
+            .alert-msg {
+                color: red;
+                font-size: 24px;
+                margin: 28px 0 0 0;
+                line-height: 1.7;
+                font-family: inherit;
+                text-align: center;
+                font-weight: bold;
+            }
+            .user-email {
+                color: #0048ff;
+                font-weight: bold;
+                word-break: break-all;
+            }
+            .loading-msg {
+                color: #0048ff;
+                font-size: 20px;
+                font-family: inherit;
+                margin-top: 28px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .lucide-spinner {
+                display: inline-block;
+                vertical-align: middle;
+                animation: spin 1.1s linear infinite;
+                color: #0048ff;
+                font-size: 2.7em;
+            }
+            @keyframes spin {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            @media (max-width: 700px) {
+                .form-container {
+                    margin: 25px 4px;
+                    padding: 12px;
+                }
+                .form-title {
+                    font-size: 21px;
+                }
+                .alert-msg {
+                    font-size: 17px;
+                }
+                .loading-msg {
+                    font-size: 16px;
+                }
+            }
+        </style>
+        <script src="https://unpkg.com/lucide@latest"></script>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+        <div class="form-container">
+            <h2 class="form-title">Confirmação de E-mail</h2>
+            <div id="alertText" class="alert-msg">
+                Carregando informações...
+            </div>
+            <div id="loadingMsg" class="loading-msg" style="display: none">
+                <i data-lucide="loader" class="lucide-spinner"></i>
+                Redirecionando para a tela home
+            </div>
+        </div>
+        <div id="footer-container"></div>
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+            import {
+                getAuth,
+                onAuthStateChanged,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+            // Config Firebase
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+                measurementId: 'G-LSC3PG9XKM',
+            };
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            // Mostra email do usuário ou mensagem padrão
+            onAuthStateChanged(auth, (user) => {
+                const alertText = document.getElementById('alertText');
+                const loadingMsg = document.getElementById('loadingMsg');
+                if (!user) {
+                    alertText.innerHTML = `
+                    Não foi possível identificar o usuário logado.<br>`;
+                } else {
+                    alertText.innerHTML = `
+                    Você não confirmou através do email de confirmação enviado.<br><br>
+                    Acesse seu email <span class="user-email">${user.email}</span> e confirme para liberar o acesso.<br><br>
+                    <span style="font-weight: normal; font-size: 16px; color: #888">
+                    </span>
+                `;
+                }
+                // Exibe a mensagem de redirecionamento
+                loadingMsg.style.display = 'flex';
+            });
+
+            // Redirecionamento automático após 4 segundos
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 10000);
+
+            // Header/Footer dinâmicos
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    // Carrega o script de status do usuário no footer
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                lucide.createIcons();
+            });
+        </script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+    </body>
+</html>

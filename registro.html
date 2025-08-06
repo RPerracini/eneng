@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Cadastro - ENENG</title>
+        <link rel="stylesheet" href="css/registro.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
+        <style>
+            .form-container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #0002;
+            }
+            .form-row {
+                display: flex;
+                gap: 10px;
+            }
+            .input-half {
+                flex: 1;
+            }
+            input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            .password-container {
+                position: relative;
+                width: 100%;
+            }
+            .password-container input {
+                padding-right: 2.5rem;
+            }
+            #toggle-password {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+            .req-item {
+                color: #b71c1c;
+                font-size: 13px;
+            }
+            .req-ok {
+                color: #18853b;
+                font-weight: bold;
+            }
+            .req-ok::before {
+                content: '✓';
+                color: #18853b;
+                margin-right: 0.3em;
+            }
+            .req-fail::before {
+                content: '✗';
+                color: #b71c1c;
+                margin-right: 0.3em;
+            }
+            .registrar button {
+                background-color: blue;
+                color: #f5a002;
+                border: none;
+                font-size: 20px;
+                font-weight: bold;
+                border-radius: 8px;
+                padding: 10px 16px;
+                margin-top: 10px;
+            }
+            .registrar button:hover {
+                background: #f5a002;
+                color: blue;
+            }
+            #errorMessage {
+                color: red;
+                text-align: center;
+                margin-top: 10px;
+            }
+            #successMessage {
+                color: green;
+                text-align: center;
+                margin-top: 10px;
+            }
+            .lucide-spinner {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 0.5em;
+                animation: spin 1s linear infinite;
+                color: #1976d2;
+                font-size: 1.3em;
+            }
+            @keyframes spin {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            #emailConfirmContainer {
+                display: none;
+                text-align: center;
+                margin-top: 20px;
+                font-size: 18px;
+                color: #333;
+            }
+
+            @media (max-width: 700px) {
+                .form-row {
+                    flex-direction: column;
+                    gap: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+        <div class="form-container">
+            <h2>Cadastro de senha</h2>
+            <div class="form-row">
+                <div class="input-half">
+                    <input type="text" id="nome" placeholder="Nome completo" />
+                </div>
+                <div class="input-half">
+                    <input
+                        type="text"
+                        id="whatsapp"
+                        placeholder="WhatsApp (Ver nota)"
+                        maxlength="16"
+                        autocomplete="off"
+                    />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-half">
+                    <input type="email" id="email" placeholder="Email" />
+                </div>
+                <div class="input-half">
+                    <div class="password-container">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Senha"
+                        />
+                        <button type="button" id="toggle-password">
+                            <i data-lucide="eye-closed"></i>
+                        </button>
+                    </div>
+                    <div id="password-requirements">
+                        <div id="req-length" class="req-item req-fail">
+                            Mínimo 8 caracteres
+                        </div>
+                        <div id="req-upper" class="req-item req-fail">
+                            1 letra maiúscula
+                        </div>
+                        <div id="req-lower" class="req-item req-fail">
+                            1 letra minúscula
+                        </div>
+                        <div id="req-number" class="req-item req-fail">
+                            1 número
+                        </div>
+                        <div id="req-special" class="req-item req-fail">
+                            1 caractere especial
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="
+                    font-size: 16px;
+                    color: #f00;
+                    margin-bottom: 10px;
+                    text-align: center;
+                "
+            >
+                Nota: WhatsApp – use apenas
+                <b>+</b>
+                e números, sem espaços. Ex:
+                <b>+5511912345678</b>
+                ,
+                <b>+351912345678</b>
+                ,
+                <b>+12135551234</b>
+            </div>
+            <div class="registrar">
+                <button id="registerBtn" type="button">
+                    Cadastrar
+                    <span id="registerSpinner" style="display: none">
+                        <i data-lucide="loader" class="lucide-spinner"></i>
+                    </span>
+                </button>
+            </div>
+            <div id="errorMessage" style="display: none"></div>
+            <div id="successMessage" style="display: none"></div>
+            <div id="emailConfirmContainer">
+                <div style="color: blue; font-size: 25px">
+                    Conta criada com sucesso.
+                    <br />
+                    Um e-mail de confirmação foi enviado para você.
+                    <br />
+                    Por favor, acesse sua caixa de entrada e clique no link de
+                    confirmação.
+                </div>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+
+        <script type="module">
+            import {
+                getApps,
+                initializeApp,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+            import {
+                getAuth,
+                createUserWithEmailAndPassword,
+                sendEmailVerification,
+                onAuthStateChanged,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+            import {
+                getFirestore,
+                doc,
+                setDoc,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+                measurementId: 'G-LSC3PG9XKM',
+            };
+
+            if (!getApps().length) {
+                initializeApp(firebaseConfig);
+            }
+
+            const auth = getAuth();
+            const db = getFirestore();
+
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+            fetch('footer.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const s = document.createElement('script');
+                    s.type = 'module';
+                    s.src = 'js/footer-status.js';
+                    document.body.appendChild(s);
+                });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                lucide.createIcons();
+                const passwordInput = document.getElementById('password');
+                const whatsappInput = document.getElementById('whatsapp');
+
+                whatsappInput.addEventListener('input', () => {
+                    let v = whatsappInput.value.replace(/[^+\d]/g, '');
+                    if (v.indexOf('+') > 0) v = v.replace(/\+/g, '');
+                    if (v.indexOf('+') === -1) v = '+' + v.replace(/\+/g, '');
+                    whatsappInput.value = v.substring(0, 16);
+                });
+
+                passwordInput.addEventListener('input', () => {
+                    const pwd = passwordInput.value;
+                    toggleReq('req-length', pwd.length >= 8);
+                    toggleReq('req-upper', /[A-Z]/.test(pwd));
+                    toggleReq('req-lower', /[a-z]/.test(pwd));
+                    toggleReq('req-number', /\d/.test(pwd));
+                    toggleReq('req-special', /[\W_]/.test(pwd));
+                });
+
+                function toggleReq(id, ok) {
+                    const el = document.getElementById(id);
+                    el.classList.toggle('req-ok', ok);
+                    el.classList.toggle('req-fail', !ok);
+                }
+
+                document
+                    .getElementById('toggle-password')
+                    .addEventListener('click', () => {
+                        passwordInput.type =
+                            passwordInput.type === 'password'
+                                ? 'text'
+                                : 'password';
+                        document.getElementById(
+                            'toggle-password'
+                        ).innerHTML = `<i data-lucide="${
+                            passwordInput.type === 'password'
+                                ? 'eye-closed'
+                                : 'eye'
+                        }"></i>`;
+                        lucide.createIcons();
+                    });
+
+                document
+                    .getElementById('registerBtn')
+                    .addEventListener('click', async () => {
+                        const nome = document
+                            .getElementById('nome')
+                            .value.trim();
+                        const whatsapp = whatsappInput.value.trim();
+                        const email = document
+                            .getElementById('email')
+                            .value.trim();
+                        const password = passwordInput.value.trim();
+                        const errEl = document.getElementById('errorMessage');
+                        const confEl = document.getElementById(
+                            'emailConfirmContainer'
+                        );
+                        const btn = document.getElementById('registerBtn');
+                        const spin = document.getElementById('registerSpinner');
+
+                        errEl.style.display = 'none';
+                        confEl.style.display = 'none';
+
+                        if (!nome || !whatsapp || !email || !password) {
+                            errEl.innerText = 'Preencha todos os campos.';
+                            return (errEl.style.display = 'block');
+                        }
+
+                        if (!/^\+\d{8,15}$/.test(whatsapp)) {
+                            errEl.innerText =
+                                'WhatsApp inválido. Use + e apenas números.';
+                            return (errEl.style.display = 'block');
+                        }
+
+                        btn.disabled = true;
+                        spin.style.display = 'inline-block';
+                        lucide.createIcons();
+
+                        try {
+                            const cred = await createUserWithEmailAndPassword(
+                                auth,
+                                email,
+                                password
+                            );
+                            const user = cred.user;
+
+                            await setDoc(doc(db, 'users', user.uid), {
+                                nome,
+                                whatsapp,
+                                email,
+                            });
+
+                            await sendEmailVerification(user, {
+                                url: 'http://127.0.0.1:5500/acao-firebase.html',
+                                handleCodeInApp: false,
+                            })
+                                .then(() => {
+                                    console.log(
+                                        '✅ E-mail de verificação enviado com sucesso!'
+                                    );
+                                })
+                                .catch((err) => {
+                                    console.error(
+                                        '❌ Erro ao enviar e-mail de verificação:',
+                                        err
+                                    );
+                                });
+
+                            confEl.style.display = 'block';
+                        } catch (e) {
+                            console.error('Erro Firebase:', e);
+                            let msg = 'Erro inesperado.';
+                            if (e.code === 'auth/email-already-in-use')
+                                msg = 'E-mail já cadastrado.';
+                            if (e.code === 'auth/invalid-email')
+                                msg = 'E-mail inválido.';
+                            if (e.code === 'auth/weak-password')
+                                msg = 'Senha muito fraca.';
+                            errEl.innerText = msg;
+                            errEl.style.display = 'block';
+                        } finally {
+                            btn.disabled = false;
+                            spin.style.display = 'none';
+                        }
+                    });
+            });
+        </script>
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+    </body>
+</html>

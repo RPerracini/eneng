@@ -1,0 +1,132 @@
+body {
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.form-container h2 {
+    color: #0000ff;
+    margin-bottom: 20px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.form-container p {
+    color: black;
+    margin-bottom: 10px;
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.input-center {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* .input-center input {
+    padding: 12px;
+    box-sizing: border-box;
+    text-align: center;
+} */
+
+.password-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input,
+.input-center input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    padding-right: 2.5rem; /* Espaço para o olho */
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #0000ff;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.descadastrar button {
+    background-color: blue;
+    border: none;
+    font-family: sans-serif;
+    color: #f5a002;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    display: block;
+    margin: 18px auto 8px auto;
+    width: auto;
+    text-align: center;
+}
+
+.descadastrar button:hover {
+    background-color: #f5a002;
+    color: #0000ff;
+}
+
+#errorMessage,
+#successMessage {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    margin-bottom: 1px;
+}
+
+.lucide-spinner {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5em;
+    animation: spin 1s linear infinite;
+    color: #1976d2; /* azul */
+    font-size: 1.4em;
+}
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 700px) {
+    .form-container {
+        max-width: 97vw;
+        padding: 10px;
+    }
+    .input-center input,
+    .input-center .password-container {
+        width: 97%;
+        min-width: unset;
+        max-width: unset;
+    }
+}

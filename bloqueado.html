@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Acesso Bloqueado - ENENG</title>
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <style>
+            .bloqueado-container {
+                max-width: 500px;
+                margin: 80px auto 0 auto;
+                background: #fff;
+                padding: 32px 24px;
+                border-radius: 16px;
+                box-shadow: 0 2px 18px #0001;
+                text-align: center;
+            }
+            .bloqueado-container h2 {
+                font-family: sans-serif;
+                font-size: 3em;
+                color: red;
+                margin-bottom: 18px;
+            }
+            .bloqueado-container p {
+                font-family: sans-serif;
+                font-size: 1.5em;
+                margin-bottom: 12px;
+            }
+            .bloqueado-container .timer {
+                font-size: 1.2em;
+                color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+        <div class="bloqueado-container">
+            <h2>Acesso Bloqueado</h2>
+            <p>
+                Você está logado e não deve usar a página solicitada nesta
+                condição.
+            </p>
+            <div class="timer">
+                Redirecionando para a página inicial em
+                <span id="timer-count">6</span>
+                segundos...
+            </div>
+        </div>
+        <div id="footer-container"></div>
+
+        <!-- Header dinâmico -->
+        <script>
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+        </script>
+
+        <!-- Footer dinâmico + status login -->
+        <script>
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- Redirecionamento automático -->
+        <script>
+            let counter = 6;
+            const span = document.getElementById('timer-count');
+            const interval = setInterval(() => {
+                counter--;
+                if (span) span.textContent = counter;
+                if (counter <= 0) {
+                    clearInterval(interval);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+        </script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+    </body>
+</html>

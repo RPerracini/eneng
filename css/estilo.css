@@ -33,10 +33,10 @@ body {
 }
 
 /* ============== FONTE PERSONALIZADA ============== */
-@font-face {
+/* @font-face {
     font-family: 'Nulshock';
     src: url('Fontes/NulshockBd.otf') format('opentype');
-}
+} */
 
 /* ============== MAIN GRID LAYOUT ============== */
 .main-grid {

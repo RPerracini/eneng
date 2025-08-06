@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Recuperar Senha - ENENG</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/registro.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <style>
+            .form-container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #0002;
+                font-family: sans-serif;
+            }
+            .form-title {
+                font-size: 28px;
+                font-weight: bold;
+                color: #144472;
+                margin-bottom: 18px;
+                text-align: center;
+            }
+            .form-subtitle {
+                font-size: 20px;
+                color: #333;
+                margin-bottom: 18px;
+                text-align: center;
+            }
+            .input-group {
+                margin-bottom: 14px;
+            }
+            .input-group label {
+                font-size: 20px;
+                font-weight: bold;
+                color: #222;
+            }
+            .input-field {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border-radius: 8px;
+                border: 1px solid #aaa;
+                font-family: inherit;
+                background: #fafbfc;
+                margin-top: 6px;
+                box-sizing: border-box;
+            }
+            .btn-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .btn {
+                background-color: blue;
+                color: #f5a002;
+                border: none;
+                font-size: 20px;
+                font-weight: bold;
+                border-radius: 8px;
+                padding: 10px 16px;
+                cursor: pointer;
+                transition: background 0.15s, color 0.15s;
+                text-align: center;
+            }
+            .btn:hover {
+                background: #f5a002;
+                color: blue;
+            }
+            .form-error {
+                color: red;
+                text-align: center;
+                margin-top: 10px;
+                font-size: 15px;
+            }
+            .form-success {
+                color: green;
+                text-align: center;
+                margin-top: 10px;
+                font-size: 16px;
+            }
+            .spinner {
+                margin: 14px auto 0;
+                width: 40px;
+                height: 40px;
+                border: 5px solid #f3f3f3;
+                border-top: 5px solid #f5a002;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                display: none;
+            }
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            @media (max-width: 700px) {
+                .form-container {
+                    margin: 25px 4px;
+                    padding: 12px;
+                }
+                .form-title {
+                    font-size: 21px;
+                }
+            }
+        </style>
+        <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+        <div class="form-container">
+            <h2 class="form-title">Redefinir Senha</h2>
+            <p class="form-subtitle">
+                Informe seu e-mail cadastrado para receber o link de redefinição
+                de senha.
+            </p>
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    class="input-field"
+                    placeholder="seu.email@exemplo.com"
+                    autocomplete="off"
+                />
+            </div>
+            <div class="btn-container">
+                <button id="sendResetLink" class="btn">
+                    Enviar link de recuperação
+                </button>
+            </div>
+            <div id="loadingSpinner" class="spinner"></div>
+            <div id="errorMessage" class="form-error"></div>
+            <div id="successMessage" class="form-success"></div>
+        </div>
+        <div id="footer-container"></div>
+        <script type="module">
+            import {
+                initializeApp,
+                getApps,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+            import {
+                getAuth,
+                sendPasswordResetEmail,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+            // Firebase config
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+                measurementId: 'G-LSC3PG9XKM',
+            };
+
+            const app = getApps().length
+                ? getApps()[0]
+                : initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            const emailInput = document.getElementById('email');
+            const sendBtn = document.getElementById('sendResetLink');
+            const spinner = document.getElementById('loadingSpinner');
+            const errorEl = document.getElementById('errorMessage');
+            const successEl = document.getElementById('successMessage');
+
+            sendBtn.addEventListener('click', async () => {
+                const email = emailInput.value.trim();
+                errorEl.textContent = '';
+                successEl.textContent = '';
+
+                if (!email) {
+                    errorEl.textContent = 'Por favor, informe seu e-mail.';
+                    return;
+                }
+
+                spinner.style.display = 'block';
+
+                // Você pode customizar a URL de redirecionamento aqui se quiser:
+                const actionCodeSettings = {
+                    url: window.location.origin + '/redefinir-senha.html',
+                    handleCodeInApp: false,
+                };
+
+                try {
+                    await sendPasswordResetEmail(
+                        auth,
+                        email,
+                        actionCodeSettings
+                    );
+                    spinner.style.display = 'none';
+                    successEl.textContent =
+                        'Se o e-mail estiver cadastrado, você receberá o link de recuperação em instantes.';
+                    setTimeout(
+                        () => (window.location.href = 'index.html'),
+                        3500
+                    );
+                } catch (error) {
+                    spinner.style.display = 'none';
+                    if (error.code === 'auth/invalid-email') {
+                        errorEl.textContent = 'E-mail inválido.';
+                    } else if (error.code === 'auth/user-not-found') {
+                        errorEl.textContent = 'E-mail não encontrado.';
+                    } else {
+                        errorEl.textContent =
+                            'Não foi possível enviar o link. Tente novamente mais tarde.';
+                    }
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                lucide.createIcons();
+            });
+
+            // Header e Footer dinâmicos
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    // Carrega o script de status do usuário no footer
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+    </body>
+</html>

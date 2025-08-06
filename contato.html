@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ENENG</title>
+        <title>Contato - ENENG</title>
+
+        <!-- Estilos -->
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/flag-icons@7.1.0/css/flag-icons.min.css"
@@ -11,18 +13,20 @@
         <link rel="stylesheet" href="css/contato.css" />
         <link rel="stylesheet" href="css/header-nav.css" />
         <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <script src="https://unpkg.com/lucide@latest"></script>
     </head>
 
     <body>
+        <!-- Cabeçalho dinâmico -->
         <div id="header-nav-container"></div>
 
         <div class="body2">
             <div class="content-wrapper">
                 <div class="contact-info">
                     <h3>Dados de Contato</h3>
-                    <p>
-                        <strong>Eng.º Roberto Perracini</strong>
-                    </p>
+                    <p><strong>Eng.º Roberto Perracini</strong></p>
                     <p>
                         <strong>Telefone:</strong>
                         +55 (11) 98540-0421
@@ -40,14 +44,15 @@
                 <form
                     id="meuFormulario"
                     class="form-container"
-                    action="https://formsubmit.co/roberto@eneng.com.br"
+                    action="https://formsubmit.co/contato_site@eneng.com.br"
                     method="POST"
                 >
+                    <!-- Campos ocultos -->
                     <input type="hidden" name="_captcha" value="false" />
                     <input
                         type="hidden"
                         name="_next"
-                        value="http://localhost:5500/obrigado.html"
+                        value="https://www.eneng.com.br/obrigado.html"
                     />
                     <input
                         type="hidden"
@@ -58,14 +63,8 @@
                     <h3 class="form-title">FORMULÁRIO DE CONTATO</h3>
 
                     <div class="form-group">
-                        <label
-                            for="nome"
-                            class="required"
-                            style="white-space: nowrap"
-                        >
-                            Nome Completo
-                        </label>
-                        <input type="text" id="nome" name="nome" />
+                        <label for="nome" class="required">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required />
                     </div>
 
                     <div class="form-group">
@@ -89,70 +88,10 @@
                                 class="ddi-select"
                                 required
                             >
-                                <option value="" data-flag="">Selecione</option>
-                                <option value="54" data-flag="🇦🇷">
-                                    🇦🇷 +54 (Argentina)
-                                </option>
-                                <option value="591" data-flag="🇧🇴">
-                                    🇧🇴 +591 (Bolívia)
-                                </option>
-                                <option value="55" data-flag="🇧🇷">
-                                    🇧🇷 +55 (Brasil)
-                                </option>
-                                <option value="56" data-flag="🇨🇱">
-                                    🇨🇱 +56 (Chile)
-                                </option>
-                                <option value="57" data-flag="🇨🇴">
-                                    🇨🇴 +57 (Colômbia)
-                                </option>
-                                <option value="506" data-flag="🇨🇷">
-                                    🇨🇷 +506 (Costa Rica)
-                                </option>
-                                <option value="593" data-flag="🇪🇨">
-                                    🇪🇨 +593 (Equador)
-                                </option>
-                                <option value="503" data-flag="🇸🇻">
-                                    🇸🇻 +503 (El Salvador)
-                                </option>
-                                <option value="502" data-flag="🇬🇷">
-                                    🇬🇷 +502 (Guatemala)
-                                </option>
-                                <option value="592" data-flag="🇬🇾">
-                                    🇬🇾 +592 (Guiana)
-                                </option>
-                                <option value="509" data-flag="🇭🇹">
-                                    🇭🇹 +509 (Haiti)
-                                </option>
-                                <option value="504" data-flag="🇭🇳">
-                                    🇭🇳 +504 (Honduras)
-                                </option>
-                                <option value="1876" data-flag="🇯🇲">
-                                    🇯🇲 +1876 (Jamaica)
-                                </option>
-                                <option value="505" data-flag="🇳🇮">
-                                    🇳🇮 +505 (Nicarágua)
-                                </option>
-                                <option value="507" data-flag="🇵🇦">
-                                    🇵🇦 +507 (Panamá)
-                                </option>
-                                <option value="595" data-flag="🇵🇾">
-                                    🇵🇾 +595 (Paraguai)
-                                </option>
-                                <option value="51" data-flag="🇵🇪">
-                                    🇵🇪 +51 (Peru)
-                                </option>
-                                <option value="1787" data-flag="🇵🇷">
-                                    🇵🇷 +1787 (Porto Rico)
-                                </option>
-                                <option value="597" data-flag="🇸🇷">
-                                    🇸🇷 +597 (Suriname)
-                                </option>
-                                <option value="598" data-flag="🇺🇾">
-                                    🇺🇾 +598 (Uruguai)
-                                </option>
-                                <option value="58" data-flag="🇻🇪">
-                                    🇻🇪 +58 (Venezuela)
-                                </option>
+                                <option value="">Selecione</option>
+                                <option value="54">🇦🇷 +54 (Argentina)</option>
+                                <option value="591">🇧🇴 +591 (Bolívia)</option>
+                                <option value="55">🇧🇷 +55 (Brasil)</option>
                             </select>
                             <input
                                 type="tel"
@@ -160,7 +99,6 @@
                                 name="ddd_whatsapp"
                                 placeholder="DDD"
                                 pattern="[0-9]{2}"
-                                title="Digite o DDD (2 dígitos)"
                                 maxlength="2"
                                 required
                             />
@@ -170,14 +108,12 @@
                                 name="whatsapp"
                                 placeholder="Número"
                                 pattern="[0-9]{8,9}"
-                                title="Digite o número (8 ou 9 dígitos)"
                                 required
                             />
                         </div>
                         <div id="whatsapp-error" class="error"></div>
                     </div>
 
-                    <!-- Mensagem -->
                     <div class="form-group">
                         <label for="mensagem">Mensagem:</label>
                         <textarea
@@ -197,7 +133,6 @@
                             accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.zip,.rar,.7z"
                             style="display: none"
                         />
-                        <!-- Botão customizado -->
                         <button
                             type="button"
                             class="custom-file-upload"
@@ -206,7 +141,6 @@
                             Escolher Arquivo
                         </button>
                         <span id="file-info">Nenhum arquivo selecionado</span>
-                        <!-- Mostrar nome do arquivo -->
                     </div>
 
                     <div class="button1">
@@ -229,34 +163,61 @@
                     <div class="tamanho-arquivo">
                         <p class="texto-vermelho">
                             Só é permitido anexar 1 arquivo. Para anexar mais de
-                            um arquivo compacte em um único arquivo .zip, .rar
-                            ou .7z. O tamanho máximo do arquivo deve ser de 5MB.
+                            um, compacte em .zip, .rar ou .7z. Tamanho máximo:
+                            5MB.
                         </p>
                     </div>
                 </form>
             </div>
-
-            <div id="footer-container"></div>
-
-            <script>
-                fetch('header-nav.html')
-                    .then((response) => response.text())
-                    .then((data) => {
-                        document.getElementById(
-                            'header-nav-container'
-                        ).innerHTML = data;
-                    });
-
-                // Carrega o footer
-                fetch('footer.html')
-                    .then((response) => response.text())
-                    .then((data) => {
-                        document.getElementById('footer-container').innerHTML =
-                            data;
-                    });
-            </script>
-
-            <script src="js/contato.js"></script>
         </div>
+
+        <!-- Rodapé dinâmico -->
+        <div id="footer-container"></div>
+
+        <!-- Cabeçalho -->
+        <script>
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+        </script>
+
+        <!-- Rodapé -->
+        <script>
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+
+        <!-- Scripts -->
+        <script src="js/contato.js"></script>
     </body>
 </html>

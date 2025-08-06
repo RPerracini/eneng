@@ -5,7 +5,7 @@
     --azul-claro: #abdef8;
     --branco: #ffffff;
     --cinza-claro: #f0f0f0;
-    --cinza-borda: #ccc;
+    --cinza-borda: #929292;
     --vermelho: #ff0000;
     --verde: #4caf50;
     --azul: #0000e6;
@@ -26,18 +26,24 @@ body {
 
 /* ===== FORMULÁRIO PRINCIPAL ===== */
 .formulario {
-    padding: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 25px;
+    padding-bottom: 1px;
+    /* padding: 10px; */
     width: 100%;
     max-width: 100%;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    /* grid-template-columns: repeat(5, 1fr); */
+    grid-template-columns: 2fr 2fr 380px 380px 380px;
     gap: 8px;
     width: 100%;
     max-width: 100%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    margin-bottom: 0px;
 }
 
 .boxInput,
@@ -55,7 +61,7 @@ body {
 
 .boxInput {
     position: relative;
-    padding-bottom: 70px;
+    padding-bottom: 5px;
 }
 
 .tituloCalc {
@@ -67,20 +73,23 @@ body {
     padding-bottom: 6px;
 }
 
+.select-pequeno {
+  font-size: 1px;
+}
+
 /* ===== ESTILOS DOS CAMPOS ===== */
 .boxInput1,
 .boxInput2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 2.5px;
     width: 100%;
 }
 
 .boxInput1 label,
 .boxInput2 label {
     color: #333;
-    font-size: 0.85rem;
     text-align: left;
     min-width: 60px;
 }
@@ -89,17 +98,14 @@ body {
 .boxInput1 input[type='number'],
 .boxInput1 select,
 .boxInput2 input[type='text'] {
-    width: 100px;
+    width: 70px;
     padding: 0px 0px;
-    font-size: 14px;
+    font-family: sans-serif;
+    font-size: 13px;
     text-align: center;
-    border: 2px solid var(--cinza-borda);
+    border: 1px solid var(--cinza-borda);
     border-radius: 5px;
-    height: 24px;
-}
-
-.boxInput2 input[type='text'] {
-    width: 300px;
+    height: 20px;
 }
 
 /* Campos de resultado */
@@ -108,63 +114,192 @@ body {
     height: 28px;
     padding: 4px 8px;
     text-align: center;
-    border: 2px solid var(--cinza-borda) !important;
-    background-color: var(--cinza-claro) !important;
+    border: 2px solid var(--cinza-borda) ;
+    background-color: var(--cinza-claro) ;
     border-radius: 5px;
     color: var(--azul);
+}
+
+.resultado-calculado1 {
+    width: 120px;
+    height: 28px;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+    margin-right: -10px;
 }
 
 /* Foco nos inputs */
 .boxInput1 input:focus,
 .boxInput2 input:focus,
 .boxInput1 select:focus {
-    border: 2px solid var(--azul);
-    box-shadow: 0 0 0 2px rgba(0, 0, 230, 0.2);
+    border: 1px solid #f52828;
+    background-color: #ffe5e5;
+    box-shadow: 0 0 3px #ff9999;
+    outline: none;
 }
 
 .boxInput1:focus-within label,
 .boxInput2:focus-within label {
-    color: var(--azul);
-    font-weight: bold;
+    color: #f52828;
+    font-weight:lighter;
 }
 
 /* ===== BOTÕES ===== */
 .btn-container {
     position: absolute;
-    right: 12px;
-    bottom: 12px;
+    right: 20px;
+    bottom: 20px;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 120px;
+    flex-direction:row;
+    gap: 10px;
+    width: auto;
 }
 
-#btnReset,
-#btnPDF {
-    width: 100%;
-    height: 28px;
+#btnReset{
     border: none;
-    border-radius: 3px;
-    font-size: 0.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 28px; /* Ajuda na centralização */
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#btnPDF {
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 28px; /* Ajuda na centralização */
+    text-align: center;
+    width: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#btnavisoLegal {
+    background:  #ff9800;
+    color: #000aff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 28px; /* Ajuda na centralização */
+    text-align: center;
+    width: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 15px;
+}
+
+#btnavisoLegal:hover{
+    background: #000aff;
+    color: #ff9800;
+}
+
+.btn-calcular {
+    background: #000aff; /* azul mais vivo */
+    color: #ff9800; /* laranja forte */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 0px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 28px; /* Ajuda na centralização */
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.btn-calcular:hover {
+    background: #ff9800;
+    color: #000aff;
+}
+
+.btn-calcular:disabled {
+    background: #aaa ;
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.7;
+    border: none;
 }
 
 #btnReset {
     background: var(--vermelho);
-    color: var(--branco);
+    color: white;
 }
 
 #btnPDF {
-    background: var(--verde);
-    color: var(--branco);
+    background: greenyellow;
+    color: black;
 }
 
 #btnReset:hover,
 #btnPDF:hover {
     background: var(--laranja);
     color: #000;
+}
+
+.botoes-final {
+  grid-column: 5;    /* Põe na quinta coluna */
+  align-self: end;   /* Alinha na base */
+  justify-self: end; /* Alinha à direita da coluna */
+  margin-bottom: 16px; /* Distância da base */
+}
+    #btnFormulasExemplo {
+    background: #000aff;
+    color: #ff9800;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px #0001;
+    transition: background 0.2s;
+    /* margin-bottom: 10px; */
+    margin-top: 350px;
+    margin-right: 40px;
+    }
+
+    #btnFormulasExemplo:hover {
+    background: #0055aa;
+    }
+
+label[for='sa'] {
+    white-space: nowrap;
+}
+
+input[type="text"] {
+    border-width: 1px !important;
+}
+
+#btnPDF:disabled {
+    background-color: #ccc; /* Cinza */
+    color: white;            /* Texto mais escuro */
+    cursor: not-allowed;    /* Cursor de bloqueio */
+    opacity: 0.7;           /* Transparência opcional */
 }
 
 /* ===== MODAIS ===== */
@@ -230,6 +365,12 @@ body {
 }
 
 /* Ícones de informação */
+
+button:hover > i[data-lucide='info'] {
+    color: #32ff7e !important; /* verde neon */
+    transition: color 0.2s;
+}
+
 .info-icon {
     color: var(--azul);
     margin-left: 8px;
@@ -272,23 +413,44 @@ input[type='number'] {
     width: 100%;
 }
 
-/* Estilo para cada linha de resultado */
 .dados_de_saída p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    padding: 0px 0;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 1px;
+    margin-top: 1px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #ccc;/* A linha embaixo */
+    /* border-top:1px solid #ccc ; */
+}
+
+.entrada-fora input{
+    margin-left: 5px;
+    padding:10px;
+}
+
+.boxInput1 .entrada-fora {
+    border-bottom: 1px solid #ccc;
+    padding: 2px;
+}
+
+.dados_de_saída p span:first-child {
+    white-space: nowrap;
+}
+.dados_de_saída p span:last-child {
+    flex-grow: 1;
+    text-align: right;
+    min-width: 100px;
+    color: black;
 }
 
 /* Estilo para os valores dos resultados */
 .dados_de_saída span {
-    text-align: right;
+    text-align: left;
     min-width: 100px;
-    padding-left: 10px;
-    font-weight: bold;
-    color: var(--azul-escuro);
+    /* padding-left: 10px; */
+    /* font-weight: bold; */
+    color: black;
 }
 
 /* Ajuste para os títulos dos resultados */
@@ -308,13 +470,117 @@ input[type='number'] {
 .dados_de_saída p:has(#tolerancia_negativa),
 .dados_de_saída p:has(#aw_max),
 .dados_de_saída p:has(#aw_min) {
-    padding-left: 15px;
+    padding-left: 0px;
+}
+
+span sub {
+    margin-left: 0;
+    padding-left: 0;
+    line-height: 1;
+}
+
+/* Estilo padrão para os ícones Lucide SVG */
+svg.lucide {
+    stroke: orange;
+    transition: stroke 0.3s ease;
+}
+
+.lucide.spinning {
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Cor azul ao passar o mouse */
+svg.lucide:hover {
+    stroke: #0000d1;
+}
+
+input[name="cliente"],
+input[name="projeto"],
+input[name="observacoes"] {
+    width: 240px !important;
+}
+
+/* Modal de Confirmação */
+#modalConfirm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);  /* Fundo preto com transparência */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Modal de Confirmação */
+#modalConfirm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);  /* Fundo preto com transparência */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;  /* Garante que o modal apareça sobre outros elementos */
+}
+
+/* Conteúdo específico do Modal de Confirmação */
+#modalConfirm .modal-content {
+    background-color: #000aff;
+    color: #ff9800;
+    padding: 20px;
+    margin: 20px;  /* Adiciona margem ao redor do modal */
+    font-size: 25px;
+    border: 4px solid #ff9800;
+}
+
+/* Estilo dos Botões no Modal de Confirmação */
+#modalConfirm .btn-modal {
+    background-color: #ff9800;
+    color: #000aff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 30px;
+    border-radius: 15px;
+}
+
+/* Hover para o botão "Sim" */
+#modalConfirm #btnSim:hover {
+    background-color: #ff0000;  /* Fundo vermelho */
+    color: #ffffff;  /* Texto branco */
+}
+
+/* Hover para o botão "Não" */
+#modalConfirm #btnNao:hover {
+    background-color: #28a745;  /* Fundo verde */
+    color: black;  /* Texto laranja */
 }
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 1200px) {
     .grid-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -329,7 +595,6 @@ input[type='number'] {
 
     .btn-container {
         position: static;
-        margin-top: 15px;
         align-items: center;
     }
 }
@@ -359,4 +624,99 @@ input[type='number'] {
     .modal-message {
         font-size: 1rem;
     }
+}
+
+/* ===================== */
+/* BOTÕES EM LINHA BASE  */
+/* ===================== */
+.coluna {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding-bottom: 20px;
+}
+
+/* Harmonizar fonte dos labels com os resultados */
+.boxInput1 label,
+.boxInput2 label,
+.dados_de_saída {
+    font-family: var(--fonte_texto_principal);
+    font-size: 13px;
+}
+
+#modalImagemX1undercut .modal-conteudo {
+    width: 85% !important;      /* ou o valor desejado */
+    max-width: 800px !important; /* ou o valor desejado */
+    margin: 0 auto;
+    overflow-x: auto;
+    margin-top: 60px !important;        /* para scroll caso a imagem seja maior */
+}
+
+#modalImagemX1undercut img[src*="xParaEvitarUndercut1.jpg"] {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    /* margin: 0 auto; */
+}
+
+#modalImagemX1undercut2 .modal-conteudo {
+    width: 110% !important;      /* Deixe maior que o padrão, ajuste conforme desejar */
+    max-width: 1200px !important; /* Altere para o valor desejado, por exemplo 900px */
+    margin: 0 auto;
+}
+
+#modalImagemX1undercut2 img[src*="xParaEvitarUndercut2.jpg"] {
+    width: 110% !important;      /* Igual ao box, ou ajuste como quiser */
+    max-width: 1150px !important; /* Igual ao box */
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+}
+
+/* === Estilo para o modal de Aviso Legal === */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+/* Estilo do modal de aviso legal */
+.modal-content.aviso-legal {
+    background-color: #0000d1;
+    color: #f5a002;
+    font-weight: bold;
+}
+
+.modal-content.aviso-legal h2 {
+    color: #f5a002;
+    font-size: 2.5rem;
+}
+
+.modal-content.aviso-legal p {
+    font-size: 1.6rem;
+}
+
+.modal-content.aviso-legal .close-modal {
+    color: #f5a002;
+    float: right;
+    cursor: pointer;
+    font-size: 3rem;
 }

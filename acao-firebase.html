@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Redirecionando... - ENENG</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/registro.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <style>
+            body {
+                background: #f0f0f0;
+                margin: 0;
+                font-family: sans-serif;
+            }
+            #header-nav-container,
+            #footer-container {
+                width: 100%;
+            }
+
+            .form-container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #0002;
+                font-family: sans-serif;
+            }
+            .form-title {
+                font-size: 36px;
+                font-weight: bold;
+                color: #0048ff;
+                margin-bottom: 18px;
+                text-align: center;
+            }
+            .form-subtitle {
+                font-size: 20px;
+                color: #333;
+                margin-bottom: 18px;
+                text-align: center;
+            }
+            .lucide-spinner {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 0.5em;
+                animation: spin 1s linear infinite;
+                color: #0048ff;
+                font-size: 2em;
+                width: 2em !important; /* força largura maior */
+                height: 2em !important; /* força altura maior */
+            }
+            @keyframes spin {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            .loading-text {
+                color: #144472;
+                font-size: 19px;
+                margin-top: 8px;
+            }
+            .error-text {
+                color: red;
+                font-size: 25px;
+                margin-top: 15px;
+                font-weight: bold;
+                text-align: center;
+            }
+            .redirect-row {
+                display: flex;
+                font-family: sans-serif;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 15px;
+                font-size: 25px;
+            }
+            @media (max-width: 700px) {
+                .form-container {
+                    margin: 25px 4px 18px 4px;
+                    padding: 18px 8px 18px 8px;
+                }
+                .form-title {
+                    font-size: 21px;
+                }
+                .form-subtitle {
+                    font-size: 15px;
+                }
+                .redirect-row {
+                    font-size: 25px;
+                    gap: 5px;
+                }
+            }
+        </style>
+        <script src="https://unpkg.com/lucide@latest"></script>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+        <div class="form-container" id="central-content">
+            <div class="form-title">Redirecionando...</div>
+            <div class="form-subtitle loading-text">
+                Aguarde um instante
+                <i data-lucide="loader" class="lucide-spinner"></i>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+        <script>
+            // Header nav dinâmico
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                });
+            // Footer dinâmico
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    // Status usuário no footer (se usar)
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+            document.addEventListener('DOMContentLoaded', () => {
+                if (window.lucide && lucide.createIcons) lucide.createIcons();
+            });
+
+            // Redirecionamento inteligente para a página correta
+            (function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const mode = urlParams.get('mode');
+                const searchParams = window.location.search;
+
+                // Mapeamento de ação do Firebase para página correta
+                if (mode === 'resetPassword') {
+                    // Redefinição de senha
+                    setTimeout(() => {
+                        window.location.href =
+                            'redefinir-senha.html' + searchParams;
+                    }, 1200);
+                } else if (mode === 'verifyEmail') {
+                    // Verificação de e-mail
+                    setTimeout(() => {
+                        window.location.href =
+                            'verificar-email.html' + searchParams;
+                    }, 1200);
+                } else {
+                    // Caso não reconhecido, mostra erro e redireciona para index.html
+                    const box = document.getElementById('central-content');
+                    box.innerHTML = `
+                    <div class="form-title">Link inválido</div>
+                    <div class="error-text">
+                        O link não é válido ou já foi utilizado.<br>
+                        <div class="redirect-row">
+                            Você será redirecionado para a página inicial.
+                            <i data-lucide="loader" class="lucide-spinner"></i>
+                        </div>
+                    </div>
+                `;
+                    if (window.lucide && lucide.createIcons)
+                        lucide.createIcons();
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 4000);
+                }
+            })();
+        </script>
+        <script src="js/logout-on-close.js" type="module"></script>
+    </body>
+</html>

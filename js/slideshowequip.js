@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetInterval() {
         clearInterval(slideInterval);
         if (!isPaused) {
-            slideInterval = setInterval(nextSlide, 5000);
+            slideInterval = setInterval(nextSlide, 3000);
         }
     }
 

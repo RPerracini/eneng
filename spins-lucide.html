@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Lucide Spinners - Loading/Refresh</title>
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: #f5f5f7;
+                padding: 2em;
+            }
+            .spinner-row {
+                margin: 1.2em 0;
+                font-size: 1.2em;
+                display: flex;
+                align-items: center;
+                gap: 1em;
+            }
+            .lucide-spinner {
+                animation: spin 1s linear infinite;
+                color: #1976d2; /* azul */
+                font-size: 2em;
+            }
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            .label {
+                min-width: 110px;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Ícones Lucide para Loading/Refresh (Animados)</h2>
+        <div class="spinner-row">
+            <span class="label">loader</span>
+            <i data-lucide="loader" class="lucide-spinner"></i>
+        </div>
+        <div class="spinner-row">
+            <span class="label">rotate-cw</span>
+            <i data-lucide="rotate-cw" class="lucide-spinner"></i>
+        </div>
+        <div class="spinner-row">
+            <span class="label">refresh-cw</span>
+            <i data-lucide="refresh-cw" class="lucide-spinner"></i>
+        </div>
+        <div class="spinner-row">
+            <span class="label">refresh-ccw</span>
+            <i data-lucide="refresh-ccw" class="lucide-spinner"></i>
+        </div>
+        <div class="spinner-row">
+            <span class="label">repeat</span>
+            <i data-lucide="repeat" class="lucide-spinner"></i>
+        </div>
+        <!-- Outros ícones Lucide de loading/refresh podem ser adicionados aqui -->
+        <script>
+            lucide.createIcons();
+        </script>
+    </body>
+</html>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ENENG-SERVIÇOS</title>
+        <title>Equipamentos - ENENG</title>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -11,9 +11,11 @@
         <link rel="stylesheet" href="css/equipamentos.css" />
         <link rel="stylesheet" href="css/header-nav.css" />
         <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
     </head>
 
     <body>
+        <!-- Container para o cabeçalho carregado dinamicamente -->
         <div id="header-nav-container"></div>
 
         <div class="content-grid">
@@ -56,6 +58,7 @@
 
             <div class="slideshow-container">
                 <div class="slides-inner">
+                    <!-- Slides -->
                     <div class="slide active">
                         <div class="image-wrapper">
                             <img
@@ -197,26 +200,55 @@
             </div>
         </div>
 
+        <!-- Container para o rodapé carregado dinamicamente -->
         <div id="footer-container"></div>
 
+        <!-- Carregar o cabeçalho dinamicamente -->
         <script>
             fetch('header-nav.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((r) => r.text())
+                .then((html) => {
                     document.getElementById('header-nav-container').innerHTML =
-                        data;
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
                 });
         </script>
 
+        <!-- ✅ Carregamento do rodapé -->
         <script>
             fetch('footer.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((res) => res.text())
+                .then((html) => {
                     document.getElementById('footer-container').innerHTML =
-                        data;
+                        html;
+
+                    // 🔥 Carrega o Firebase antes do footer-status.js
+                    requestAnimationFrame(() => {
+                        import('./js/footer-status.js');
+                    });
                 });
         </script>
 
+        <!-- Script de slideshow -->
         <script src="js/slideshowequip.js"></script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
     </body>
 </html>

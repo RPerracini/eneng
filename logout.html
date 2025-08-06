@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Logout - ENENG</title>
+        <link rel="stylesheet" href="css/logout.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <style>
+            button.logout-btn {
+                padding: 10px;
+                font-size: 18px;
+                cursor: pointer;
+                border-radius: 6px;
+                background-color: #0000e6;
+                color: #fc9403;
+                border: none;
+            }
+
+            .container {
+                text-align: center;
+                max-width: 400px;
+                margin: 40px auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+
+        <div class="container">
+            <h2>Você será desconectado</h2>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+
+        <div id="footer-container"></div>
+
+        <script>
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- Script de logout -->
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+            import {
+                getAuth,
+                signOut,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            window.logout = function logout() {
+                signOut(auth)
+                    .then(() => {
+                        window.location.href = 'index.html';
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao fazer logout:', error);
+                    });
+            };
+        </script>
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+
+        <!-- Script de logout automático -->
+        <!-- <script src="js/logout-on-close.js" type="module"></script> -->
+    </body>
+</html>

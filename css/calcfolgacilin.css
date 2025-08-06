@@ -1,4 +1,3 @@
-/* ESTILOS GERAIS */
 body {
     font-family: sans-serif;
     margin: 0;
@@ -16,50 +15,34 @@ body {
     text-align: center;
     color: #0000e6;
     font-size: 1.8rem;
-    margin-top: -4px;
+    margin-top: -6px;
+    margin-bottom: 25px;
 }
 
-.linha-azul {
-    height: 2px;
-    background: linear-gradient(to right, transparent, #0000e6, transparent);
-    margin: 0.5rem 0 1.5rem 0;
-}
-
-/* LAYOUT DAS COLUNAS */
 .form-grid {
     display: flex;
+    flex-wrap: nowrap;
     gap: 2rem;
-    align-items: stretch;
-}
-
-.coluna {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    box-shadow: 0 0 10px black;
-    display: flex;
-    flex-direction: column;
 }
 
 .coluna-dados {
     flex: 0 0 35%;
-    min-width: 400px;
+    min-width: 35%;
 }
 
 .coluna-imagem {
     flex: 0 0 25%;
+    min-width: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 200px;
 }
 
-.coluna:last-child {
+.coluna-resultados {
     flex: 1;
 }
 
-/* ESTILOS DOS FORMULÁRIOS */
 .form-row {
     display: flex;
     align-items: center;
@@ -68,14 +51,11 @@ body {
 
 .form-row label {
     flex: 0 0 75%;
-    margin: 0;
     padding-right: 10px;
 }
 
-/* Estilo para o label quando o input está focado */
 .form-row:focus-within label {
     color: blue;
-    font-weight: normal;
 }
 
 .form-row input,
@@ -86,10 +66,9 @@ body {
     border-radius: 5px;
     text-align: center;
     background-color: white;
-    width: 100%; /* Ajuste a largura conforme necessário */
+    width: 100%;
 }
 
-/* Remover controles de incremento numérico */
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -100,7 +79,6 @@ input[type='number'] {
     -moz-appearance: textfield;
 }
 
-/* ESTILOS ESPECÍFICOS PARA INPUTS */
 #cliente,
 #projeto,
 #observacao {
@@ -108,63 +86,66 @@ input[type='number'] {
     margin-left: -35%;
 }
 
-/* ESTILOS DOS BOTÕES */
-.botoes {
+.botoes,
+.botoes-entrada {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: flex-end;
+    width: 100%;
     margin-top: 1.5rem;
+    gap: 15px;
 }
 
-/* IMAGEM */
 .coluna-imagem img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
     display: block;
-    padding: 0px;
 }
 
 .coluna h2 {
     color: #fc9403;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin: -1rem 0 1rem 0;
-    padding: 0;
-    position: relative;
-    top: 1px;
 }
 
 #deltaT {
     cursor: default;
-    background-color: #f0f0f0;
+    background-color: #e3eaf1;
 }
 
-#deltaT:focus {
+#deltaT:focus,
+#deltaT:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+input[readonly] {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+}
+
+input:focus,
+select:focus {
+    border-color: #fc9403;
     outline: none;
-    box-shadow: none;
+    box-shadow: 0 0 3px #fc9403;
 }
 
-/* BOTÕES DE ENTRADA - SOLUÇÃO DEFINITIVA */
-.botoes-entrada {
-    display: flex;
-    justify-content: flex-end; /* Alinha à direita */
-    width: 100%;
-    margin-top: 1.5rem;
-    gap: 15px; /* Espaço entre os botões */
-}
-
-/* BOTÃO RESETAR */
 .btn-reset {
     background-color: #ff0505;
     color: white;
-    border: none;
     padding: 0.5rem 1.2rem;
     font-size: 1rem;
-    font-family: sans-serif;
+    font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
+    border: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -175,7 +156,50 @@ input[type='number'] {
     color: black;
 }
 
-/* RESPONSIVIDADE */
+.btn-aviso {
+    background-color: blue !important;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-aviso:hover {
+    background-color: #fc9403 !important;
+    color: black !important;
+}
+
+.botoes button {
+    background-color: #f6260a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 150px;
+}
+
+.botoes button:hover {
+    background-color: #fc9403;
+    color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.botoes button::before {
+    content: '📄';
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
 @media (max-width: 1200px) {
     .form-grid {
         flex-direction: column;
@@ -188,11 +212,26 @@ input[type='number'] {
         min-width: 100%;
     }
 }
+/*
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
-/* ESTILOS DE IMPRESSÃO */
+.pulse {
+    animation: pulse 0.5s ease-in-out;
+} */
+
 @media print {
     main {
-        font-family: 'font_personalizada', sans-serif;
+        font-family: sans-serif;
         color: #000;
         padding: 20px;
         margin: 0;
@@ -214,19 +253,15 @@ input[type='number'] {
     label {
         display: inline-block;
         font-weight: bold;
-        width: auto;
         margin-right: 10px;
     }
 
     input,
     select {
         display: inline-block;
-        width: auto;
         font-size: 14px;
         border: none;
         background: none;
-        padding: 0;
-        margin: 0;
     }
 
     button,
@@ -236,88 +271,67 @@ input[type='number'] {
     }
 }
 
-/* ESTILOS ADICIONAIS PARA INPUTS */
-input[readonly] {
-    background-color: #f8f9fa;
-    color: #333;
-    border: 1px solid #ccc;
-}
+/* === Estilo para o modal de Aviso Legal === */
 
-#deltaT {
-    background-color: #e3eaf1;
-}
-
-input:-webkit-autofill {
-    box-shadow: 0 0 0px 1000px white inset !important;
-    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-    -webkit-text-fill-color: #000 !important;
-}
-
-input:focus,
-select:focus {
-    border-color: #fc9403;
-    outline: none;
-    box-shadow: 0 0 3px #fc9403;
-}
-
-#deltaT:focus-visible {
-    outline: none !important;
-}
-
-#deltaT:hover {
-    border-color: #ccc !important;
-}
-
-/* BOTÃO GERAR PDF - VERSÃO COMPLETA */
-.botoes {
-    display: flex;
-    justify-content: flex-end; /* Alinha à direita por padrão */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
     width: 100%;
-    margin: 2rem 0 1rem 0;
-    padding-right: 1rem; /* Espaçamento da borda direita */
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.botoes button {
-    background-color: #f6260a;
-    color: white;
-    border: none;
-    padding: 0.5rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 8px;
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+/* Estilo do modal de aviso legal */
+.modal-content.aviso-legal {
+    background-color: #0000d1;
+    color: #f5a002;
+    font-weight: bold;
+}
+
+.modal-content.aviso-legal h2 {
+    color: #f5a002;
+    font-size: 2.5rem;
+}
+
+.modal-content.aviso-legal p {
+    font-size: 1.6rem;
+}
+
+.modal-content.aviso-legal .close-modal {
+    color: #f5a002;
+    float: right;
     cursor: pointer;
-    transition: all 0.3s;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-left: 150px;
+    font-size: 3rem;
 }
 
-.btn-aviso {
-    background-color: blue !important;
-    color: white;
-}
+/* === Melhorias finais para o modal === */
 
-.botoes button:hover {
-    background-color: #fc9403;
-    color: black;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Se quiser adicionar um ícone ao botão */
-.botoes button::before {
-    content: '📄';
-    margin-right: 8px;
-    font-size: 1.1em;
-}
-
-.botoes-entrada button {
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    display: flex;
+.modal {
+    display: none;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+}
+
+.modal-content.aviso-legal {
+    max-width: 800px;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.modal-content.aviso-legal p {
+    margin-top: 1rem;
 }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ENENG-SERVIÇOS</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="css/servicos.css" />
+        <link rel="stylesheet" href="css/slideshow.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+    </head>
+
+    <body>
+        <div id="header-nav-container"></div>
+
+        <main class="content-grid">
+            <div class="service-card">
+                <h2>Projetos e Reformas</h2>
+                <p>
+                    Projetos e reformas de redutores com acompanhamento na
+                    fabricação, ensaios químicos e mecânicos dos materiais,
+                    testes e montagens com emissão de relatórios técnicos.
+                </p>
+
+                <h2>Repotenciamento</h2>
+                <p>Projetos de repotenciamento.</p>
+
+                <h2>Soluções Personalizadas</h2>
+                <p>
+                    Podemos ajudá-lo a entender melhor suas necessidades,
+                    recomendando a melhor solução e também executar os projetos,
+                    acompanhar a fabricação e tudo o que for necessário para
+                    obter um ótimo produto final.
+                </p>
+
+                <h2>Assessoria Técnica</h2>
+                <p>
+                    Assessoria na escolha dos diferentes modelos no mercado, bem
+                    como execução dos cálculos para verificação da capacidade
+                    necessária.
+                </p>
+            </div>
+
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <img src="Imagens/Redutor Duo.JPG" alt="Imagem 1" />
+                    <p class="slide-texto">
+                        Aqui vai o texto abaixo da imagem 1
+                    </p>
+                </div>
+                <div class="slide">
+                    <img
+                        src="imagens/Redutordapaginainicial2.png"
+                        alt="Imagem 2"
+                    />
+                    <p class="slide-texto">
+                        Aqui vai o texto abaixo da imagem 2
+                    </p>
+                </div>
+                <div class="slide">
+                    <img
+                        src="Imagens/Rolamento de esferas.png"
+                        alt="Imagem 3"
+                    />
+                    <p class="slide-texto">
+                        Aqui vai o texto abaixo da imagem 3
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pontinhos -->
+            <div style="text-align: center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+
+            <div class="service-card"></div>
+        </main>
+
+        <div id="footer-container"></div>
+
+        <script>
+            fetch('header-nav.html')
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        data;
+                });
+        </script>
+
+        <script>
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+
+                    // Carrega o script de status do usuário no footer
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <script src="js/slideshow.js"></script>
+    </body>
+</html>

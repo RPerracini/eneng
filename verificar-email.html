@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Verificar E-mail - ENENG</title>
+        <link rel="stylesheet" href="css/registro.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <style>
+            .form-container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 32px 24px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #0002;
+                text-align: center;
+            }
+
+            .lucide-spinner {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 0.5em;
+                animation: spin 1s linear infinite;
+                color: #1976d2;
+                font-size: 1.3em;
+            }
+
+            @keyframes spin {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .verif-success {
+                color: black;
+                font-size: 1.5em;
+                font-weight: bold;
+                font-family: sans-serif;
+            }
+
+            .verif-error {
+                color: red;
+                font-size: 1.5em;
+                font-weight: bold;
+                font-family: sans-serif;
+            }
+
+            .lucide-alert {
+                font-size: 2.5em;
+                width: 2.5em;
+                height: 2.5em;
+                vertical-align: middle;
+                margin-bottom: 15px;
+            }
+
+            .lucide-check-circle {
+                font-size: 3em;
+                color: lawngreen;
+                width: 3em;
+                height: 3em;
+                vertical-align: middle;
+                margin-bottom: 15px;
+            }
+
+            @keyframes pulseElegantLoop {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.7;
+                }
+                50% {
+                    transform: scale(1.1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 0.7;
+                }
+            }
+
+            .icon-pulse-elegant {
+                animation: pulseElegantLoop 2.5s ease-in-out infinite;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+        <div class="form-container" id="content">
+            <h2>Verificando e-mail...</h2>
+            <div id="status">
+                <i data-lucide="loader" class="lucide-spinner"></i>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+
+        <script type="module">
+            // Header e footer dinâmicos
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                });
+
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+            import {
+                getAuth,
+                applyActionCode,
+            } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+            const firebaseConfig = {
+                apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
+                authDomain: 'eneng-b34ee.firebaseapp.com',
+                projectId: 'eneng-b34ee',
+                storageBucket: 'eneng-b34ee.appspot.com',
+                messagingSenderId: '401693608382',
+                appId: '1:401693608382:web:a912bbb51dac61d88151ef',
+                measurementId: 'G-LSC3PG9XKM',
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            function getParam(name) {
+                const url = new URL(window.location.href);
+                return url.searchParams.get(name);
+            }
+
+            async function verificarEmail() {
+                const code = getParam('oobCode');
+                const statusEl = document.getElementById('status');
+
+                if (!code) {
+                    statusEl.innerHTML = `<div class="verif-error">
+                        Link inválido!<br>Tente novamente pelo e-mail recebido.
+                    </div>`;
+                    return;
+                }
+
+                try {
+                    await applyActionCode(auth, code);
+                    statusEl.innerHTML = `<div class="verif-success">
+                        <i data-lucide="check-circle" class="icon-pulse-elegant" style="margin-bottom: 15px;"></i><br>
+                        E-mail verificado com sucesso.<br><br>
+                        <span style="font-weight: normal;">
+                            <i data-lucide="log-in" class="icon-pulse-elegant" style="vertical-align: middle; margin-right: 6px;"></i>
+                            Você já está conectado à sua nova conta.
+                        </span>
+                    </div>`;
+                } catch (e) {
+                    let msg = 'Houve um erro ao verificar seu e-mail.';
+                    if (e.code === 'auth/invalid-action-code') {
+                        msg =
+                            'Link de verificação inválido ou expirado.<br>Solicite um novo no sistema.';
+                    } else if (e.code === 'auth/expired-action-code') {
+                        msg = 'Este link expirou.<br>Solicite um novo.';
+                    } else if (e.code === 'auth/user-disabled') {
+                        msg = 'Esta conta está desabilitada.';
+                    }
+
+                    statusEl.innerHTML = `<div class="verif-error">
+                        <i data-lucide="alert-triangle" class="lucide-alert"></i><br>
+                        ${msg}
+                    </div>`;
+                }
+
+                lucide.createIcons();
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                lucide.createIcons();
+                verificarEmail();
+            });
+        </script>
+        <!-- <script src="js/logout-on-close.js" type="module"></script> -->
+    </body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Consulta de Tolerância de Cremalheira</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            label,
+            select,
+            input {
+                font-size: 1rem;
+            }
+            button {
+                margin-top: 10px;
+                padding: 6px 12px;
+                font-size: 1rem;
+            }
+            #resultado {
+                margin-top: 20px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Consulta de Tolerância de Cremalheira</h1>
+
+        <label for="diametro">Diâmetro de Referência (mm):</label>
+        <br />
+        <input type="number" id="diametro" name="diametro" min="1" step="1" />
+
+        <br />
+        <br />
+        <label for="serie">Série de tolerância (Aₛₙₑ):</label>
+        <br />
+        <select id="serie" name="serie">
+            <option value="a">a</option>
+            <option value="ab">ab</option>
+            <option value="b">b</option>
+            <option value="bc">bc</option>
+            <option value="c">c</option>
+            <option value="cd">cd</option>
+            <option value="d">d</option>
+            <option value="e">e</option>
+            <option value="f">f</option>
+            <option value="g">g</option>
+            <option value="h">h</option>
+        </select>
+
+        <br />
+        <br />
+        <button onclick="consultarTolerancia()">Consultar Tolerância</button>
+
+        <p id="resultado"></p>
+
+        <script>
+            // ======== 1) Montagem da tabela de dados (com strings para preservar espaços e sinais “-”) ========
+            // Cada linha é um array de 13 colunas: [“Acima de”, “Até”, “a”, “ab”, “b”, “bc”, “c”, “cd”, “d”, “e”, “f”, “g”, “h”]
+            const tabelaAsne = [
+                [
+                    '-',
+                    '10',
+                    '-100',
+                    '-85',
+                    '-70',
+                    '-58',
+                    '-48',
+                    '-40',
+                    '-33',
+                    '-22',
+                    '-10',
+                    '-5',
+                    '0',
+                ],
+                [
+                    '10',
+                    '50',
+                    '-135',
+                    '-110',
+                    '-95',
+                    '-75',
+                    '-65',
+                    '-54',
+                    '-44',
+                    '-30',
+                    '-14',
+                    '-7',
+                    '0',
+                ],
+                [
+                    '50',
+                    '125',
+                    '-180',
+                    '-150',
+                    '-125',
+                    '-105',
+                    '-85',
+                    '-70',
+                    '-60',
+                    '-40',
+                    '-19',
+                    '-9',
+                    '0',
+                ],
+                [
+                    '125',
+                    '280',
+                    '-250',
+                    '-200',
+                    '-170',
+                    '-140',
+                    '-115',
+                    '-95',
+                    '-80',
+                    '-56',
+                    '-26',
+                    '-12',
+                    '0',
+                ],
+                [
+                    '280',
+                    '560',
+                    '-330',
+                    '-280',
+                    '-230',
+                    '-190',
+                    '-155',
+                    '-130',
+                    '-110',
+                    '-75',
+                    '-35',
+                    '-17',
+                    '0',
+                ],
+                [
+                    '560',
+                    '1 000',
+                    '-450',
+                    '-370',
+                    '-310',
+                    '-260',
+                    '-210',
+                    '-175',
+                    '-145',
+                    '-100',
+                    '-48',
+                    '-22',
+                    '0',
+                ],
+                [
+                    '1 000',
+                    '1 600',
+                    '-600',
+                    '-500',
+                    '-420',
+                    '-340',
+                    '-290',
+                    '-240',
+                    '-200',
+                    '-135',
+                    '-64',
+                    '-30',
+                    '0',
+                ],
+                [
+                    '1 600',
+                    '2 500',
+                    '-820',
+                    '-680',
+                    '-560',
+                    '-460',
+                    '-390',
+                    '-320',
+                    '-270',
+                    '-180',
+                    '-85',
+                    '-41',
+                    '0',
+                ],
+                [
+                    '2 500',
+                    '4 000',
+                    '-1 100',
+                    '-920',
+                    '-760',
+                    '-620',
+                    '-520',
+                    '-430',
+                    '-360',
+                    '-250',
+                    '-115',
+                    '-56',
+                    '0',
+                ],
+                [
+                    '4 000',
+                    '6 300',
+                    '-1 500',
+                    '-1 250',
+                    '-1 020',
+                    '-840',
+                    '-700',
+                    '-580',
+                    '-480',
+                    '-330',
+                    '-155',
+                    '-75',
+                    '0',
+                ],
+                [
+                    '6 300',
+                    '10 000',
+                    '-2 000',
+                    '-1 650',
+                    '-1 350',
+                    '-1 150',
+                    '-940',
+                    '-780',
+                    '-640',
+                    '-450',
+                    '-210',
+                    '-100',
+                    '0',
+                ],
+            ];
+
+            // Mapear cada sigla de série para o índice correto dentro de cada linha de tabelaAsne
+            // Lembre-se: índice 0 = “Acima de”, índice 1 = “Até”
+            // índice 2 = “a”, 3 = “ab”, 4 = “b”, 5 = “bc”, 6 = “c”, 7 = “cd”, 8 = “d”, 9 = “e”, 10 = “f”, 11 = “g”, 12 = “h”
+            const seriesIndex = {
+                a: 2,
+                ab: 3,
+                b: 4,
+                bc: 5,
+                c: 6,
+                cd: 7,
+                d: 8,
+                e: 9,
+                f: 10,
+                g: 11,
+                h: 12,
+            };
+
+            // ======== 2) Função para localizar a linha correta com base no diâmetro fornecido ========
+            function encontrarLinha(diametro) {
+                // Para cada linha, vamos ler o valor “Até” (coluna índice 1), converter para número e comparar
+                for (let i = 0; i < tabelaAsne.length; i++) {
+                    // Retirar espaços eventuais na string antes de converter
+                    const ateStr = tabelaAsne[i][1].replace(/\s/g, '');
+                    const ateNum = parseInt(ateStr, 10);
+                    if (diametro <= ateNum) {
+                        return tabelaAsne[i];
+                    }
+                }
+                return null; // caso nenhum intervalo satisfaça (diâmetro maior do que o maior “Até”)
+            }
+
+            // ======== 3) Função disparada ao clicar no botão ========
+            function consultarTolerancia() {
+                const campoDiam = document.getElementById('diametro');
+                const campoSerie = document.getElementById('serie');
+                const resultadoP = document.getElementById('resultado');
+
+                const diametro = parseInt(campoDiam.value, 10);
+                const serie = campoSerie.value;
+
+                resultadoP.textContent = ''; // limpar mensagem anterior
+
+                if (isNaN(diametro) || diametro <= 0) {
+                    resultadoP.textContent =
+                        'Digite um valor de diâmetro válido (maior que zero).';
+                    return;
+                }
+
+                // 3.1) Encontrar a linha da tabela correspondente ao diâmetro
+                const linha = encontrarLinha(diametro);
+                if (!linha) {
+                    resultadoP.textContent =
+                        'Diâmetro fora da faixa de referência (acima de 10 000 mm).';
+                    return;
+                }
+
+                // 3.2) Obter o índice da coluna com base na série selecionada
+                const idx = seriesIndex[serie];
+                if (idx === undefined) {
+                    resultadoP.textContent = 'Série de tolerância inválida.';
+                    return;
+                }
+
+                // 3.3) Obter o valor da tabela (string) e exibir
+                const valorAsne = linha[idx];
+                resultadoP.textContent =
+                    `Para diâmetro = ${diametro} mm e série “${serie}”, ` +
+                    `Aₛₙₑ = ${valorAsne} µm.`;
+            }
+        </script>
+    </body>
+</html>

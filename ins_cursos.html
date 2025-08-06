@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ENENG</title>
+        <title>Cursos - ENENG</title>
+
+        <!-- Estilos -->
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/flag-icons@7.1.0/css/flag-icons.min.css"
@@ -11,9 +13,11 @@
         <link rel="stylesheet" href="css/ins_cursos.css" />
         <link rel="stylesheet" href="css/header-nav.css" />
         <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
     </head>
 
     <body>
+        <!-- Cabeçalho dinâmico -->
         <div id="header-nav-container"></div>
 
         <div class="body2">
@@ -33,7 +37,6 @@
 
             <div class="content-wrapper">
                 <!-- COLUNA 1: INFORMAÇÕES -->
-
                 <div class="text-info">
                     <h3>PÚBLICO OBJETIVO</h3>
                     <p>
@@ -85,7 +88,7 @@
                 <form
                     id="meuFormulario"
                     class="form-container"
-                    action="https://formsubmit.co/roberto@eneng.com.br"
+                    action="https://formsubmit.co/contato_site@eneng.com.br"
                     method="POST"
                 >
                     <input type="hidden" name="_captcha" value="false" />
@@ -94,7 +97,6 @@
                         name="_next"
                         value="http://localhost:5500/obrigado.html"
                     />
-
                     <input
                         type="hidden"
                         name="_subject"
@@ -107,47 +109,6 @@
                     </div>
 
                     <!-- Campo Nome -->
-
-                    <!-- Campos Ocultos para Preenchimento Automático Falso -->
-
-                    <input
-                        type="text"
-                        style="display: none"
-                        name="fake-name"
-                        autocomplete="off"
-                    />
-
-                    <input
-                        type="text"
-                        style="display: none"
-                        name="fake-email"
-                        autocomplete="off"
-                    />
-                    <input
-                        type="text"
-                        style="display: none"
-                        name="fake-phone"
-                        autocomplete="off"
-                    />
-                    <input
-                        type="text"
-                        style="display: none"
-                        name="fake-whatsapp"
-                        autocomplete="off"
-                    />
-                    <input
-                        type="text"
-                        style="display: none"
-                        name="fake-company"
-                        autocomplete="off"
-                    />
-                    <input
-                        type="text"
-                        style="display: none"
-                        name="fake-position"
-                        autocomplete="off"
-                    />
-
                     <div class="form-group">
                         <label
                             for="nome"
@@ -353,26 +314,56 @@
                 </form>
             </div>
         </div>
-
+        <!-- Rodapé -->
         <div id="footer-container"></div>
 
+        <!-- ✅ Carregamento do header + Firebase V9 -->
         <script>
             fetch('header-nav.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((r) => r.text())
+                .then((html) => {
                     document.getElementById('header-nav-container').innerHTML =
-                        data;
-                });
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
 
-            // Carrega o footer
-            fetch('footer.html')
-                .then((response) => response.text())
-                .then((data) => {
-                    document.getElementById('footer-container').innerHTML =
-                        data;
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
                 });
         </script>
 
+        <!-- ✅ Carregamento do rodapé -->
+        <script>
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+
+                    // Carrega o script de status do usuário no footer
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+
+        <!-- Scripts da página -->
         <script src="js/ins_cursos.js"></script>
     </body>
 </html>

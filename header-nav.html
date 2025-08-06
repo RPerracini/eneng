@@ -1,96 +1,108 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ENENG</title>
-        <link rel="stylesheet" href="css/header-nav.css" />
-    </head>
+<!-- header-nav.html — cabeçalho + navegação reutilizável -->
 
-    <body>
-        <header>
-            <div class="header-content">
-                <img
-                    src="Imagens/LogoEneng1.png"
-                    alt="Logo ENENG"
-                    class="logo"
-                />
-                <div class="textos-header">
-                    <!-- <h1 class="title">ENENG REDUTORES E ENGRENAGENS</h1> -->
+<header>
+    <div class="header-content">
+        <img src="Imagens/LogoEneng1.png" alt="Logo ENENG" class="logo" />
 
-                    <h1 class="title">
-                        <div class="linha-desktop">
-                            ENENG REDUTORES, ENGRENAGENS
-                        </div>
-                        <div class="linha-desktop">
-                            E TRANSPORTADORES TUBULARES
-                        </div>
-                    </h1>
+        <div class="textos-header">
+            <h1 class="title">
+                <div class="linha-desktop">ENENG REDUTORES, ENGRENAGENS</div>
+                <div class="linha-desktop">E TRANSPORTADORES TUBULARES</div>
+            </h1>
+            <h2 class="slogan">
+                Sua parceira nas
+                <br />
+                melhores soluções.
+            </h2>
+        </div>
+    </div>
+</header>
 
-                    <h2 class="slogan">
-                        Inovando o Futuro
-                        <br />
-                        da Engenharia
-                    </h2>
-                </div>
+<nav>
+    <ul class="menu">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="institucional.html">INSTITUCIONAL</a></li>
+
+        <!-- SERVIÇOS -->
+        <li class="dropdown outros-dropdown">
+            <a>SERVIÇOS ▾</a>
+            <div class="dropdown-menu">
+                <a href="redutores-engrenagens.html">
+                    Redutores, engrenagens, transmissões por correntes ou
+                    correias
+                </a>
+                <a href="equipamentos.html">
+                    Equipamentos de elevação e transporte
+                </a>
             </div>
-        </header>
+        </li>
 
-        <nav>
-            <ul>
-                <li><a href="index.html">HOME</a></li>
+        <!-- CÁLCULOS -->
+        <li class="dropdown outros-dropdown">
+            <a>CÁLCULOS ▾</a>
+            <div class="dropdown-menu">
+                <a href="pagina1.html">
+                    Características geométricas das engrenagens cilíndricas
+                </a>
+                <a href="pagina2.html">
+                    Folga nas tampas em rolamentos cilíndricos
+                </a>
+                <a href="pagina3.html">Torque e volume de óleo</a>
+            </div>
+        </li>
 
-                <li><a href="institucional.html">INSTUTICIONAL</a></li>
+        <!-- CURSOS -->
+        <li class="dropdown outros-dropdown2">
+            <a>CURSOS ▾</a>
+            <div class="dropdown-menu">
+                <a href="ins_cursos.html">Curso de manutenção de redutores</a>
+                <a href="Emconstrução.html">
+                    Curso de características geométricas das engrenagens
+                    cilíndricas
+                </a>
+            </div>
+        </li>
 
-                <li class="dropdown">
-                    <a>SERVIÇOS ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="redutores-engrenagens.html">
-                            Redutores, engrenagens, transmissões por correntes
-                            ou correias
-                        </a>
-                        <a href="equipamentos.html">
-                            Equipamentos de elevação e transporte,
-                            transportadores de correia e transportadores
-                            tubulares
-                        </a>
-                    </div>
-                </li>
+        <li><a href="contato.html">CONTATO</a></li>
 
-                <li class="dropdown">
-                    <a>CÁLCULOS ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="Emconstrução.html">
-                            Características geométricas de um par de engrenagens
-                        </a>
-                        <a href="calcfolgacilin.html">
-                            Calculo da folga nas tampas em rolamentos
-                            cilíndricos
-                        </a>
-                        <a href="Emconstrução.html">
-                            Torque de atrito e volume de óleo para rolamentos
-                            cilindricos
-                        </a>
-                    </div>
-                </li>
+        <!-- SENHA (apenas opções de senha) -->
+        <li class="dropdown senha-dropdown">
+            <a id="senha-label">SENHA ▾</a>
+            <div class="dropdown-menu">
+                <a href="registro.html">Cadastro de senha</a>
+                <a href="descadastrar.html">Descadastro de senha</a>
+                <a href="recuperar-senha.html">Trocar a senha</a>
+            </div>
+        </li>
 
-                <li class="dropdown">
-                    <a>CURSOS ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="ins_cursos.html">
-                            Curso de manutenção de redutores
-                        </a>
-                        <a href="Emconstrução.html">
-                            Curso de características geométricas das engrenagens
-                            cilindricas
-                        </a>
-                    </div>
-                </li>
+        <li><a href="LGPD.html">LGPD</a></li>
 
-                <li><a href="contato.html">CONTATO</a></li>
+        <li class="admin" style="display: none">
+            <a href="admin.html">ADMIN</a>
+        </li>
 
-                <li><a href="LGPD.html">LGPD</a></li>
-            </ul>
-        </nav>
-    </body>
-</html>
+        <!-- LOGIN / LOGOUT fixa na extrema direita -->
+        <li class="login1-container">
+            <a href="login.html" id="menu-login">
+                <i data-lucide="log-in"></i>
+                <span>LOGIN</span>
+            </a>
+
+            <a
+                href="#"
+                onclick="logout()"
+                id="menu-logout"
+                style="display: none"
+            >
+                <i data-lucide="log-out"></i>
+                <span>LOGOUT</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Lucide: carrega e renderiza os ícones assim que o arquivo terminar de baixar -->
+<script
+    src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+    onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+></script>

@@ -1,0 +1,30 @@
+{
+    "workbench.colorTheme": "Dracula Theme Soft",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.guides.bracketPairs": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "cSpell.language": "en,pt-BR",
+    "cSpell.userWords": ["versao"],
+    "liveServer.settings.donotVerifyTags": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "[html]": {
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "[css]": {
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
+            "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "[javascript]": {
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    }
+}

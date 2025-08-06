@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Área Restrita</title>
+        <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+        <style>
+            .form-container {
+                text-align: center;
+                padding: 30px;
+            }
+
+            #userEmail {
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #333;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header-nav-container"></div>
+
+        <div class="form-container">
+            <h2>Área Restrita</h2>
+            <h3>Conectado com:</h3>
+
+            <!-- Box para a mensagem do usuário -->
+            <div id="messageBox" class="message-box" style="display: none">
+                <p id="userEmail"></p>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+
+        <!-- Cabeçalho dinâmico -->
+        <script>
+            fetch('header-nav.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/header-nav.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- Rodapé dinâmico -->
+        <script>
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- Verificação de autenticação com Firebase 9 -->
+        <script type="module">
+            import { auth } from './js/firebase-init.js';
+            import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    document.getElementById('userEmail').textContent =
+                        user.email;
+                    document.getElementById('messageBox').style.display =
+                        'block';
+
+                    setTimeout(() => {
+                        window.location.href = 'calculo1.html';
+                    }, 2000);
+                } else {
+                    window.location.href = 'login.html';
+                }
+            });
+        </script>
+
+        <!-- Logout automático ao fechar todas as abas -->
+        <script type="module" src="js/logout-on-close.js"></script>
+    </body>
+</html>

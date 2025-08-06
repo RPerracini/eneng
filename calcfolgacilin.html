@@ -4,19 +4,27 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Folga Cilíndrica</title>
+
+        <!-- CSS -->
         <link rel="stylesheet" href="css/header-nav.css" />
         <link rel="stylesheet" href="css/footer.css" />
         <link rel="stylesheet" href="css/calcfolgacilin.css" />
-        <link rel="stylesheet" href="css/modal.css" />
+        <link rel="stylesheet" href="css/modais.css" />
+
+        <!-- Biblioteca jsPDF para exportar PDF -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jspdf-customfonts@latest/dist/jspdf.customfonts.min.js"></script>
+
+        <!-- Firebase (apenas módulos) -->
+        <script type="module" src="js/firebase-init.js"></script>
+        <script type="module" src="js/auth-state.js"></script>
     </head>
+
     <body>
         <div id="header-nav-container"></div>
 
         <!-- Modal Aviso Legal -->
         <div id="avisoModal" class="modal">
-            <div class="modal-content">
+            <div class="modal-content aviso-legal">
                 <span class="close-modal">&times;</span>
                 <h2>Aviso Legal</h2>
                 <p>
@@ -30,11 +38,11 @@
             </div>
         </div>
 
+        <!-- Conteúdo principal -->
         <main class="container">
             <h1 class="titulo-principal">
                 Cálculo da folga em tampas para rolamentos cilíndricos
             </h1>
-            <div class="linha-azul"></div>
 
             <form id="formCalc" class="form-grid">
                 <div class="coluna coluna-dados">
@@ -42,16 +50,19 @@
 
                     <div class="form-row">
                         <label for="cliente">Cliente</label>
-                        <input type="text" id="cliente" />
+                        <input type="text" id="cliente" name="cliente" />
                     </div>
+
                     <div class="form-row">
                         <label for="projeto">Projeto</label>
-                        <input type="text" id="projeto" />
+                        <input type="text" id="projeto" name="projeto" />
                     </div>
+
                     <div class="form-row">
                         <label for="observacao">Eixo</label>
-                        <input type="text" id="observacao" />
+                        <input type="text" id="observacao" name="observacao" />
                     </div>
+
                     <div class="form-row">
                         <label for="distancia">
                             Distância entre centros dos rolamentos
@@ -61,12 +72,17 @@
                             </span>
                             (mm)
                         </label>
-                        <input type="number" id="distancia" required />
+                        <input
+                            type="number"
+                            id="distancia"
+                            name="distancia"
+                            required
+                        />
                     </div>
 
                     <div class="form-row">
                         <label for="materialEixo">Material do eixo</label>
-                        <select id="materialEixo">
+                        <select id="materialEixo" name="materialEixo">
                             <option value="aco">Aço</option>
                             <option value="aluminio">Alumínio</option>
                             <option value="ferro">Ferro Fundido</option>
@@ -75,7 +91,7 @@
 
                     <div class="form-row">
                         <label for="materialCaixa">Material da caixa</label>
-                        <select id="materialCaixa">
+                        <select id="materialCaixa" name="materialCaixa">
                             <option value="aco">Aço</option>
                             <option value="aluminio">Alumínio</option>
                             <option value="ferro">Ferro Fundido</option>
@@ -86,37 +102,63 @@
                         <label for="tempAmbiente">
                             Temperatura ambiente (°C)
                         </label>
-                        <input type="number" id="tempAmbiente" required />
+                        <input
+                            type="number"
+                            id="tempAmbiente"
+                            name="tempAmbiente"
+                            required
+                        />
                     </div>
+
                     <div class="form-row">
                         <label for="tempCaixa">Temperatura da caixa (°C)</label>
-                        <input type="number" id="tempCaixa" required />
+                        <input
+                            type="number"
+                            id="tempCaixa"
+                            name="tempCaixa"
+                            required
+                        />
                     </div>
 
                     <div class="form-row">
                         <label for="rotacao">Rotação do eixo (rpm)</label>
-                        <input type="number" id="rotacao" required />
+                        <input
+                            type="number"
+                            id="rotacao"
+                            name="rotacao"
+                            required
+                        />
                     </div>
 
                     <div class="form-row">
                         <label for="deltaT">
-                            Diferença de temperatura entre caixa e eixo (ºC)
+                            Diferença de temperatura entre caixa e eixo (°C)
                         </label>
                         <input
                             type="text"
                             id="deltaT"
                             name="deltaT"
                             readonly
-                            tabindex="-1"
                             class="no-focus-style"
+                            tabindex="-1"
                         />
                     </div>
 
                     <div class="botoes-entrada">
+                        <button
+                            type="button"
+                            id="btnFormulas"
+                            class="btn-aviso"
+                        >
+                            <i data-lucide="book-open"></i>
+                            Formulário
+                        </button>
+
                         <button type="button" id="btnAviso" class="btn-aviso">
                             <i data-lucide="info"></i>
                             Aviso Legal
                         </button>
+
                         <button type="button" id="btnReset" class="btn-reset">
                             <i data-lucide="refresh-ccw"></i>
                             Resetar Dados
@@ -128,7 +170,7 @@
                     <img src="imagens/Eixo1.png" alt="Imagem de exemplo" />
                 </div>
 
-                <div class="coluna">
+                <div class="coluna coluna-resultados">
                     <h2>Resultados</h2>
                     <div class="form-row">
                         <label>Coeficiente de dilatação do eixo (°C⁻¹):</label>
@@ -140,15 +182,14 @@
                     </div>
                     <div class="form-row">
                         <label>
-                            Diferença de temperatura entre caixa e meio ambiente
+                            Diferença de temperatura entre caixa e ambiente
                             (°C):
                         </label>
                         <input type="text" id="res2" readonly />
                     </div>
                     <div class="form-row">
                         <label>
-                            Diferença de temperatura entre eixo e meio ambiente
-                            (°C):
+                            Diferença de temperatura entre eixo e ambiente (°C):
                         </label>
                         <input type="text" id="res3" readonly />
                     </div>
@@ -165,6 +206,10 @@
                         <input type="text" id="res6" readonly />
                     </div>
                     <div class="form-row">
+                        <label>Segurança (mm):</label>
+                        <input type="text" id="res9" readonly />
+                    </div>
+                    <div class="form-row">
                         <label>Folga necessária (mm):</label>
                         <input type="text" id="res7" readonly />
                     </div>
@@ -172,81 +217,78 @@
                         <label>Tolerância da folga (mm):</label>
                         <input type="text" id="res8" readonly />
                     </div>
+
                     <div class="botoes">
-                        <button type="button" onclick="gerarPDF()">
+                        <button type="button" id="btnGerarPDF">
                             Gerar PDF
                         </button>
                     </div>
                 </div>
             </form>
+
+            <!-- 📘 Modal: Fórmulas -->
+            <div id="formulasModal" class="modal-overlay">
+                <div class="modal-conteudo padrao">
+                    <span class="fechar-modal" data-modal="formulasModal">
+                        &times;
+                    </span>
+                    <h3>Fórmulas Utilizadas</h3>
+                    <img
+                        src="help/Formulas_CalcFolgaCilin.jpg"
+                        alt="Fórmulas de cálculo"
+                        style="max-width: 100%; height: auto; margin-top: 1rem"
+                    />
+                </div>
+            </div>
         </main>
 
         <div id="footer-container"></div>
 
-        <script src="js/calcfolgacilin.js"></script>
-        <script src="js/modal.js"></script>
-
+        <!-- Header dinâmico -->
         <script>
             fetch('header-nav.html')
-                .then((res) => res.text())
-                .then(
-                    (data) =>
-                        (document.getElementById(
-                            'header-nav-container'
-                        ).innerHTML = data)
-                );
-            fetch('footer.html')
-                .then((res) => res.text())
-                .then(
-                    (data) =>
-                        (document.getElementById('footer-container').innerHTML =
-                            data)
-                );
-        </script>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const form = document.getElementById('formCalc');
-
-                const campos = Array.from(
-                    form.querySelectorAll('input, select, textarea')
-                ).filter(
-                    (campo) => !campo.disabled && campo.offsetParent !== null
-                );
-
-                campos.forEach((campo, index) => {
-                    campo.addEventListener('keydown', (event) => {
-                        if (event.key === 'Enter') {
-                            event.preventDefault();
-
-                            const proximoCampo = campos[index + 1];
-                            if (proximoCampo) {
-                                proximoCampo.focus();
-                            } else {
-                                campo.blur(); // Último campo
-                            }
-
-                            // Executa o cálculo ao sair do último campo de entrada
-                            if (campo.id === 'tempCaixa') {
-                                calcular(); // Nome da função de cálculo
-                            }
-                        }
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
                     });
                 });
-            });
         </script>
 
-        <style>
-            /* Estilo adicional para garantir o bloqueio visual */
-            #deltaT {
-                cursor: default !important;
-                background-color: #f0f0f0 !important;
-                caret-color: transparent !important;
-            }
+        <!-- Footer dinâmico e script de status com versionamento -->
+        <script>
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
 
-            #deltaT:focus {
-                outline: none !important;
-            }
-        </style>
+                    const statusScript = document.createElement('script');
+                    statusScript.type = 'module';
+                    statusScript.src = 'js/footer-status.js?v=2'; // força atualização
+                    document.body.appendChild(statusScript);
+                });
+        </script>
+
+        <!-- Lucide icons -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+
+        <!-- Scripts locais -->
+        <script type="module" src="js/calcfolgacilin.js"></script>
+        <script src="js/modais.js"></script>
     </body>
 </html>

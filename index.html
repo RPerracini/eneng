@@ -3,16 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ENENG</title>
-        <link rel="stylesheet" href="css/estilo.css" />
+        <title>Home - ENENG</title>
+
+        <!-- Estilos -->
+        <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/header-nav.css" />
         <link rel="stylesheet" href="css/footer.css" />
+
+        <!-- Ícones -->
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+        <!-- Firebase base -->
+        <script type="module" src="js/auth-state.js"></script>
     </head>
 
     <body>
+        <!-- ✅ Cabeçalho dinâmico -->
         <div id="header-nav-container"></div>
 
-        <main class="main-grid">
+        <!-- ✅ Conteúdo Principal -->
+
             <section class="hero">
                 <div class="hero-container">
                     <div class="hero-image">
@@ -72,60 +82,51 @@
                 <div class="container">
                     <p>
                         Para mais informações sobre as representadas clique na
-                        imagem da mesma
+                        imagem da mesma.
                     </p>
                 </div>
             </section>
         </main>
 
+        <!-- ✅ Rodapé dinâmico -->
         <div id="footer-container"></div>
 
-        <script>
+        <!-- ✅ Carregamento do cabeçalho + sincronização -->
+        <script type="module">
             fetch('header-nav.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((res) => res.text())
+                .then((html) => {
                     document.getElementById('header-nav-container').innerHTML =
-                        data;
+                        html;
+                    window.lucide?.createIcons();
+
+                    // Aguarda DOM antes de importar os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js'); // Sincroniza login em header e footer
+                    });
                 });
         </script>
 
-        <script>
+        <!-- ✅ Carregamento do rodapé -->
+        <script type="module">
             fetch('footer.html')
-                .then((response) => response.text())
-                .then((data) => {
+                .then((res) => res.text())
+                .then((html) => {
                     document.getElementById('footer-container').innerHTML =
-                        data;
+                        html;
+
+                    // Aguarda DOM do footer
+                    requestAnimationFrame(() => {
+                        import('./js/footer-status.js');
+                    });
                 });
         </script>
 
-        <script>
-            var url = 'https://cdn.waplus.io/waplus-crm/settings/ossembed.js';
-            var s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = url;
-            var options = {
-                enabled: true,
-                chatButtonSetting: {
-                    backgroundColor: '#16BE45',
-                    ctaText: 'Envie uma mensagem',
-                    borderRadius: '8',
-                    marginLeft: '20',
-                    marginBottom: '30',
-                    marginRight: '20',
-                    position: 'right',
-                    textColor: '#ffffff',
-                    phoneNumber: '+5511985400421',
-                    messageText:
-                        '👋🏻 Recebemos sua mensagem com sucesso! Em breve, um dos nossos representantes entrará em contato.',
-                    trackClick: true,
-                },
-            };
-            s.onload = function () {
-                CreateWhatsappBtn(options);
-            };
-            var x = document.getElementsByTagName('script')[0];
-            x.parentNode.insertBefore(s, x);
-        </script>
+        <!-- Fallback para ícones -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke: '#f5a002', strokeWidth: 2, size: 24 });"
+        ></script>
     </body>
 </html>

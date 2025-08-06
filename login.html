@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Login - ENENG</title>
+        <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script type="module" src="js/auth-state.js"></script>
+
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+        <!-- ✅ Inicialização do Firebase (deve vir após os SDKs compat) -->
+    </head>
+
+    <body>
+        <div id="header-nav-container"></div>
+
+        <div class="form-container">
+            <h2>Login</h2>
+            <div id="loggedInMessage" style="display: none">
+                <div class="email">
+                    <strong><span id="user-email"></span></strong>
+                </div>
+            </div>
+            <div id="loginFields">
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    autocomplete="off"
+                />
+                <div class="password-container">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Senha"
+                        autocomplete="off"
+                    />
+                    <button type="button" id="toggle-password">
+                        <i data-lucide="eye-closed"></i>
+                    </button>
+                </div>
+                <div class="entrar">
+                    <button id="loginBtn">Entrar</button>
+                </div>
+            </div>
+
+            <div
+                id="successMessage"
+                style="
+                    display: none;
+                    color: #fc9403;
+                    text-align: center;
+                    margin: 20px 0;
+                "
+            ></div>
+            <p>
+                <a href="registro.html" class="cadastrar" id="cadastrar-link">
+                    Cadastrar
+                </a>
+            </p>
+            <div id="errorMessage" style="display: none; color: red"></div>
+            <div id="verificacaoEmail" style="display: none">
+                <button id="reenviarConfirmacao">
+                    <i data-lucide="mail"></i>
+                    Reenviar e-mail de confirmação
+                </button>
+                <div id="verificacaoStatus" style="margin-top: 10px"></div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+
+        <!-- Scripts dinâmicos -->
+        <script>
+            fetch('header-nav.html')
+                .then((r) => r.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    if (window.lucide) {
+                        lucide.createIcons({
+                            stroke: '#f5a002',
+                            strokeWidth: 2,
+                            size: 24,
+                            overwrite: true,
+                        });
+                    }
+
+                    // ✅ Depois que o header foi injetado, carregue os scripts
+                    requestAnimationFrame(() => {
+                        import('./js/header-nav.js');
+                        import('./js/auth-sync.js');
+                    });
+                });
+
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <script type="module" src="js/firebase-init.js"></script>
+
+        <script type="module" src="js/login.js"></script>
+
+        <!-- coloque imediatamente antes de </body> -->
+        <script
+            src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+            onload="lucide.createIcons({ stroke:'#f5a002', strokeWidth:2, size:24 });"
+        ></script>
+
+        <!-- ✅ Login handler -->
+        <!-- <script type="module" src="js/login-session.js"></script> -->
+    </body>
+</html>

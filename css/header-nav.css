@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Nulshock';
+  src: url('../Fonte_Site/nulshock.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* =================== RESET GLOBAL =================== */
 * {
     margin: 0;
@@ -44,7 +51,7 @@ header img {
 
 header h1 {
     color: #f5a002;
-    font-family: 'Nulshock', Impact, sans-serif;
+    font-family: 'Nulshock';
     font-size: 2.5rem;
     letter-spacing: 2px;
     position: absolute;
@@ -62,7 +69,7 @@ header h1 {
 
 header .slogan {
     color: #f5a002;
-    font-family: 'Nulshock', Impact, sans-serif;
+    font-family: 'Nulshock';
     font-size: 1.2rem;
     position: absolute;
     right: 50px;
@@ -92,10 +99,10 @@ header .slogan span {
 nav {
     background-color: #0000d1;
     padding: 0;
-    padding-bottom: 20px;
-    position: relative;
+    padding-bottom: 10px;
+    position: relative; /* Definir a posição relativa para o contêiner de navegação */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centraliza a barra de navegação horizontalmente */
     width: 100%;
     z-index: 10;
     margin: 0;
@@ -104,27 +111,30 @@ nav {
 nav .container {
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
-nav ul {
+/* Centraliza os itens de navegação */
+nav ul.menu {
     display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-    flex-wrap: wrap;
+    padding-top: 5px;
+    padding-bottom: 0;
+    justify-content: center; /* Garante que os itens fiquem centralizados */
+    align-items: center;
+    margin: 0; /* Remove margens desnecessárias */
+    width: auto; /* Garante que a lista ocupe apenas o espaço necessário */
 }
 
 nav li {
-    margin: 0 15px;
+    margin: 0 15px; /* Ajuste o espaçamento entre os itens */
     position: relative;
 }
 
 nav a {
     color: #f5a002;
-    font-family: 'Nulshock', Impact, sans-serif;
-    font-size: 1rem;
+    font-family: 'Nulshock';
+    font-size: 1.2rem;
     text-decoration: none;
     padding: 4px 35px;
     letter-spacing: 1.2px;
@@ -133,14 +143,35 @@ nav a {
 
 nav a:hover {
     color: white;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
 }
 
-.dropdown-menu {
+/* =================== DROPDOWN =================== */
+.menu .outros-dropdown .dropdown-menu {
     display: none;
     position: absolute;
     background-color: #fc9403;
     min-width: 500px;
+    z-index: 9999;
+    padding: 10px;
+    font-family: sans-serif !important;
+}
+
+.menu .outros-dropdown1 .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fc9403;
+    min-width: 250px;
+    z-index: 9999;
+    padding: 10px;
+    font-family: sans-serif !important;
+}
+
+.menu .outros-dropdown2 .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fc9403;
+    min-width: 400px;
     z-index: 9999;
     padding: 10px;
     font-family: sans-serif !important;
@@ -159,9 +190,25 @@ nav a:hover {
     font-family: sans-serif;
 }
 
+/* Especificamente para o LOGIN/OUT */
+.menu .login-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fc9403;
+    min-width: 10px;
+    z-index: 9999;
+    padding: 10px;
+    font-family: sans-serif !important;
+}
+
+/* Quando o usuário passa o mouse sobre o "LOGIN/OUT" */
+.menu .login-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
 li a {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
 .dropdown {
@@ -176,6 +223,18 @@ li a {
 
 .dropdown:hover > a::after {
     transform: rotate(180deg);
+}
+
+.contador-wrapper {
+  position: fixed;
+  top: -40px;      /* Distância do topo da página */
+  right: 10px;    /* Distância da borda direita */
+  z-index: 9999;  /* Garante que fique acima de outros elementos */
+}
+
+.contador-wrapper img {
+  width: 50px;   /* Ajuste o tamanho se quiser maior/menor */
+  height: auto;
 }
 
 /* =================== RESPONSIVO =================== */
@@ -205,7 +264,7 @@ li a {
         position: static;
         transform: none;
         font-size: 1rem;
-        margin-top: 10px;
+        margin-top: 0px;
         right: 0;
         display: block;
     }
@@ -219,16 +278,9 @@ li a {
         margin: 10px 0;
     }
 
-    .dropdown-menu {
-        position: static;
-        min-width: auto;
-        width: 90%;
-    }
-
-    .dropdown-menu a {
-        font-size: 1rem;
-        padding: 8px;
-        text-align: center;
+    nav ul.menu .logout-item {
+        margin-right: 1200px;
+        align-items: center;
     }
 }
 
@@ -247,6 +299,28 @@ li a {
 
 .title .linha-mobile {
     display: none;
+}
+
+/* ========== E-MAIL DO USUÁRIO NO HEADER ========== */
+#user-email-display {
+    position: absolute;
+    /* top: 60%; */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fc9403;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+#user-email-text {
+    display: block;
+}
+
+.header-content {
+    position: relative; /* Necessário para posicionamento absoluto do email */
 }
 
 @media (max-width: 1200px) {
@@ -288,5 +362,88 @@ li a {
         line-height: 1.4;
         white-space: normal;
         display: block;
+    }
+}
+
+/* ───────── EMPURRA LOGIN / LOGOUT PARA O CANTO DIREITO ───────── */
+.login1-container {
+    margin-left: auto; /* faz o flexbox “empurrar” até a borda direita */
+    display: flex;
+    gap: 10px; /* espaço entre LOGIN e LOGOUT */
+}
+
+/* estilo opcional – deixa o link visível/destacado */
+.login1-container a {
+    font-weight: 700;
+    padding: 4px 12px;
+}
+
+/* ───────── DROPDOWN EXCLUSIVO DE SENHA ───────── */
+.senha-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fc9403;
+    min-width: 250px;
+    z-index: 9999;
+    padding: 10px;
+    font-family: sans-serif !important;
+}
+.senha-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* espaça o ícone do texto e alinha verticalmente */
+.login1-container i {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* mantém a cor do ícone sincronizada com o link em :hover */
+.login1-container a:hover i {
+    stroke: red; /* mesma cor do link hover já definido */
+}
+
+/* link de LOGIN / LOGOUT -------------------------------------------------- */
+.login1-container a {
+    display: inline-flex; /* o truque: vira um flex-box horizontal   */
+    align-items: center; /* centraliza verticalmente ícone + texto  */
+    padding: 4px 35px; /* mesmo padding dos outros <a>            */
+    color: yellow;
+}
+
+/* ícone ------------------------------------------------------------------- */
+.login1-container svg {
+    /* lucide converte <i> em <svg>            */
+    width: 2em; /* usa a altura da fonte                   */
+    height: 2em;
+    margin-right: 6px; /* espacinho entre ícone e texto           */
+    vertical-align: middle; /* fallback para navegadores antigos       */
+    color: yellow;
+}
+
+.login1-container svg path {
+    stroke: yellow !important;
+}
+
+.login1-container a:hover svg path {
+    stroke: red !important;
+}
+
+.login1-container a:hover {
+    color: red !important;
+}
+
+@media (max-width: 768px) {
+    .menu .login-dropdown .dropdown-menu {
+        width: 90% !important; /* Largura ajustada para telas menores */
+    }
+}
+
+@media (max-width: 768px) {
+    #user-email-display {
+        position: static;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 0.85rem;
     }
 }

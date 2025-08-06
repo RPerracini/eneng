@@ -1,0 +1,612 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center; /* centraliza verticalmente */
+    justify-content: center; /* centraliza horizontalmente */
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    padding: 24px;
+    overflow: auto; /* scroll se necessário */
+    display: none; /* ← Esconde todas as modais inicialmente */
+}
+
+.modal-conteudo {
+    background-color: #00d9f8;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 960px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: auto; /* garante alinhamento horizontal */
+    position: relative;
+}
+
+/* Botão de fechar */
+.fechar-modal {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    z-index: 10;
+}
+
+/* Título */
+.modal-conteudo h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+}
+
+/* Estilo base para imagens */
+.modal-conteudo img,
+.img-deslizamento,
+.imagem-modulo-reduzida,
+.imagem-z1 {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Específico para box azul do módulo */
+#boxImagemModulos {
+    width: 700px;
+    background-color: #00d9f8;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#boxAnguloAlfa {
+    width: 900px; /* aumente o tamanho total do box */
+    max-width: 95vw; /* limite de largura em telas menores */
+    padding: 24px; /* espaço interno */
+    border-radius: 12px; /* bordas arredondadas */
+    background-color: #00d9f8; /* fundo branco */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* sombra sutil */
+}
+
+/* Específico para imagem z1 */
+#boxImagemZ1 {
+    position: relative;
+    width: 1500px;
+    max-width: 90vw;
+    background-color: #00d9f8;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#modalTabelaClassePrecisao.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 175px; /* Aumente ou reduza conforme necessário */
+    overflow: visible;
+    display: none;
+}
+
+#modalTabelaClassePrecisao .modal-conteudo img {
+    margin-top: 40px; /* Move apenas essa imagem para baixo */
+}
+
+/* Estilo extra para gráficos */
+.modal-conteudo.grafico-deslizamento {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#modalRelacaoLD .modal-conteudo {
+    max-width: 960px; /* ou 800px, se preferir mais compacto */
+    width: 95%;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #00d9f8;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#boxAnguloBeta {
+    width: 1200px; /* Exemplo, se o padrão era 500px, aumente em 50% */
+    max-width: 90vw;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #00d9f8;
+}
+
+#modalRelacaoLD.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha o conteúdo no topo */
+    padding-top: 40px; /* ⬅️ Distância do topo da página */
+    overflow: visible;
+    display: none; /* Escondido por padrão */
+}
+
+#modalRelacaoLD img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+#modalImagemX1undercut .modal-conteudo {
+    transform: scale(1.3);
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 80vh;
+    text-align: center;
+    padding: 20px;
+    overflow: auto;
+}
+
+/* Imagem aumentada e centralizada horizontalmente */
+#modalImagemX1undercut .img-deslizamento {
+    width: 130%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+#modalImagemX1undercut.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo */
+    padding-top: 50px; /* ⬇️ Desce o box inteiro */
+    overflow: visible;
+    display: none; /* ← Esconde todas as modais inicialmente */
+}
+
+/* Modal X1 Resistencia à Flexão — descer box + imagem */
+#modalImagemX1resistenciaaflexao.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo */
+    padding-top: 40px; /* ⬇️ Desce o box */
+    overflow: visible;
+    display: none; /* ← Esconde todas as modais inicialmente */
+}
+
+#modalImagemX1resistenciaaflexao .modal-conteudo {
+    transform: scale(1.4); /* aumenta o box */
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 80vh;
+    text-align: center;
+    padding: 20px;
+    overflow: auto;
+}
+
+#modalImagemX1resistenciaaflexao .img-deslizamento {
+    width: 130%; /* aumenta a imagem */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+/* Modal Razão de Deslizamento — descer box + imagem com aumento de 20% */
+#modalImagemDeslizamento.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo */
+    padding-top: 20px; /* Desce o conteúdo */
+    overflow: visible;
+    display: none; /* ← Esconde todas as modais inicialmente */
+}
+
+#modalImagemDeslizamento .modal-conteudo {
+    transform: scale(1.2); /* aumenta o box em 20% */
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 85vh;
+    text-align: center;
+    padding: 20px;
+    overflow: auto;
+}
+
+#modalImagemDeslizamento .img-deslizamento {
+    width: 120%; /* aumenta a imagem em 20% */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+/* ========================= */
+/* Modal “Adendo e Dedendo”  */
+/* ========================= */
+#modalAdendo.modal-overlay {
+    display: none;
+    justify-content: center;
+    align-items: flex-start; /* alinha o box no topo, se desejar */
+    padding-top: 25px; /* ajuste vertical */
+    overflow: visible;
+}
+
+#modalAdendo .modal-conteudo {
+    transform: scale(1.4); /* aumenta o box em 40% */
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    max-height: 85vh; /* mantém limite de altura */
+    overflow: auto;
+}
+
+#modalAdendo .modal-conteudo img {
+    width: 140%; /* aumenta a imagem em 40% */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+/* Modal personalizado para Somatória de Correções */
+#Modalsomatoriadascorreções.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    overflow: visible;
+}
+
+#boxImagemSomatoria.modal-conteudo {
+    transform: scale(1.3); /* aumenta a área total em 30% */
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    padding: 20px;
+    overflow: auto;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modalImagem1 .modal-conteudo {
+    width: 1344px; /* 40% maior que 960px */
+    max-width: 90vw; /* ainda limita em telas menores */
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    background-color: #00d9f8;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.imagem-somatoria--pagina1 {
+    width: 100%; /* aproveita o novo tamanho do box */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.imagem-somatoria {
+    width: 130%; /* aumenta a imagem em 30% */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.imagem-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagem-wrapper img {
+    display: block;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.imagem-wrapper .botao-canto.voltar {
+    left: 0px;
+}
+
+.titulo-com-botoes {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 🟡 Centraliza verticalmente */
+    gap: 24px;
+    width: 100%;
+    padding: 8px 0; /* ⬅️ Espaço extra (ajustável) */
+}
+
+.titulo-com-botoes h3 {
+    margin: 0;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.botao-canto.avancar {
+    position: relative;
+    top: 1px; /* Ajuste fino de alinhamento */
+}
+
+.botao-canto {
+    background-color: #0000d1;
+    color: #f5a002;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao-canto:hover {
+    background-color: #f5a002;
+    color: #0000d1;
+}
+
+.botao-canto:hover svg {
+    stroke: #0000d1;
+}
+
+.botao-canto svg {
+    display: block;
+}
+
+.imagem-wrapper .botao-canto {
+    position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.botao-canto.voltar {
+    left: 0;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--azul);
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    color: var(--vermelho);
+    transform: scale(1.2);
+}
+
+#formulasModal .modal-content {
+    position: relative; /* necessário para posicionar o botão */
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    display: none; /* modal fechado por padrão */
+}
+
+.modal-conteudo img {
+    max-width: 100%;
+    height: auto;
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--azul, #020272);
+    cursor: pointer;
+    user-select: none;
+}
+
+.fechar-modal:hover {
+    color: var(--vermelho, #ff0000);
+}
+
+/* Ajuste para a classe "padrao" usada para estilo padrão */
+.padrao {
+    position: relative;
+}
+
+#boxImagemEspessuraMinima {
+    max-width: 1200px; /* aumentar a largura */
+    width: 90%;
+    padding: 30px;
+}
+
+#boxImagemEspessuraMinima img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+}
+
+#modalTabelaClassePrecisao.modal-overlay {
+    display: none;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    background: rgba(0,0,0,0.6);
+    min-height: 100vh !important;
+    padding: 0 !important;
+}
+
+#modalTabelaClassePrecisao .modal-conteudo.padrao {
+    margin-top: 36px !important;
+    max-width: 700px;
+    width: 80%;
+    background-color: #abdef8;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    /* padding: 30px 24px 24px 24px; */
+    position: relative;
+}
+
+#modalTabelaClassePrecisao .modal-tabela-iso {
+    position: relative;
+    margin-top: 14px;
+    max-width: 700px;
+    width: 100%;
+    background-color: #abdef8;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    padding: 30px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#modalTabelaClassePrecisao .fechar-modal {
+    position: absolute;
+    top: 14px;
+    right: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+#modalTabelaClassePrecisao .fechar-modal:hover {
+    color: var(--vermelho, #ff0000);
+}
+
+#modalTabelaClassePrecisao .titulo-modal-iso {
+    color: black;
+    font-size: 1.4rem;
+    margin-top: 0px;
+    margin-bottom: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#modalTabelaClassePrecisao .conteudo-tabela-iso img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: block;
+    margin: 0 auto;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .modal-conteudo {
+        padding: 16px;
+    }
+
+    .fechar-modal {
+        font-size: 24px;
+        top: 12px;
+        right: 16px;
+    }
+
+    #boxImagemModulos {
+        width: 95%;
+    }
+
+    .imagem-modulo-reduzida {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-conteudo h3 {
+        font-size: 1rem;
+    }
+
+    .imagem-modulo-reduzida {
+        width: 100%;
+    }
+
+    #boxImagemModulos {
+        width: 95%;
+        padding: 12px;
+    }
+}
+
+/* ========== RESPONSIVIDADE PARA MODAIS (TELAS PEQUENAS) ========== */
+@media (max-width: 768px) {
+    #modalImagemX1undercut .modal-conteudo,
+    #modalImagemX1resistenciaaflexao .modal-conteudo,
+    #modalImagemDeslizamento .modal-conteudo {
+        transform: scale(1.05); /* Menor aumento em telas pequenas */
+        padding: 10px;
+    }
+
+    #modalImagemX1undercut .img-deslizamento,
+    #modalImagemX1resistenciaaflexao .img-deslizamento {
+        width: 105%;
+    }
+
+    #modalImagemDeslizamento .img-deslizamento {
+        width: 110%;
+    }
+}

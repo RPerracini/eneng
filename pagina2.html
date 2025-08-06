@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Área Restrita</title>
+        <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/header-nav.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+        <style>
+            .lucide.spinning {
+                animation: spin 1s linear infinite;
+                vertical-align: middle;
+                margin-bottom: 10px;
+            }
+
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            #loginWarning {
+                color: red;
+                font-size: 1.8rem;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+
+            #userEmail {
+                text-align: center;
+                font-size: 1.3rem;
+                color: blue;
+            }
+
+            #authTitle {
+                color: red;
+                text-align: center;
+                font-size: 1.4rem;
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="header-nav-container"></div>
+
+        <div
+            class="form-container"
+            style="
+                max-width: 400px;
+                width: 100%;
+                padding-top: 10px;
+                margin-top: 45px;
+            "
+        >
+            <h2 style="color: blue">Área Restrita</h2>
+
+            <!-- ✅ Mostrado apenas quando logado -->
+            <div id="authTitle">
+                <i
+                    data-lucide="loader"
+                    class="lucide spinning"
+                    style="color: orange; width: 36px; height: 36px"
+                ></i>
+                <h3>Conectado com:</h3>
+            </div>
+
+            <div id="messageBox" class="message-box" style="display: none">
+                <p id="userEmail"></p>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+
+        <!-- Cabeçalho e Rodapé -->
+        <script>
+            fetch('header-nav.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('header-nav-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/header-nav.js';
+                    document.body.appendChild(script);
+                });
+
+            fetch('footer.html')
+                .then((res) => res.text())
+                .then((html) => {
+                    document.getElementById('footer-container').innerHTML =
+                        html;
+                    const script = document.createElement('script');
+                    script.type = 'module';
+                    script.src = 'js/footer-status.js';
+                    document.body.appendChild(script);
+                });
+        </script>
+
+        <!-- Firebase Autenticação -->
+        <script type="module">
+            import { auth } from './js/firebase-init.js';
+            import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+            onAuthStateChanged(auth, (user) => {
+                const emailBox = document.getElementById('userEmail');
+                const messageBox = document.getElementById('messageBox');
+                const authTitle = document.getElementById('authTitle');
+
+                if (user) {
+                    if (authTitle) authTitle.style.display = 'block';
+                    if (emailBox) emailBox.textContent = user.email;
+                    if (messageBox) messageBox.style.display = 'block';
+                    lucide.createIcons?.();
+
+                    setTimeout(() => {
+                        window.location.href = 'calcfolgacilin.html';
+                    }, 1000);
+                } else {
+                    if (authTitle) authTitle.style.display = 'none';
+
+                    if (emailBox && messageBox) {
+                        emailBox.innerHTML = `
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <i data-lucide="loader" class="lucide spinning" style="color: orange; width: 36px; height: 36px;"></i>
+                            <div id="loginWarning">Você não fez login.</div>
+                            <div style="font-size: 1.5rem; color: blue; margin-top: 12px;">
+                            Redirecionando para a página de login...
+                            </div>
+                        </div>
+            `;
+                        messageBox.style.display = 'block';
+                        lucide.createIcons?.();
+                    }
+
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 3000);
+                }
+            });
+        </script>
+    </body>
+</html>

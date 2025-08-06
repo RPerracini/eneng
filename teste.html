@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Teste PDF</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    </head>
+    <body>
+        <button id="btnGerarPDF">Gerar PDF</button>
+
+        <script>
+            const btn = document.getElementById('btnGerarPDF');
+
+            btn.addEventListener('click', () => {
+                fetch('Fontes_PDF/NotoSans-Regular.txt')
+                    .then((resp) => {
+                        if (!resp.ok) throw new Error('Erro carregando fonte');
+                        return resp.text();
+                    })
+                    .then((base64) => {
+                        const { jsPDF } = window.jspdf;
+                        const doc = new jsPDF();
+
+                        // ✅ Nome interno no VFS deve ser SEMPRE igual nas duas linhas abaixo
+                        doc.addFileToVFS('NotoSans-Regular.ttf', base64);
+                        doc.addFont('NotoSans-Regular.ttf', 'noto', 'normal');
+
+                        doc.setFont('noto');
+                        doc.setFontSize(16);
+
+                        doc.text(
+                            'PDF gerado com fonte externa Noto Sans!',
+                            20,
+                            20
+                        );
+
+                        doc.save('teste.pdf');
+                    })
+                    .catch((err) => {
+                        console.error('Erro:', err);
+                        alert('Erro ao gerar PDF. Veja o console.');
+                    });
+            });
+        </script>
+    </body>
+</html>

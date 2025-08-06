@@ -1,0 +1,205 @@
+.form-container h2 {
+    margin-bottom: 20px;
+    padding: 0px;
+    background: white;
+    font-family: sans-serif;
+    font-size: 40px;
+    color: #0000ff;
+    text-align: center;
+}
+
+.form-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.input-half {
+    flex: 1 1 0;
+    min-width: 0;
+}
+@media (max-width: 700px) {
+    .form-container {
+        max-width: 98vw;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    .input-half {
+        margin-bottom: 10px;
+    }
+}
+input {
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.password-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 0;
+}
+.password-container input {
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 2.5rem;
+}
+#toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #0000ff;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.requirements {
+    font-size: 13px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    color: #b71c1c;
+    line-height: 1.5;
+}
+.req-item {
+    display: flex;
+    align-items: center;
+    color: #b71c1c;
+    gap: 0.5em;
+    transition: color 0.2s;
+}
+.req-ok {
+    color: #18853b;
+    font-weight: bold;
+}
+.req-ok::before {
+    content: '✓';
+    color: #18853b;
+    margin-right: 0.3em;
+}
+.req-fail::before {
+    content: '✗';
+    color: #b71c1c;
+    margin-right: 0.3em;
+}
+.lucide-spinner {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5em;
+    color: #1976d2;
+    font-size: 1.2em;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.registrar button {
+    background-color: blue;
+    border: none;
+    font-family: sans-serif;
+    color: #f5a002;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 10px;
+    border-radius: 8px;
+    font-size: 20px;
+    display: block;
+    margin: 10px auto;
+    width: auto;
+    text-align: center;
+}
+.registrar button:hover {
+    background-color: #f5a002;
+    color: #0000ff;
+}
+#errorMessage,
+#successMessage {
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 10px;
+    margin-bottom: 1px;
+    color: red;
+}
+.password-container button i {
+    width: 20px;
+    height: 20px;
+}
+#checkVerificationBtn,
+#recoverPasswordBtn {
+    background-color: blue;
+    border: none;
+    font-family: sans-serif;
+    color: #f5a002;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 21px;
+    display: block;
+    margin: 20px auto 10px auto;
+    width: auto;
+    text-align: center;
+}
+#checkVerificationBtn:hover,
+#recoverPasswordBtn:hover {
+    background-color: #f5a002;
+    color: blue;
+}
+.checkStatus {
+    font-family: sans-serif;
+    font-size: 30px;
+    margin-top: 10px;
+    color: red;
+}
+
+.emailConfirmContainer {
+    font-size: 50px;
+}
+
+#reenviarConfirmacao {
+    background-color: blue;
+    color: #f5a002;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 20px auto 0 auto;
+    display: block;
+    cursor: pointer;
+    min-width: 220px;
+    transition: background 0.2s, color 0.2s;
+}
+#reenviarConfirmacao:hover {
+    background-color: #f5a002;
+    color: blue;
+}
+#verificacaoStatus {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}

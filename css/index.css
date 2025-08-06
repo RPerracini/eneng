@@ -23,13 +23,7 @@ body {
     max-width: 100%;
     margin: 0 auto;
     padding: 0 15px;
-    font-family: Nulshock;
-}
-
-/* ===== FONT ===== */
-@font-face {
-    font-family: 'Nulshock';
-    src: url('Fontes/NulshockBd.otf') format('opentype');
+    font-family: 'Nulshock', Impact, sans-serif;
 }
 
 /* ===== MAIN GRID LAYOUT ===== */
@@ -49,7 +43,7 @@ body {
 .hero {
     grid-area: hero;
     /* background-color: #abdef8; */
-    padding: 40px 0;
+    padding: 35px 0;
     margin-bottom: 0;
 }
 
@@ -84,7 +78,7 @@ body {
     font-family: 'Nulshock', Impact, sans-serif;
     font-size: 3rem;
     line-height: 1.2;
-    color: #020272;
+    color: #0000d0;
     margin: 0;
 }
 
@@ -97,7 +91,7 @@ body {
 
 .texto_representadas p {
     font-size: 2rem;
-    color: #020272;
+    color: #0000d0;
     margin: 0 auto 5px;
     text-align: center;
     max-width: 1600px;
@@ -135,12 +129,12 @@ body {
     grid-area: info;
     width: 100%;
     max-width: 100%;
-    padding-top: 10px;
+    padding-top: 0px;
 }
 
 .mais_informações p {
-    font-size: 1rem;
-    color: #020272;
+    font-size: 1.3rem;
+    color: #0000d0;
     text-align: center;
     max-width: 1200px;
     margin: 0 auto;

@@ -49,5 +49,3 @@ export function requireLogin() {
  * 5. Exportações
  * --------------------------------------------------------------------------*/
 export { auth, app };
-
-

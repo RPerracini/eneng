@@ -29,5 +29,4 @@ async function displayVisitantes() {
         console.error("Erro ao carregar contador: ", error);
     }
 }
-
 incrementVisitantes().then(displayVisitantes);

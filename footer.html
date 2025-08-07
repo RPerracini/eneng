@@ -1,5 +1,6 @@
+<!-- // footer.html -->
 <footer>
-    <div class="footer-wrapper">
+    <div class="footer-wrapper" style="display: flex; justify-content: space-between; align-items: center;">
         <p id="footer_copyright">
             &copy; 2025 ENGº ROBERTO PERRACINI. Todos os direitos reservados.
         </p>
@@ -25,14 +26,21 @@
             <p id="user-email-text" style="text-align: center">Carregando…</p>
         </div>
 
-        <p class="versao">Versão 1.0</p>
+        <!-- Visitantes alinhado à direita -->
+        <p id="visit-counter" style="font-size: 0.9em; margin-left: auto;">
+            Visitantes: <span id="visit-count">Carregando…</span>
+        </p>
     </div>
 
-    <style>
+    <script type="module" src="js/auth-state.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/contador.js"></script>
+
+    <!-- <style>
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
-    </style>
+    </style> -->
 </footer>

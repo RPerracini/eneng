@@ -1,5 +1,4 @@
 // firebase-init.js
-// Firebase 9.23 – inicialização centralizada do app e do Auth
 import {
     initializeApp,
     getApps,
@@ -49,4 +48,6 @@ export function requireLogin() {
 /* ============================================================================
  * 5. Exportações
  * --------------------------------------------------------------------------*/
-export { auth };
+export { auth, app };
+
+

@@ -1,18 +1,20 @@
 // firebase-config.js
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
 const firebaseConfig = {
     apiKey: 'AIzaSyCYfIlHU7ZT-Cs8VHxugTaSSFXjfSDiaPg',
     authDomain: 'eneng-b34ee.firebaseapp.com',
+    databaseURL: 'https://eneng-b34ee-default-rtdb.firebaseio.com', // <- adicione esta linha
     projectId: 'eneng-b34ee',
-    storageBucket: 'eneng-b34ee.firebasestorage.app',
+    storageBucket: 'eneng-b34ee.appspot.com', // <- corrigido o domínio
     messagingSenderId: '401693608382',
     appId: '1:401693608382:web:a912bbb51dac61d88151ef',
     measurementId: 'G-LSC3PG9XKM',
 };
 
-// Inicializar o Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app(); // Se já estiver inicializado, usa a instância existente
-}
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+export { database };
+
